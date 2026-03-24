@@ -3,13 +3,14 @@
 Build a static website for Vagalume, a beach club in Tulum, using a brand-first workflow grounded in local source assets.
 
 ## Stack And Tooling
-- Use static HTML, CSS, and JavaScript as the baseline stack until a framework is selected.
-- Use `npm` as the package manager when Node-based tooling is introduced.
-- Treat the repository as bootstrap mode until app files are added.
+- Use the React + Vite app in `web/` for the marketing landing (exported from Paper, ready for future 3D via react-three/fiber).
+- Use `npm` as the package manager for `web/`.
+- Keep static preview available as a fallback.
 
 ## Run Commands
-- Run local preview with `python -m http.server 4173`.
-- Run temporary build placeholder with `powershell -Command "Write-Output 'No build step configured yet'"`.
+- Run the Vagalume site in dev with `cd web && npm run dev`.
+- Run production build with `cd web && npm run build` and preview with `cd web && npm run preview`.
+- Run legacy static preview with `python -m http.server 4173` from repo root if needed.
 - Run temporary test placeholder with `powershell -Command "Write-Output 'No automated tests configured yet'"`.
 
 ## Security Boundaries
