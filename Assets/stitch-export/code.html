@@ -165,25 +165,19 @@
 </div>
 </section>
 <!-- Upcoming Events Section -->
-<section class="max-w-7xl mx-auto py-32 px-12">
-<div class="flex flex-col gap-12">
-<div class="flex justify-between items-end mb-4">
+<section class="py-32 px-6 md:px-12">
+<div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-end gap-6 mb-10">
 <div class="flex flex-col gap-2">
 <span class="font-label text-[10px] tracking-[0.4em] text-primary/60 uppercase font-light">Curation</span>
 <h2 class="font-headline text-5xl tracking-widest text-on-surface uppercase">UPCOMING RITUALS</h2>
 </div>
-<div class="flex gap-4 mb-2">
-<button class="w-12 h-12 rounded-full border border-outline/20 flex items-center justify-center hover:bg-earth/10 transition-colors">
-<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
-</button>
-<button class="w-12 h-12 rounded-full border border-outline/20 flex items-center justify-center hover:bg-earth/10 transition-colors">
-<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
-</button>
+<a class="mb-2 shrink-0 border border-outline/30 text-[#FAF9D6] px-8 py-3 rounded-xl font-label text-[10px] tracking-[0.32em] uppercase hover:bg-earth/10 transition-all text-center" href="#">SEE ALL EVENTS</a>
 </div>
-</div>
-<!-- Featured Slider Banner -->
-<div class="relative w-full aspect-[21/9] rounded-[48px] overflow-hidden group border border-outline/10">
-<img alt="New Year Eternal event" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkyDIJLqu9awG67YO6qIv9lieWsWDJRnGBYcCZyCkcNcndlxUbvCw0JxKhqRaaCY-9Ng4w-XvdOVfU6oH9P5O6Qt859VBBSz937gbh2IH--xP4u7vSSBp8aBvCjkQNXZLVR_8fETOdPSdfdOqpIJEqR3ATe-w4_vRPxmC7xCjbKsI3MmAZbIlgGMDLQ5sMC1ZhFbg68hb-mAvl5oxM7rpUo_PfG-KZzQe6INGZsU0MzXCHFDFsfpyhN21ox-cj6jRayWJ5yt19LQ"/>
+<!-- Banner rotativo: más ancho que el grid (max-w-7xl), misma relación 21/9 -->
+<div class="relative w-full max-w-[100rem] mx-auto aspect-[21/9] rounded-[48px] overflow-hidden border border-outline/10 isolate" data-events-banner="">
+<!-- Slide 1 -->
+<article class="events-banner__slide absolute inset-0 z-10 opacity-100 transition-opacity duration-700 ease-in-out group" aria-hidden="false">
+<img alt="New Year Eternal event" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkyDIJLqu9awG67YO6qIv9lieWsWDJRnGBYcCZyCkcNcndlxUbvCw0JxKhqRaaCY-9Ng4w-XvdOVfU6oH9P5O6Qt859VBBSz937gbh2IH--xP4u7vSSBp8aBvCjkQNXZLVR_8fETOdPSdfdOqpIJEqR3ATe-w4_vRPxmC7xCjbKsI3MmAZbIlgGMDLQ5sMC1ZhFbg68hb-mAvl5oxM7rpUo_PfG-KZzQe6INGZsU0MzXCHFDFsfpyhN21ox-cj6jRayWJ5yt19LQ"/>
 <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
 <div class="absolute inset-0 p-16 flex flex-col justify-center max-w-2xl">
 <span class="bg-burgundy text-sand px-4 py-1 self-start rounded-full font-label text-[8px] tracking-[0.3em] mb-6 uppercase">Featured Event</span>
@@ -192,17 +186,45 @@
 <span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="calendar_today">calendar_today</span> DEC 31, 2024</span>
 <span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span> 10:00 PM</span>
 </div>
-<button class="bg-sand text-burgundy px-8 py-3 rounded-xl font-label text-[10px] tracking-[0.32em] self-start hover:bg-white transition-all">GET TICKETS</button>
+<button type="button" class="bg-sand text-burgundy px-8 py-3 rounded-xl font-label text-[10px] tracking-[0.32em] self-start hover:bg-white transition-all">GET TICKETS</button>
 </div>
-<!-- Slider Pagination Indicators -->
-<div class="absolute bottom-8 right-16 flex gap-3">
-<div class="w-8 h-1 bg-sand rounded-full"></div>
-<div class="w-8 h-1 bg-white/20 rounded-full"></div>
-<div class="w-8 h-1 bg-white/20 rounded-full"></div>
+</article>
+<!-- Slide 2 -->
+<article class="events-banner__slide absolute inset-0 z-0 opacity-0 pointer-events-none transition-opacity duration-700 ease-in-out group" aria-hidden="true">
+<img alt="Solaris Gathering" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida/ADBb0uilTQfIdo1Rsqh2NKSctCLFCny-IUz137doFoEbObsWSsnUwSJSl4RDwOeoJhx5I0mhoWVnkOConN-3BdX_YOpgY-dXEVqvB1zmDFU6iK4hJLHfdupcn8PE9YzeZgqzhn4XfRzTqo-oaRc4jVgnXwUbYSeTmbPKOzXPGY4H_dcpqXxiFuKepSwOjbkssOz1WtSDKitbl8Z5tUGZTlaY10ilhF_iXfjMQ2mmjqYOtaHCsbfWguCNc7WTEanaEoYHDVVviKoVxy0"/>
+<div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+<div class="absolute inset-0 p-16 flex flex-col justify-center max-w-2xl">
+<span class="bg-earth text-sand px-4 py-1 self-start rounded-full font-label text-[8px] tracking-[0.3em] mb-6 uppercase">Gathering</span>
+<h3 class="font-headline text-6xl text-sand mb-4 tracking-[0.1em] uppercase leading-tight">SOLARIS<br/><span class="italic font-light">Gathering</span></h3>
+<div class="flex items-center gap-6 mb-8 text-on-surface/70 font-label text-[10px] tracking-[0.2em]">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="calendar_today">calendar_today</span> NOV 14, 2024</span>
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span> SUNSET</span>
+</div>
+<button type="button" class="bg-sand text-burgundy px-8 py-3 rounded-xl font-label text-[10px] tracking-[0.32em] self-start hover:bg-white transition-all">GET TICKETS</button>
+</div>
+</article>
+<!-- Slide 3 -->
+<article class="events-banner__slide absolute inset-0 z-0 opacity-0 pointer-events-none transition-opacity duration-700 ease-in-out group" aria-hidden="true">
+<img alt="Cenote Deep" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida/ADBb0uiYewmFt-AXYm61cOpyADF0KYVFtkNKjJUWyhd4wfIB7TG4A8jCH79PUr-mayaS-HQVhcVgFOttOiLyEMlSogBS17c-nlR0OqzRb7tXWwKj5Z4sNIBDQCQcwnbneSt77sY9PY2yk5kbN5V0bH_A-ioYG2wNN0IU6Wb8V5EMB5xYGTr8xPKf374RDcIX6WttDiQme377bPceeOGsuNc6CS7pgjz_Vv-NI9fIUnZ9Llg-H-zUgHBJKsAD4OdD0niSQUvRW3XJ5ij6"/>
+<div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+<div class="absolute inset-0 p-16 flex flex-col justify-center max-w-2xl">
+<span class="bg-burgundy text-sand px-4 py-1 self-start rounded-full font-label text-[8px] tracking-[0.3em] mb-6 uppercase">Deep listening</span>
+<h3 class="font-headline text-6xl text-sand mb-4 tracking-[0.1em] uppercase leading-tight">CENOTE<br/><span class="italic font-light">Deep</span></h3>
+<div class="flex items-center gap-6 mb-8 text-on-surface/70 font-label text-[10px] tracking-[0.2em]">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="calendar_today">calendar_today</span> NOV 22, 2024</span>
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span> LATE NIGHT</span>
+</div>
+<button type="button" class="bg-sand text-burgundy px-8 py-3 rounded-xl font-label text-[10px] tracking-[0.32em] self-start hover:bg-white transition-all">GET TICKETS</button>
+</div>
+</article>
+<div class="absolute bottom-8 right-16 z-20 flex gap-3" aria-label="Eventos destacados">
+<button type="button" class="events-banner__dot h-1 w-8 cursor-pointer rounded-full bg-sand transition-colors" aria-label="Slide 1" aria-current="true"></button>
+<button type="button" class="events-banner__dot h-1 w-8 cursor-pointer rounded-full bg-white/20 transition-colors" aria-label="Slide 2"></button>
+<button type="button" class="events-banner__dot h-1 w-8 cursor-pointer rounded-full bg-white/20 transition-colors" aria-label="Slide 3"></button>
 </div>
 </div>
 <!-- Event Cards Grid -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
 <!-- Card 1 -->
 <div class="flex flex-col gap-6 group">
 <div class="aspect-square w-full rounded-[48px] overflow-hidden relative border border-outline/10">
@@ -237,7 +259,6 @@
 <span class="font-label text-[10px] tracking-[0.3em] text-earth uppercase mb-2 block font-medium">DEC 05 • 2024</span>
 <h4 class="font-headline text-2xl text-on-surface mb-3 tracking-wide uppercase">ANCESTRAL MOON</h4>
 <p class="font-body text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase">A multi-sensory performance honoring the lunar cycle through fire and movement.</p>
-</div>
 </div>
 </div>
 </div>
@@ -327,4 +348,5 @@
 </footer>
 </main>
 <script src="hero-3d.mjs" type="module"></script>
+<script src="events-banner.mjs" type="module"></script>
 </body></html>
