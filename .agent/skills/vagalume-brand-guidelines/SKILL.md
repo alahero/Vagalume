@@ -1,54 +1,54 @@
 ---
 name: vagalume-brand-guidelines
-description: Use when the user asks to implement, revise, or validate Vagalume website sections using approved brand signals; this skill transforms extracted brandbook and Instagram inputs into section-ready tone, palette, typography, UI, and interaction guidance.
+description: Use when implementing Vagalume (beach club, Tulum) marketing site sections, copy, layout, tokens, or UI decisions. Enforces the official brand manual distilled in Brandbook.md; typography licenses are handled separately by the team.
 ---
 
-# Mission Statement
+# Guía rápida — Vagalume
 
-Turn source-backed Vagalume brand signals into reusable website implementation guidance.
+## Fuente de verdad
 
-## Step-by-Step Instructions
+1. Leer y seguir **`Brandbook.md`** en la raíz del repositorio (transcripción completa del manual PNG en `PDF to PNG/1x/`).
+2. Para patrones de código en el proyecto React/Vite, alinear también con `@.agent/rules/web-implementation.md` cuando aplique.
 
-1. Read approved source outputs.
-   - Read the latest brand guideline summary generated from PDF and Instagram inputs.
-   - Confirm which sections are in scope (hero, events, reservations, gallery, contact).
+## Checklist de implementación
 
-2. Map brand signals to web primitives.
-   - Define section-level tone and copy constraints.
-   - Define token-level color and typography usage.
-   - Define spacing, visual effects, and motion constraints.
+### Color
 
-3. Generate implementation guidance.
-   - Produce section blueprints with required content blocks.
-   - Produce do and do-not examples for copy and UI.
-   - Produce accessibility guardrails for contrast and readability.
+- Tokens HEX canónicos: `--vl-earth` `#6D4B27`, `--vl-sand` `#FAF9D6`, `--vl-burgundy` `#331515`, `--vl-forest` `#0A4008` (lámina 34 del manual).
+- Proporción orientativa: 40% tierra, 30% arena, 20% borgoña, 10% verde (lámina 35); el verde apoya **hover** y acentos sutiles.
+- Modo oscuro frecuente en manual: fondo carbón + texto champagne/crema; líneas `1px`.
+- Las láminas 26–28 pueden verse distintas por **textura**; los HEX siguen siendo los de p.34.
 
-4. Resolve conflicts explicitly.
-   - Prioritize brandbook definitions over social content drift.
-   - Flag unsupported assumptions as pending data.
+### Tipografía
 
-5. Package for direct use.
-   - Return concise outputs for immediate implementation.
-   - Link deeper rationale only when requested.
+- **Calvino:** display, wordmark, editorial (Thin, Light, Bold). **Licencia:** la gestiona el equipo.
+- **Avenir Next:** UI y cuerpo estilo manual (Ultra Light, Regular, Bold). «GASTRONOMIC & DRINKS» = **Avenir Next Regular** (aspecto stencil es de diseño, no otra familia obligatoria).
+- Titulares tipo manual: mayúsculas, peso fino, **tracking amplio**. Wordmark VAGALUME: serif, mayúsculas, tracking generoso.
 
-## Examples
+### Trazos, radios y layout
 
-Example prompt 1:
-"Apply Vagalume brand rules to a new home hero and events section."
+- Divisores y marcos: **hairline `1px`**.
+- **Dos modos de radio:** (1) editorial/cuadrícula → **0** o casi 0; (2) storytelling → tarjetas **24–48px** (responsive con `clamp`), paneles enmarcados **~40–60px**, pills **9999px**, cajas textura **~16–24px**.
+- Isotipo en **círculo**; anillo con **corte inferior** para el glow de la luciérnaga.
+- Logo responsive: ~700px stack, ~500px horizontal, ~250px solo wordmark, ~100px solo isotipo (lámina 33).
+- **Área de respeto 1X:** el valor en px lo define el equipo manualmente.
 
-Expected action:
-- Generate two section blueprints.
-- Enforce tone, palette, type, and interaction rules.
+### Tono y copy
 
-Example prompt 2:
-"Review this draft page and list deviations from Vagalume brand."
+- **Inglés**; segunda y tercera persona; calmado, culto, invitador; místico sin condescender.
+- CTAs/copies de referencia en `Brandbook.md` (corregir «COMMING» → COMING SOON en producción).
 
-Expected action:
-- Compare the draft to approved signals.
-- Return an issue list with concrete fixes.
+### Imagen y redes
 
-## Error Handling
+- Regla B&W y «no celulares» en toma: pensada sobre todo para **fotos de redes**; web puede alinearse al espíritu sin dogmatismo absoluto salvo directriz nueva.
 
-- Stop and request the latest brand summary if no approved source-backed output exists.
-- Continue with partial guidance when only some sources are available, and label confidence per section.
-- Avoid fabricating values that are not traceable to source evidence.
+### Qué evitar
+
+- Bordes gruesos; radio «medio genérico» en todo el sitio.
+- Submarcas (Sessions, Sundaze, Disorder) al mismo nivel que la marca principal sin contexto.
+- Lujo vacío «glitzy»; priorizar **autenticidad** y narrativa (lugar, textura, comunidad).
+
+## Si falta dato
+
+- No inventar valores que contradigan `Brandbook.md`.
+- Marcar en código o en tareas lo pendiente (p. ej. tokens finales tras compra de fuentes).

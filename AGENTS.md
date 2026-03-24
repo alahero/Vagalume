@@ -6,6 +6,7 @@ Build a static website for Vagalume, a beach club in Tulum, using a brand-first 
 - Use the React + Vite app in `web/` for the marketing landing (exported from Paper, ready for future 3D via react-three/fiber).
 - Use `npm` as the package manager for `web/`.
 - Keep static preview available as a fallback.
+- **Google Stitch MCP** (Cursor): definido en `.cursor/mcp.json`. Copia `.env.stitch.example` → `.env.stitch` en la raíz del repo y pon ahí `STITCH_API_KEY` (ese archivo está en `.gitignore`). Reinicia Cursor para cargar el servidor.
 
 ## Run Commands
 - Run the Vagalume site in dev with `cd web && npm run dev`.

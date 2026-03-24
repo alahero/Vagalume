@@ -1,19 +1,14 @@
-import { VagalumeLandingDesktop } from './components/paper/VagalumeLandingDesktop';
-import { VagalumeLandingMobile } from './components/paper/VagalumeLandingMobile';
-
 /**
- * Muestra el layout mobile por defecto en viewport angosto y desktop en pantallas anchas.
- * Para 3D: envuelve una sección con <Canvas> de react-three/fiber sin reemplazar todo el árbol.
+ * Placeholder mínimo: el diseño de producción vive en Stitch; aquí solo mantenemos el shell Vite/React.
  */
 export default function App() {
   return (
-    <>
-      <div className="vagalume-desktop-only">
-        <VagalumeLandingDesktop />
-      </div>
-      <div className="vagalume-mobile-only">
-        <VagalumeLandingMobile />
-      </div>
-    </>
+    <main className="vl-shell">
+      <p className="vl-shell__eyebrow">Tulum, Mexico</p>
+      <h1 className="vl-shell__title">Vagalume</h1>
+      <p className="vl-shell__body">
+        Marketing site shell — implement the approved Stitch mockup here when you are ready to ship.
+      </p>
+    </main>
   );
 }

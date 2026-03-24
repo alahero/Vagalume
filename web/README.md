@@ -1,6 +1,6 @@
 # Vagalume — sitio web (React + Vite)
 
-Contiene el layout exportado desde [Paper](https://app.paper.design/file/01KMEFSA2CK733FYYNCA0PXVZK) como componentes React con estilos en línea.
+Shell mínimo listo para integrar el mockup aprobado en **Google Stitch**. El layout exportado desde Paper ya no está en este repo.
 
 ## Comandos
 
@@ -11,10 +11,9 @@ npm run build
 npm run preview
 ```
 
-- **Desktop:** `src/components/paper/VagalumeLandingDesktop.tsx`
-- **Mobile:** `src/components/paper/VagalumeLandingMobile.tsx`
-- **Conmutación:** `src/index.css` (breakpoint 1024px) + `App.tsx`
+- **UI actual:** `src/App.tsx` + `src/index.css` (placeholder con tokens de marca).
+- **Stitch (generar / listar pantallas):** `npm run stitch:vagalume` y `node scripts/stitch-list-screens.mjs` (requiere `STITCH_API_KEY` y, para listar, `STITCH_PROJECT_ID`).
 
 ## Próximo paso (3D)
 
-Instala `@react-three/fiber` y `@react-three/drei` y monta un `<Canvas>` dentro del hero (reemplaza o superpone el bloque visual actual).
+Cuando el landing esté integrado, instala `@react-three/fiber` y `@react-three/drei` y monta un `<Canvas>` donde corresponda en la composición.
