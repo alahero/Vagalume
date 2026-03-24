@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Work+Sans:wght@100;200;300;400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#353534",
+              "secondary": "#c9c8a8",
+              "background": "#131313",
+              "surface-bright": "#3a3939",
+              "on-surface": "#e5e2e1",
+              "inverse-surface": "#e5e2e1",
+              "tertiary": "#efbab8",
+              "surface-container-low": "#1c1b1b",
+              "on-error-container": "#ffdad6",
+              "on-tertiary": "#492726",
+              "inverse-primary": "#7b5732",
+              "surface-container-high": "#2a2a2a",
+              "primary-container": "#6d4b27",
+              "secondary-fixed": "#e5e4c2",
+              "tertiary-fixed": "#ffdad8",
+              "surface-tint": "#edbe90",
+              "surface-variant": "#353534",
+              "error-container": "#93000a",
+              "error": "#ffb4ab",
+              "on-secondary-container": "#b7b797",
+              "on-background": "#e5e2e1",
+              "on-primary-fixed-variant": "#60401d",
+              "on-secondary-fixed": "#1c1d08",
+              "surface-container-lowest": "#0e0e0e",
+              "surface": "#131313",
+              "outline-variant": "#4f453b",
+              "on-tertiary-fixed-variant": "#623d3c",
+              "primary-fixed": "#ffdcbd",
+              "secondary-fixed-dim": "#c9c8a8",
+              "on-primary-container": "#ecbd90",
+              "on-error": "#690005",
+              "outline": "#9c8e83",
+              "on-surface-variant": "#d3c4b7",
+              "on-secondary-fixed-variant": "#47482f",
+              "on-primary": "#462a08",
+              "on-tertiary-fixed": "#301313",
+              "primary": "#edbe90",
+              "inverse-on-surface": "#313030",
+              "primary-fixed-dim": "#edbe90",
+              "on-secondary": "#31321b",
+              "tertiary-container": "#6f4847",
+              "secondary-container": "#47482f",
+              "on-tertiary-container": "#eeb9b7",
+              "surface-dim": "#131313",
+              "surface-container": "#201f1f",
+              "on-primary-fixed": "#2c1600",
+              "tertiary-fixed-dim": "#efbab8",
+              "earth": "#6D4B27",
+              "sand": "#FAF9D6",
+              "burgundy": "#331515"
+            },
+            fontFamily: {
+              "headline": ["Newsreader", "serif"],
+              "body": ["Work Sans", "sans-serif"],
+              "label": ["Work Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #131313; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24; }
+        .newsreader-caps { font-family: 'Newsreader'; font-variant: small-caps; text-transform: uppercase; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        /* Hero: imagen → canvas 3D → texto (z-index) */
+        .hero-3d__bg { z-index: 0; }
+        .hero-3d__canvas { z-index: 5; }
+        .hero-3d__content { z-index: 20; pointer-events: none; }
+        .hero-3d__content * { pointer-events: none; }
+        /* translateY baja el copy sin pelear con justify-center (el margen superior se re-centraba) */
+        .hero-3d__content--shift {
+          transform: translateY(clamp(5.5rem, 24vh, 13.25rem));
+        }
+        @media (min-width: 768px) {
+          .hero-3d__content--shift {
+            transform: translateY(clamp(7rem, 28vh, 16rem));
+          }
+        }
+    </style>
+</head>
+<body class="font-body text-on-surface selection:bg-primary/30">
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-[#0A0A0A]/60 backdrop-blur-md border-b border-[#9c8e83]/20 flex justify-between items-center px-12 py-6">
+<div class="text-2xl font-light tracking-[0.4em] text-[#edbe90] uppercase font-headline">VAGALUME</div>
+<div class="hidden md:flex gap-12">
+<a class="text-[#FAF9D6] border-b border-[#edbe90] pb-1 font-label text-[10px] tracking-[0.32em] font-light" href="#">EXPERIENCES</a>
+<a class="text-[#edbe90]/70 hover:text-[#edbe90] transition-colors font-label text-[10px] tracking-[0.32em] font-light" href="#">CUISINE</a>
+<a class="text-[#edbe90]/70 hover:text-[#edbe90] transition-colors font-label text-[10px] tracking-[0.32em] font-light" href="#">SANTUARIO</a>
+<a class="text-[#edbe90]/70 hover:text-[#edbe90] transition-colors font-label text-[10px] tracking-[0.32em] font-light" href="#">RESERVATIONS</a>
+</div>
+<button class="bg-primary-container text-on-primary-container px-8 py-3 rounded-xl font-label text-[10px] tracking-[0.32em] hover:bg-primary-container/80 transition-all active:scale-95 duration-300 ease-out">
+        BOOK NOW
+    </button>
+</nav>
+<!-- Side Nav (Desktop Anchor) -->
+<aside class="fixed left-0 top-0 h-full w-20 hover:w-64 transition-all duration-700 z-40 border-r border-[#9c8e83]/10 bg-[#0A0A0A] flex flex-col justify-between items-center py-8 group overflow-hidden shadow-[48px_0_48px_rgba(0,0,0,0.5)]">
+<div class="flex flex-col items-center gap-12 w-full">
+<div class="flex flex-col items-center">
+<span class="text-xl font-light tracking-widest text-[#FAF9D6] font-headline">V</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-label text-[8px] tracking-[0.4em] text-primary pt-2 whitespace-nowrap">TULUM SANCTUARY</span>
+</div>
+<div class="flex flex-col gap-8 w-full">
+<div class="flex items-center px-6 gap-6 text-[#FAF9D6] bg-[#6D4B27]/20 border-l-2 border-[#edbe90] py-4 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="waves">waves</span>
+<span class="opacity-0 group-hover:opacity-100 transition-all duration-500 font-label text-[10px] tracking-[0.32em] whitespace-nowrap">THE CLUB</span>
+</div>
+<div class="flex items-center px-6 gap-6 text-[#edbe90]/40 hover:text-[#edbe90] transition-all duration-500 py-4 cursor-pointer hover:bg-[#331515]/30">
+<span class="material-symbols-outlined" data-icon="spa">spa</span>
+<span class="opacity-0 group-hover:opacity-100 transition-all duration-500 font-label text-[10px] tracking-[0.32em] whitespace-nowrap">WELLNESS</span>
+</div>
+<div class="flex items-center px-6 gap-6 text-[#edbe90]/40 hover:text-[#edbe90] transition-all duration-500 py-4 cursor-pointer hover:bg-[#331515]/30">
+<span class="material-symbols-outlined" data-icon="theater_comedy">theater_comedy</span>
+<span class="opacity-0 group-hover:opacity-100 transition-all duration-500 font-label text-[10px] tracking-[0.32em] whitespace-nowrap">CULTURE</span>
+</div>
+<div class="flex items-center px-6 gap-6 text-[#edbe90]/40 hover:text-[#edbe90] transition-all duration-500 py-4 cursor-pointer hover:bg-[#331515]/30">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="opacity-0 group-hover:opacity-100 transition-all duration-500 font-label text-[10px] tracking-[0.32em] whitespace-nowrap">CONTACT</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-6 w-full items-center">
+<div class="opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col gap-4 mb-8">
+<a class="text-[#edbe90]/50 hover:text-[#FAF9D6] font-label text-[9px] tracking-[0.3em] flex items-center gap-3" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="photo_camera">photo_camera</span> INSTAGRAM
+            </a>
+<a class="text-[#edbe90]/50 hover:text-[#FAF9D6] font-label text-[9px] tracking-[0.3em] flex items-center gap-3" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="audiotrack">audiotrack</span> SPOTIFY
+            </a>
+</div>
+</div>
+</aside>
+<main class="ml-20 min-h-screen">
+<!-- Hero Section: fondo → logo 3D (luz dorada) → copy -->
+<section class="hero-3d-root relative h-screen min-h-[32rem] flex flex-col items-center justify-center text-center px-4 pt-20 overflow-hidden" data-hero-3d>
+<div class="hero-3d__bg absolute inset-0">
+<img alt="" class="absolute inset-0 w-full h-full object-cover" src="media/hero-bg.jpg"/>
+<!-- Velo oscuro + degradado: contraste para logo 3D y titulares -->
+<div class="absolute inset-0 bg-black/50" aria-hidden="true"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-black/45 via-black/55 to-[#131313]" aria-hidden="true"></div>
+</div>
+<canvas id="canvas3d" class="hero-3d__canvas absolute inset-0 block h-full w-full pointer-events-none" width="1491" height="945"></canvas>
+<div class="hero-3d__content hero-3d__content--shift relative flex flex-col items-center max-w-5xl pointer-events-none">
+<span class="font-label text-xs tracking-[0.5em] text-white mb-8 uppercase font-light drop-shadow-[0_2px_12px_rgba(0,0,0,0.75)]">A Sanctuary of Sound</span>
+<h1 class="font-headline text-4xl sm:text-5xl md:text-6xl tracking-[0.18em] md:tracking-[0.2em] font-extralight text-on-surface mb-10 uppercase leading-[1.08] drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
+            ARCHITECTS<br/><span class="italic font-light">of the</span> SOUL
+        </h1>
+<div class="w-px h-32 bg-gradient-to-b from-primary/60 to-transparent drop-shadow-[0_0_8px_rgba(237,190,144,0.35)]"></div>
+</div>
+</section>
+<!-- Upcoming Events Section -->
+<section class="max-w-7xl mx-auto py-32 px-12">
+<div class="flex flex-col gap-12">
+<div class="flex justify-between items-end mb-4">
+<div class="flex flex-col gap-2">
+<span class="font-label text-[10px] tracking-[0.4em] text-primary/60 uppercase font-light">Curation</span>
+<h2 class="font-headline text-5xl tracking-widest text-on-surface uppercase">UPCOMING RITUALS</h2>
+</div>
+<div class="flex gap-4 mb-2">
+<button class="w-12 h-12 rounded-full border border-outline/20 flex items-center justify-center hover:bg-earth/10 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-12 h-12 rounded-full border border-outline/20 flex items-center justify-center hover:bg-earth/10 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Featured Slider Banner -->
+<div class="relative w-full aspect-[21/9] rounded-[48px] overflow-hidden group border border-outline/10">
+<img alt="New Year Eternal event" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkyDIJLqu9awG67YO6qIv9lieWsWDJRnGBYcCZyCkcNcndlxUbvCw0JxKhqRaaCY-9Ng4w-XvdOVfU6oH9P5O6Qt859VBBSz937gbh2IH--xP4u7vSSBp8aBvCjkQNXZLVR_8fETOdPSdfdOqpIJEqR3ATe-w4_vRPxmC7xCjbKsI3MmAZbIlgGMDLQ5sMC1ZhFbg68hb-mAvl5oxM7rpUo_PfG-KZzQe6INGZsU0MzXCHFDFsfpyhN21ox-cj6jRayWJ5yt19LQ"/>
+<div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+<div class="absolute inset-0 p-16 flex flex-col justify-center max-w-2xl">
+<span class="bg-burgundy text-sand px-4 py-1 self-start rounded-full font-label text-[8px] tracking-[0.3em] mb-6 uppercase">Featured Event</span>
+<h3 class="font-headline text-6xl text-sand mb-4 tracking-[0.1em] uppercase leading-tight">NEW YEAR<br/><span class="italic font-light">Eternal</span></h3>
+<div class="flex items-center gap-6 mb-8 text-on-surface/70 font-label text-[10px] tracking-[0.2em]">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="calendar_today">calendar_today</span> DEC 31, 2024</span>
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span> 10:00 PM</span>
+</div>
+<button class="bg-sand text-burgundy px-8 py-3 rounded-xl font-label text-[10px] tracking-[0.32em] self-start hover:bg-white transition-all">GET TICKETS</button>
+</div>
+<!-- Slider Pagination Indicators -->
+<div class="absolute bottom-8 right-16 flex gap-3">
+<div class="w-8 h-1 bg-sand rounded-full"></div>
+<div class="w-8 h-1 bg-white/20 rounded-full"></div>
+<div class="w-8 h-1 bg-white/20 rounded-full"></div>
+</div>
+</div>
+<!-- Event Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+<!-- Card 1 -->
+<div class="flex flex-col gap-6 group">
+<div class="aspect-square w-full rounded-[48px] overflow-hidden relative border border-outline/10">
+<img alt="Solaris Gathering" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/ADBb0uilTQfIdo1Rsqh2NKSctCLFCny-IUz137doFoEbObsWSsnUwSJSl4RDwOeoJhx5I0mhoWVnkOConN-3BdX_YOpgY-dXEVqvB1zmDFU6iK4hJLHfdupcn8PE9YzeZgqzhn4XfRzTqo-oaRc4jVgnXwUbYSeTmbPKOzXPGY4H_dcpqXxiFuKepSwOjbkssOz1WtSDKitbl8Z5tUGZTlaY10ilhF_iXfjMQ2mmjqYOtaHCsbfWguCNc7WTEanaEoYHDVVviKoVxy0"/>
+<div class="absolute inset-0 bg-burgundy/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="px-4">
+<span class="font-label text-[10px] tracking-[0.3em] text-earth uppercase mb-2 block font-medium">NOV 14 • 2024</span>
+<h4 class="font-headline text-2xl text-on-surface mb-3 tracking-wide uppercase">SOLARIS GATHERING</h4>
+<p class="font-body text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase">An organic house journey guided by desert vibrations and golden hour spirits.</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="flex flex-col gap-6 group">
+<div class="aspect-square w-full rounded-[48px] overflow-hidden relative border border-outline/10">
+<img alt="Cenote Deep" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/ADBb0uiYewmFt-AXYm61cOpyADF0KYVFtkNKjJUWyhd4wfIB7TG4A8jCH79PUr-mayaS-HQVhcVgFOttOiLyEMlSogBS17c-nlR0OqzRb7tXWwKj5Z4sNIBDQCQcwnbneSt77sY9PY2yk5kbN5V0bH_A-ioYG2wNN0IU6Wb8V5EMB5xYGTr8xPKf374RDcIX6WttDiQme377bPceeOGsuNc6CS7pgjz_Vv-NI9fIUnZ9Llg-H-zUgHBJKsAD4OdD0niSQUvRW3XJ5ij6"/>
+<div class="absolute inset-0 bg-earth/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="px-4">
+<span class="font-label text-[10px] tracking-[0.3em] text-earth uppercase mb-2 block font-medium">NOV 22 • 2024</span>
+<h4 class="font-headline text-2xl text-on-surface mb-3 tracking-wide uppercase">CENOTE DEEP</h4>
+<p class="font-body text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase">Submerge into the subterranean frequencies of melodic techno within our jungle atrium.</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="flex flex-col gap-6 group">
+<div class="aspect-square w-full rounded-[48px] overflow-hidden relative border border-outline/10">
+<img alt="Ancestral Moon" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/ADBb0ug88_qNEulI3O4hIZe2a6hBu9ISBJ6_b1woIKv8TBb0WusYnBy5c50v7s8QtjrLdWegUz7zbXU6bPIJni-1gV-fWY6ntLKrHXLYW97O2qs8NstkQmMooxbQcyIP0xQUOootu9EX-ADoWNF_AxXA-J4_L-NsdWeIzcTgNynzIlvLLf8KgFTwOhcPjnPOSqrifut65jsCggPMrpxRYxCEwy5krI_7eIjnz2seY7yrOW_LsjxWjgkQF3rn1eGDiTMYBbB8sc0n0asU"/>
+<div class="absolute inset-0 bg-burgundy/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="px-4">
+<span class="font-label text-[10px] tracking-[0.3em] text-earth uppercase mb-2 block font-medium">DEC 05 • 2024</span>
+<h4 class="font-headline text-2xl text-on-surface mb-3 tracking-wide uppercase">ANCESTRAL MOON</h4>
+<p class="font-body text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase">A multi-sensory performance honoring the lunar cycle through fire and movement.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pillars Section (Simplified Bento) -->
+<section class="max-w-7xl mx-auto py-32 px-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+<div class="flex flex-col items-center p-12 bg-surface-container-low rounded-xl border border-outline-variant/10 group hover:border-primary/30 transition-all duration-700">
+<span class="material-symbols-outlined text-4xl text-primary/40 group-hover:text-primary transition-colors mb-6" data-icon="water_drop">water_drop</span>
+<span class="font-label text-[10px] tracking-[0.4em] text-on-surface/50 font-light uppercase">ELEMENTAL</span>
+</div>
+<div class="flex flex-col items-center p-12 bg-surface-container-low rounded-xl border border-outline-variant/10 group hover:border-primary/30 transition-all duration-700">
+<span class="material-symbols-outlined text-4xl text-primary/40 group-hover:text-primary transition-colors mb-6" data-icon="nights_stay">nights_stay</span>
+<span class="font-label text-[10px] tracking-[0.4em] text-on-surface/50 font-light uppercase">NOCTURNAL</span>
+</div>
+<div class="flex flex-col items-center p-12 bg-surface-container-low rounded-xl border border-outline-variant/10 group hover:border-primary/30 transition-all duration-700">
+<span class="material-symbols-outlined text-4xl text-primary/40 group-hover:text-primary transition-colors mb-6" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-label text-[10px] tracking-[0.4em] text-on-surface/50 font-light uppercase">MYSTICAL</span>
+</div>
+<div class="flex flex-col items-center p-12 bg-surface-container-low rounded-xl border border-outline-variant/10 group hover:border-primary/30 transition-all duration-700">
+<span class="material-symbols-outlined text-4xl text-primary/40 group-hover:text-primary transition-colors mb-6" data-icon="temple_buddhist">temple_buddhist</span>
+<span class="font-label text-[10px] tracking-[0.4em] text-on-surface/50 font-light uppercase">SACRED</span>
+</div>
+</section>
+<!-- Editorial Feature 1: The Ritual -->
+<section class="max-w-5xl mx-auto py-32 px-12">
+<div class="relative rounded-[48px] overflow-hidden border border-outline/20 p-1 md:p-2">
+<div class="aspect-[16/9] w-full rounded-[40px] overflow-hidden relative group">
+<img alt="Luxury beach club ritual" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" data-alt="cinematic close-up of a ceremonial fire pit at night on a Tulum beach, warm orange glow reflecting on dark sand and tropical palm leaves" src="https://lh3.googleusercontent.com/aida/ADBb0uiuvsKCVplH2L0VajRJ3DjIfQ_RUkDYiXbOWekEO1OQsunTcA5VjxdDdQLWKVXBNwJ-J6fPOjhQCjueo09AWULJGkvm0pGykbV1OROPLrcn6ceiipkowEtUm-SpPyDQYHTLy1DlES7inwDdpZkeN2ZxNFRUoR2n0DS0VDbYs0QoO9yfuvMX-hpjIJmONGJ0efT9K4MRoIAAU6aKJ1B5_duk1zokKai8a7q90cHf8hVePAGDGMElUwxtvobDSSvStsAReTq2eZYe"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
+<div class="absolute bottom-16 left-16 right-16">
+<h2 class="font-headline text-4xl text-secondary mb-6 tracking-widest uppercase">The Sunset Ritual</h2>
+<p class="font-body text-sm font-light text-on-surface/70 leading-relaxed max-w-xl tracking-wide">
+                        As the sun descends below the jungle canopy, Vagalume transforms. Experience a sensory transition led by world-class curation and the ancient pulse of Mayan heritage.
+                    </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Accent Panel: The Sound -->
+<section class="w-full py-40 bg-tertiary-container/10 flex flex-col items-center text-center">
+<div class="max-w-3xl px-12">
+<span class="material-symbols-outlined text-primary mb-12 text-5xl" data-icon="graphic_eq">graphic_eq</span>
+<h3 class="font-headline text-5xl text-on-surface mb-8 tracking-[0.15em] uppercase">AUDITORY ALCHEMY</h3>
+<p class="font-body text-lg font-extralight text-on-surface/60 leading-loose tracking-widest uppercase italic">
+                Where deep house meets organic vibrations. A curated frequency for the modern wanderer.
+            </p>
+<div class="mt-16 flex gap-12 justify-center">
+<button class="font-label text-[10px] tracking-[0.4em] text-primary border-b border-outline pb-2 hover:text-secondary transition-all uppercase">Explore Artists</button>
+<button class="font-label text-[10px] tracking-[0.4em] text-primary border-b border-outline pb-2 hover:text-secondary transition-all uppercase">Listen Live</button>
+</div>
+</div>
+</section>
+<!-- Editorial Feature 2: Cuisine -->
+<section class="max-w-5xl mx-auto py-32 px-12">
+<div class="relative rounded-[48px] overflow-hidden border border-outline/20 p-1 md:p-2">
+<div class="aspect-[4/5] md:aspect-video w-full rounded-[40px] overflow-hidden relative group">
+<img alt="Exotic gastronomy" class="w-full h-full object-cover grayscale-[40%] transition-transform duration-1000 group-hover:scale-105" data-alt="Artistic overhead shot of a gourmet seafood dish with vibrant edible flowers on a textured dark ceramic plate, moody high-contrast lighting" src="https://lh3.googleusercontent.com/aida/ADBb0uh4behj60nimISp2Oy0KdDLsn61x-TOxaPbz8pOMABB7YXuEn17x5xcmLCIAlN1s7oxbtU0hx-eIQ4DFdBCDLYsPZVMcNP_bgO3AeyqRdEaDSpBozdw15KFn8JDIk7BFL7F28NbrIBmi2j2oGyWPdrFeqGTLckpt_7tVGzs5DirhnCxcQjKiIzNsE5sT0li1V9pe4P8a_Y6SNKlxXl4n4GIuTGwMkp9bEwshOXxdaUiO2-EjEsy73dlVwsjw0jBLMOqP23g758D"/>
+<div class="absolute inset-0 bg-[#331515]/20 mix-blend-multiply"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center px-12">
+<h2 class="font-headline text-6xl text-on-surface mb-8 tracking-[0.25em] uppercase">GASTRONOMÍA</h2>
+<div class="w-24 h-px bg-primary/40 mb-8"></div>
+<p class="font-body text-xs font-light text-[#FAF9D6] tracking-[0.3em] uppercase max-w-lg">
+                        Honoring the raw essence of coastal ingredients through refined technique.
+                    </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Floating Action Button -->
+<div class="fixed bottom-12 right-12 z-50">
+<button class="w-16 h-16 rounded-full bg-primary shadow-2xl flex items-center justify-center text-on-primary hover:scale-110 transition-transform active:scale-95 group">
+<span class="material-symbols-outlined text-3xl" data-icon="calendar_month">calendar_month</span>
+<span class="absolute right-20 bg-surface-container-highest px-6 py-2 rounded-full font-label text-[10px] tracking-widest text-on-surface opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none uppercase border border-outline/20">RESERVE A TABLE</span>
+</button>
+</div>
+<!-- Footer -->
+<footer class="w-full py-20 px-12 border-t border-[#9c8e83]/10 bg-[#0A0A0A] flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex flex-col gap-4 text-center md:text-left">
+<span class="font-label text-[10px] tracking-[0.3em] text-[#edbe90]/50 uppercase">© 2024 VAGALUME TULUM. ARCHITECTURE OF THE SOUL.</span>
+</div>
+<div class="flex gap-12">
+<a class="text-[#edbe90]/50 hover:text-[#FAF9D6] underline underline-offset-8 transition-all font-label text-[10px] tracking-[0.3em] uppercase" href="#">PRIVACY</a>
+<a class="text-[#edbe90]/50 hover:text-[#FAF9D6] underline underline-offset-8 transition-all font-label text-[10px] tracking-[0.3em] uppercase" href="#">MEMBERSHIP</a>
+<a class="text-[#edbe90]/50 hover:text-[#FAF9D6] underline underline-offset-8 transition-all font-label text-[10px] tracking-[0.3em] uppercase" href="#">PRESS</a>
+<a class="text-[#edbe90]/50 hover:text-[#FAF9D6] underline underline-offset-8 transition-all font-label text-[10px] tracking-[0.3em] uppercase" href="#">CAREERS</a>
+</div>
+</footer>
+</main>
+<script src="hero-3d.mjs" type="module"></script>
+</body></html>

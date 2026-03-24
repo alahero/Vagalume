@@ -1,41 +1,57 @@
-# Web Implementation Rule
+# Regla de implementación web — Vagalume
 
-Apply this rule to all `*.html`, `*.css`, and `*.js` files.
+Aplica a **`web/`** (React + Vite: `*.tsx`, `*.ts`, `*.css`) y a cualquier HTML/CSS/JS estático del repo.
 
-## Goal
-Implement sections with semantic structure, reusable tokens, and mobile-first behavior.
+## Objetivo
 
-## Do This
-- Use semantic layout blocks: `header`, `main`, `section`, `footer`.
-- Define design tokens in `:root` and consume them through variables.
-- Name CSS classes with predictable section scopes (`hero__title`, `events__item`).
-- Build mobile-first styles first, then add larger breakpoints.
-- Keep interaction logic in JavaScript files, not inline handlers.
+Marcado semántico, **tokens de marca** (`Brandbook.md`), mobile-first y componentes acotados por sección.
 
-## Avoid This
-- Avoid inline style attributes for production code.
-- Avoid generic class names like `.box` or `.title`.
-- Avoid hardcoded colors and spacing values repeated across files.
+## Autoridad de diseño
 
-## Preferred Pattern
+- **Colores, tipografía, logo, tono y do/don’t:** `Brandbook.md` y `@.agent/skills/vagalume-brand-guidelines/SKILL.md`.
+- **Mapeo Stitch + manual (sin contradicciones):** `@.agent/skills/vagalume-brand-guidelines/references/design-system.md`.
+- Fuentes del mockup Stitch (p. ej. Newsreader, Work Sans) son **referencia** hasta tener **Calvino** y **Avenir Next**; usar fallbacks del manual en código.
 
-```html
+## Qué hacer
+
+- Bloques semánticos: `header`, `main`, `section`, `footer` (o equivalentes en React).
+- Tokens en `:root` con prefijo **`--vl-`**; consumirlos con `var()` (evitar hex sueltos repetidos).
+- Clases con alcance predecible por sección (`hero__title`, `events__item`).
+- Estilos mobile-first; breakpoints mayores después.
+- Lógica interactiva en módulos TS/JS, no atributos inline tipo `onclick`.
+- **Radios:** respetar el sistema dual del manual — editorial (casi 0) vs storytelling (grandes / pill); no un solo radio “genérico” en todo el sitio.
+- **Imágenes aprobadas:** priorizar `Assets/` (`1.jpg`–`7.jpg`, `logo-blanco-vagalume.png`) salvo otra directriz de marketing.
+
+## Qué evitar
+
+- Atributos `style=""` en producción salvo casos puntuales justificados.
+- Nombres genéricos sueltos (`.box`, `.title` sin contexto).
+- **Blanco puro** (`#FFFFFF`) y **azul de enlace por defecto** donde el manual pide champagne/crema.
+- Clichés de “nightlife” (neón fuerte, brillos tipo lens flare) alineado a `Brandbook.md` y `design-system.md`.
+
+## Patrón preferido
+
+```tsx
 <main>
-  <section class="hero" id="home">
-    <p class="hero__eyebrow">Tulum Beach Club</p>
-    <h1 class="hero__title">Vagalume</h1>
-    <a class="hero__cta" href="#reservations">Reserve Table</a>
+  <section className="hero" id="home">
+    <p className="hero__eyebrow">Tulum Beach Club</p>
+    <h1 className="hero__title">Vagalume</h1>
+    <a className="hero__cta" href="#reservations">
+      Reserve Table
+    </a>
   </section>
 </main>
 ```
 
 ```css
+/* Tokens alineados al Brandbook; ampliar en :root según design-system.md */
 :root {
-  --bg-900: #0b0a0a;
-  --surface-700: #1a1411;
-  --accent-500: #d35b1f;
-  --text-100: #f7f0e6;
-  --text-300: #d9c8b3;
+  --vl-earth: #6d4b27;
+  --vl-sand: #faf9d6;
+  --vl-burgundy: #331515;
+  --vl-forest: #0a4008;
+  --vl-night: #0a0a0a;
+  --vl-champagne: #e8e2d0;
   --space-2: 8px;
   --space-4: 16px;
   --space-8: 32px;
@@ -43,9 +59,10 @@ Implement sections with semantic structure, reusable tokens, and mobile-first be
 
 body {
   margin: 0;
-  background: var(--bg-900);
-  color: var(--text-100);
-  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--vl-night);
+  color: var(--vl-champagne);
+  /* Objetivo: Avenir Next; fallback acordado al manual hasta licencia */
+  font-family: "Montserrat", system-ui, sans-serif;
 }
 
 .hero {
@@ -54,7 +71,12 @@ body {
 
 .hero__title {
   margin: 0 0 var(--space-4);
-  font-size: clamp(40px, 12vw, 88px);
+  font-size: clamp(2.5rem, 12vw, 5.5rem);
+  /* Objetivo: Calvino en display; Cormorant Garamond como fallback temporal */
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 @media (min-width: 768px) {
@@ -64,7 +86,8 @@ body {
 }
 ```
 
-```js
+```ts
+// Patrón de UI: preferir data-* y módulos pequeños
 const menuButton = document.querySelector("[data-menu-toggle]");
 const menuPanel = document.querySelector("[data-menu-panel]");
 
@@ -73,3 +96,8 @@ menuButton?.addEventListener("click", () => {
   menuPanel?.setAttribute("data-open", String(!isOpen));
 });
 ```
+
+## Superficies y secciones (Stitch + manual)
+
+- Entre secciones grandes, preferir **cambio de capa** (tonos de `--vl-night` / superficies anidadas) además de —no en lugar de— **hairlines 1px** cuando el manual pida marco o línea a ancho completo.
+- Efectos tipo **glass** (blur + opacidad) opcionales para nav u overlays; no debilitar contraste de texto.

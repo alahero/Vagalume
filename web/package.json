@@ -7,11 +7,16 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "stitch:vagalume": "node scripts/stitch-generate-vagalume.mjs"
+    "stitch:vagalume": "node scripts/stitch-generate-vagalume.mjs",
+    "stitch:download-screen": "node scripts/stitch-download-screen.mjs",
+    "stitch:list-screens": "node scripts/stitch-list-screens.mjs"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "three": "^0.183.2"
   },
   "devDependencies": {
     "@google/stitch-sdk": "^0.0.3",

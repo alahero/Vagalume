@@ -67,3 +67,69 @@ body {
   font-weight: 400;
   color: rgba(232, 226, 208, 0.75);
 }
+
+.vl-shell__hint {
+  margin-top: 1.25rem;
+  font-size: 0.8rem;
+}
+
+.vl-shell__hint a {
+  color: var(--vl-sand);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(250, 249, 214, 0.35);
+}
+
+.vl-shell__hint a:hover {
+  border-bottom-color: var(--vl-sand);
+}
+
+/* Hero 3D de prueba (?hero3d=1) */
+.hero-3d {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #0a0908;
+}
+
+.hero-3d__chrome {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(0.75rem, 2vw, 1.25rem) clamp(1rem, 3vw, 2rem);
+  pointer-events: none;
+}
+
+.hero-3d__label {
+  margin: 0;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(232, 226, 208, 0.45);
+}
+
+.hero-3d__link {
+  pointer-events: auto;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--vl-sand);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(250, 249, 214, 0.35);
+}
+
+.hero-3d__link:hover {
+  border-bottom-color: var(--vl-sand);
+}

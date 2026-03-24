@@ -9,6 +9,7 @@ description: Use when implementing Vagalume (beach club, Tulum) marketing site s
 
 1. Leer y seguir **`Brandbook.md`** en la raíz del repositorio (transcripción completa del manual PNG en `PDF to PNG/1x/`).
 2. Para patrones de código en el proyecto React/Vite, alinear también con `@.agent/rules/web-implementation.md` cuando aplique.
+3. **`references/design-system.md`** en esta skill: consolida el export Stitch (`Assets/stitch-export/DESIGN.md`, o el zip equivalente) con el manual; **si hay conflicto, mandan (1) y esta skill**, no el archivo de Stitch solo.
 
 ## Checklist de implementación
 

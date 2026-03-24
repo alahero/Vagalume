@@ -12,7 +12,8 @@ npm run preview
 ```
 
 - **UI actual:** `src/App.tsx` + `src/index.css` (placeholder con tokens de marca).
-- **Stitch (generar / listar pantallas):** `npm run stitch:vagalume` y `node scripts/stitch-list-screens.mjs` (requiere `STITCH_API_KEY` y, para listar, `STITCH_PROJECT_ID`).
+- **Mockup Stitch (fuente principal en repo):** `Assets/stitch-export/` — `code.html`, `screen.png`, `DESIGN.md`. Si falta la carpeta, descomprime `Assets/stitch_vagalume_beach_club_tulum.zip` ahí (`Expand-Archive` en PowerShell o tu herramienta habitual).
+- **Stitch vía API (opcional):** `npm run stitch:vagalume`, `npm run stitch:list-screens`, `npm run stitch:download-screen` con `STITCH_API_KEY` en `.env.stitch` — solo si necesitas regenerar o bajar otra pantalla desde el servicio.
 
 ## Próximo paso (3D)
 
