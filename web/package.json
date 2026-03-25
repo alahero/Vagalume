@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build && node scripts/copy-stitch-export.mjs",
+    "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "stitch:vagalume": "node scripts/stitch-generate-vagalume.mjs",
     "stitch:download-screen": "node scripts/stitch-download-screen.mjs",
