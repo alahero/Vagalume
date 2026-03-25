@@ -13,6 +13,7 @@ npm run preview
 
 - **UI actual:** `src/App.tsx` + `src/index.css` (placeholder con tokens de marca).
 - **Mockup Stitch (fuente principal en repo):** `Assets/stitch-export/` — `code.html`, `screen.png`, `DESIGN.md`. Si falta la carpeta, descomprime `Assets/stitch_vagalume_beach_club_tulum.zip` ahí (`Expand-Archive` en PowerShell o tu herramienta habitual).
+- **Deploy (Vite):** Tras `npm run build`, el export se copia a `dist/stitch-export/`. En producción abre **`/stitch-export/code.html`** (o **`/stitch-export/`** → redirige a `code.html`). Configura el proyecto en Vercel/Netlify con **raíz `web`**.
 - **Stitch vía API (opcional):** `npm run stitch:vagalume`, `npm run stitch:list-screens`, `npm run stitch:download-screen` con `STITCH_API_KEY` en `.env.stitch` — solo si necesitas regenerar o bajar otra pantalla desde el servicio.
 
 ## Próximo paso (3D)
