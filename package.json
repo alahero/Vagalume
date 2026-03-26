@@ -1,5 +1,5 @@
 {
   "name": "vagalume",
   "private": true,
-  "description": "Raíz del monorepo; la app vive en web/. En Vercel: Settings → General → Root Directory = web (obligatorio; el vercel.json activo es web/vercel.json)."
+  "description": "Raíz del monorepo; la app vive en web/. Vercel: Root Directory vacío (raíz del repo); vercel.json en esta raíz usa npm --prefix web."
 }
