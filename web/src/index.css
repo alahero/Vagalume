@@ -334,6 +334,12 @@ body {
   transition: color 0.5s, background 0.5s;
 }
 
+a.vl-sidebar__item {
+  text-decoration: none;
+  color: rgba(237, 190, 144, 0.4);
+  cursor: pointer;
+}
+
 .vl-sidebar__item:hover {
   color: var(--vl-primary);
   background: rgba(51, 21, 21, 0.3);
@@ -386,16 +392,52 @@ body {
   color: var(--vl-sand);
 }
 
+/* Enlaces legales / contacto (sidebar, más discretos) */
+.vl-sidebar__legal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  padding: 0 1.25rem 0 1.5rem;
+  opacity: 0;
+  transition: opacity 0.7s;
+}
+
+.vl-sidebar:hover .vl-sidebar__legal {
+  opacity: 1;
+}
+
+.vl-sidebar__legal-link {
+  font-size: 0.625rem;
+  letter-spacing: 0.22em;
+  line-height: 1.45;
+  text-transform: uppercase;
+  color: rgba(237, 190, 144, 0.38);
+  text-decoration: none;
+  transition: color 0.35s;
+}
+
+.vl-sidebar__legal-link:hover {
+  color: rgba(237, 190, 144, 0.75);
+}
+
 /* Mobile overlay */
 .vl-mobile-overlay {
-  display: none;
+  display: block;
   position: fixed;
   inset: 0;
   z-index: 60;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .vl-mobile-overlay--open {
-  display: block;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .vl-mobile-overlay__backdrop {
@@ -440,6 +482,12 @@ body {
 
 .vl-mobile-overlay--open .vl-mobile-overlay__backdrop {
   opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .vl-mobile-overlay {
+    display: none;
+  }
 }
 
 .vl-mobile-drawer__eyebrow {
@@ -527,6 +575,14 @@ body {
   text-transform: uppercase;
   color: rgba(237, 190, 144, 0.5);
   text-decoration: none;
+}
+
+.vl-mobile-drawer__foot-link--legal {
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  padding-left: 1rem;
 }
 
 /* Footer */

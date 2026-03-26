@@ -3,6 +3,19 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useHomeSectionNav, type HomeNavId } from "../hooks/useHomeSectionNav";
 import FabCalendar from "./FabCalendar";
 
+/** Menú digital (misma URL que la sección cuisine en home). */
+const SIDEBAR_MENU_URL = "https://mandalagroup.menu/tulum/vagalume/";
+/** Perfil público; actualizar si el handle oficial cambia. */
+const SIDEBAR_INSTAGRAM_URL = "https://www.instagram.com/vagalumetulum/";
+/** Lista usada en el embed del home; sustituir por perfil de artista/venue si aplica. */
+const SIDEBAR_SPOTIFY_URL = "https://open.spotify.com/playlist/37i9dQZF1DX9pP7cC2liKw";
+
+/** Enlaces legales / contacto en MandalaTickets (inglés). */
+const MT_TERMS_URL = "https://mandalatickets.com/info/terminos/en";
+const MT_PRIVACY_URL = "https://mandalatickets.com/info/privacidad/en";
+const MT_FAQS_URL = "https://mandalatickets.com/info/faqs/en";
+const MT_CONTACT_URL = "https://mandalatickets.com/info/contactanos/en";
+
 export type NavVariant = "home" | "events";
 
 type SiteLayoutProps = {
@@ -69,6 +82,9 @@ export default function SiteLayout({ children, navVariant }: SiteLayoutProps) {
   }, []);
 
   const hash = (id: string) => (navVariant === "home" ? `#${id}` : `/#${id}`);
+
+  const upcomingEventsActive =
+    location.pathname === "/events" || (location.pathname === "/" && activeSection === "events");
 
   return (
     <>
@@ -161,38 +177,82 @@ export default function SiteLayout({ children, navVariant }: SiteLayoutProps) {
         </a>
       </nav>
 
-      <aside className="vl-sidebar" aria-label="Secciones">
+      <aside className="vl-sidebar" aria-label="Accesos y enlaces">
         <div className="vl-sidebar__inner">
           <div className="vl-sidebar__top">
             <span className="vl-sidebar__mark">V</span>
             <span className="vl-sidebar__tag">TULUM SANCTUARY</span>
           </div>
           <div className="vl-sidebar__nav">
-            <div className="vl-sidebar__item vl-sidebar__item--active">
-              <span className="material-symbols-outlined">waves</span>
-              <span className="vl-sidebar__label">THE CLUB</span>
-            </div>
-            <div className="vl-sidebar__item">
-              <span className="material-symbols-outlined">spa</span>
-              <span className="vl-sidebar__label">WELLNESS</span>
-            </div>
-            <div className="vl-sidebar__item">
-              <span className="material-symbols-outlined">theater_comedy</span>
-              <span className="vl-sidebar__label">CULTURE</span>
-            </div>
-            <div className="vl-sidebar__item">
-              <span className="material-symbols-outlined">mail</span>
-              <span className="vl-sidebar__label">CONTACT</span>
-            </div>
-          </div>
-          <div className="vl-sidebar__social">
-            <a className="vl-sidebar__social-link" href="#">
-              <span className="material-symbols-outlined">photo_camera</span>
-              INSTAGRAM
+            <Link
+              className={
+                "vl-sidebar__item" + (upcomingEventsActive ? " vl-sidebar__item--active" : "")
+              }
+              to="/events"
+            >
+              <span className="material-symbols-outlined">event_upcoming</span>
+              <span className="vl-sidebar__label">UPCOMING EVENTS</span>
+            </Link>
+            <a
+              className="vl-sidebar__item"
+              href={SIDEBAR_MENU_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="material-symbols-outlined">restaurant_menu</span>
+              <span className="vl-sidebar__label">OUR MENU</span>
             </a>
-            <a className="vl-sidebar__social-link" href="#">
+            <a
+              className="vl-sidebar__item"
+              href={SIDEBAR_INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="material-symbols-outlined">photo_camera</span>
+              <span className="vl-sidebar__label">INSTAGRAM</span>
+            </a>
+            <a
+              className="vl-sidebar__item"
+              href={SIDEBAR_SPOTIFY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <span className="material-symbols-outlined">audiotrack</span>
-              SPOTIFY
+              <span className="vl-sidebar__label">SPOTIFY</span>
+            </a>
+          </div>
+          <div className="vl-sidebar__legal">
+            <a
+              className="vl-sidebar__legal-link"
+              href={MT_TERMS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Terms &amp; Conditions
+            </a>
+            <a
+              className="vl-sidebar__legal-link"
+              href={MT_PRIVACY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Privacy Policy
+            </a>
+            <a
+              className="vl-sidebar__legal-link"
+              href={MT_FAQS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              FAQs
+            </a>
+            <a
+              className="vl-sidebar__legal-link"
+              href={MT_CONTACT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Contact Us
             </a>
           </div>
         </div>
@@ -256,30 +316,81 @@ export default function SiteLayout({ children, navVariant }: SiteLayoutProps) {
               LOCATION
             </a>
           </div>
-          <p className="vl-mobile-drawer__label">Explore</p>
-          <div className="vl-mobile-drawer__explore">
-            <span className="vl-mobile-drawer__explore-item vl-mobile-drawer__explore-item--active">
-              <span className="material-symbols-outlined">waves</span> THE CLUB
-            </span>
-            <span className="vl-mobile-drawer__explore-item">
-              <span className="material-symbols-outlined">spa</span> WELLNESS
-            </span>
-            <span className="vl-mobile-drawer__explore-item">
-              <span className="material-symbols-outlined">theater_comedy</span>{" "}
-              CULTURE
-            </span>
-            <span className="vl-mobile-drawer__explore-item">
-              <span className="material-symbols-outlined">mail</span> CONTACT
-            </span>
-          </div>
-          <div className="vl-mobile-drawer__footer">
-            <a className="vl-mobile-drawer__foot-link" href="#">
-              <span className="material-symbols-outlined">photo_camera</span>
+          <p className="vl-mobile-drawer__label">More</p>
+          <div className="vl-mobile-drawer__section">
+            <Link
+              className={
+                "vl-mobile-drawer__link" + (upcomingEventsActive ? " vl-mobile-drawer__link--active" : "")
+              }
+              to="/events"
+              onClick={() => setMobileOpen(false)}
+            >
+              UPCOMING EVENTS
+            </Link>
+            <a
+              className="vl-mobile-drawer__link"
+              href={SIDEBAR_MENU_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
+            >
+              OUR MENU
+            </a>
+            <a
+              className="vl-mobile-drawer__link"
+              href={SIDEBAR_INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
+            >
               INSTAGRAM
             </a>
-            <a className="vl-mobile-drawer__foot-link" href="#">
-              <span className="material-symbols-outlined">audiotrack</span>
+            <a
+              className="vl-mobile-drawer__link"
+              href={SIDEBAR_SPOTIFY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
+            >
               SPOTIFY
+            </a>
+          </div>
+          <div className="vl-mobile-drawer__footer">
+            <a
+              className="vl-mobile-drawer__foot-link vl-mobile-drawer__foot-link--legal"
+              href={MT_TERMS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
+            >
+              Terms &amp; Conditions
+            </a>
+            <a
+              className="vl-mobile-drawer__foot-link vl-mobile-drawer__foot-link--legal"
+              href={MT_PRIVACY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
+            >
+              Privacy Policy
+            </a>
+            <a
+              className="vl-mobile-drawer__foot-link vl-mobile-drawer__foot-link--legal"
+              href={MT_FAQS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
+            >
+              FAQs
+            </a>
+            <a
+              className="vl-mobile-drawer__foot-link vl-mobile-drawer__foot-link--legal"
+              href={MT_CONTACT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
+            >
+              Contact Us
             </a>
           </div>
         </nav>
