@@ -1,5 +1,6 @@
 import { useEffect, useState, type MouseEvent, type ReactNode } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useHomeSectionNav, type HomeNavId } from "../hooks/useHomeSectionNav";
 import FabCalendar from "./FabCalendar";
 
 export type NavVariant = "home" | "events";
@@ -16,6 +17,13 @@ export default function SiteLayout({ children, navVariant }: SiteLayoutProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const activeSection = useHomeSectionNav();
+
+  const topNavClass = (id: HomeNavId) =>
+    "vl-topnav__link" + (activeSection === id ? " vl-topnav__link--active" : "");
+
+  const drawerLinkClass = (id: HomeNavId) =>
+    "vl-mobile-drawer__link" + (activeSection === id ? " vl-mobile-drawer__link--active" : "");
 
   /** Misma lógica que el HTML legacy: en inicio → scroll suave al hero; si no, ir a / arriba. */
   const handleBrandClick = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -105,22 +113,41 @@ export default function SiteLayout({ children, navVariant }: SiteLayoutProps) {
           </Link>
         </div>
         <div className="vl-topnav__links">
+          {navVariant === "home" ? (
+            <a
+              className={topNavClass("events")}
+              href="#events"
+              aria-current={activeSection === "events" ? "true" : undefined}
+            >
+              EVENTS
+            </a>
+          ) : null}
           <a
-            className="vl-topnav__link vl-topnav__link--active"
-            href={navVariant === "home" ? "#events" : "/events#events"}
+            className={topNavClass("experience")}
+            href={hash("experience")}
+            aria-current={activeSection === "experience" ? "true" : undefined}
           >
-            EVENTS
-          </a>
-          <a className="vl-topnav__link" href={hash("experience")}>
             EXPERIENCE
           </a>
-          <a className="vl-topnav__link" href={hash("playlist")}>
+          <a
+            className={topNavClass("playlist")}
+            href={hash("playlist")}
+            aria-current={activeSection === "playlist" ? "true" : undefined}
+          >
             PLAYLIST
           </a>
-          <a className="vl-topnav__link" href={hash("cuisine")}>
+          <a
+            className={topNavClass("cuisine")}
+            href={hash("cuisine")}
+            aria-current={activeSection === "cuisine" ? "true" : undefined}
+          >
             CUISINE
           </a>
-          <a className="vl-topnav__link" href={hash("location")}>
+          <a
+            className={topNavClass("location")}
+            href={hash("location")}
+            aria-current={activeSection === "location" ? "true" : undefined}
+          >
             LOCATION
           </a>
         </div>
@@ -186,39 +213,44 @@ export default function SiteLayout({ children, navVariant }: SiteLayoutProps) {
         <nav className="vl-mobile-drawer" aria-label="Menú móvil">
           <p className="vl-mobile-drawer__eyebrow">Tulum sanctuary</p>
           <div className="vl-mobile-drawer__section">
+            {navVariant === "home" ? (
+              <a
+                className={drawerLinkClass("events")}
+                href="#events"
+                aria-current={activeSection === "events" ? "true" : undefined}
+                onClick={() => setMobileOpen(false)}
+              >
+                EVENTS
+              </a>
+            ) : null}
             <a
-              href={navVariant === "home" ? "#events" : "/events#events"}
-              className={
-                "vl-mobile-drawer__link vl-mobile-drawer__link--active"
-              }
-              onClick={() => setMobileOpen(false)}
-            >
-              EVENTS
-            </a>
-            <a
-              className="vl-mobile-drawer__link"
+              className={drawerLinkClass("experience")}
               href={hash("experience")}
+              aria-current={activeSection === "experience" ? "true" : undefined}
               onClick={() => setMobileOpen(false)}
             >
               EXPERIENCE
             </a>
             <a
-              className="vl-mobile-drawer__link"
+              className={drawerLinkClass("playlist")}
               href={hash("playlist")}
+              aria-current={activeSection === "playlist" ? "true" : undefined}
               onClick={() => setMobileOpen(false)}
             >
               PLAYLIST
             </a>
             <a
-              className="vl-mobile-drawer__link"
+              className={drawerLinkClass("cuisine")}
               href={hash("cuisine")}
+              aria-current={activeSection === "cuisine" ? "true" : undefined}
               onClick={() => setMobileOpen(false)}
             >
               CUISINE
             </a>
             <a
-              className="vl-mobile-drawer__link"
+              className={drawerLinkClass("location")}
               href={hash("location")}
+              aria-current={activeSection === "location" ? "true" : undefined}
               onClick={() => setMobileOpen(false)}
             >
               LOCATION
