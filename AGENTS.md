@@ -9,9 +9,9 @@ Build a static website for Vagalume, a beach club in Tulum, using a brand-first 
 - **Google Stitch MCP** (Cursor): definido en `.cursor/mcp.json`. Copia `.env.stitch.example` → `.env.stitch` en la raíz del repo y pon ahí `STITCH_API_KEY` (ese archivo está en `.gitignore`). Reinicia Cursor para cargar el servidor.
 
 ## Run Commands
-- Run the Vagalume site in dev with `cd web && npm run dev`.
+- Run the Vagalume site in dev with `cd web && npm run dev`, or from repo root: `npm run dev` (script en `package.json` raíz).
 - Run production build with `cd web && npm run build` and preview with `cd web && npm run preview`.
-- Run legacy static preview with `python -m http.server 4173` from repo root if needed.
+- Legacy HTML exports (solo referencia): `legacy/stitch-exports/` — sirve con `python -m http.server` desde la carpeta que contenga esos archivos si necesitas comparar visualmente; el producto es la app en `web/`.
 - Run temporary test placeholder with `powershell -Command "Write-Output 'No automated tests configured yet'"`.
 
 ## Security Boundaries

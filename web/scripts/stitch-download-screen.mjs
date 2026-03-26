@@ -6,7 +6,7 @@
  *
  * Uso (PowerShell, raíz del repo):
  *   node web/scripts/stitch-download-screen.mjs
- *   node web/scripts/stitch-download-screen.mjs --out ../Assets/stitch-import
+ *   node web/scripts/stitch-download-screen.mjs --out ../legacy/stitch-import
  *
  * Variables opcionales: STITCH_PROJECT_ID, STITCH_SCREEN_ID
  */
@@ -69,8 +69,7 @@ const SCREEN_ID =
   process.env.STITCH_SCREEN_ID || "ae510f3055ed4e56a7b949fd6ae48d2a";
 
 const outputDir =
-  outArg ||
-  path.join(__dirname, "..", "..", "Assets", "stitch-import-minimalist-brand-photos");
+  outArg || path.join(__dirname, "..", "..", "legacy", "stitch-import");
 
 if (!process.env.STITCH_API_KEY?.trim()) {
   const envPath = path.join(__dirname, "..", "..", ".env.stitch");

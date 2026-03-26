@@ -1,8 +1,12 @@
+import { Routes, Route, Navigate } from "react-router-dom";
+import SiteLayout from "./components/SiteLayout";
 import Hero3DPage from "./Hero3DPage";
+import EventsPage from "./pages/EventsPage";
+import HomePage from "./pages/HomePage";
 
 /**
- * Placeholder mínimo: el diseño de producción vive en Stitch; aquí solo mantenemos el shell Vite/React.
- * Prueba del hero 3D: abre `/?hero3d=1`
+ * Rutas del sitio marketing; `?hero3d=1` conserva la vista previa del hero 3D a pantalla completa.
+ * La query se lee con `window` (SPA sin SSR) para evitar condiciones de carrera con el router.
  */
 export default function App() {
   const showHero3d =
@@ -14,15 +18,24 @@ export default function App() {
   }
 
   return (
-    <main className="vl-shell">
-      <p className="vl-shell__eyebrow">Tulum, Mexico</p>
-      <h1 className="vl-shell__title">Vagalume</h1>
-      <p className="vl-shell__body">
-        Marketing site shell — implement the approved Stitch mockup here when you are ready to ship.
-      </p>
-      <p className="vl-shell__body vl-shell__hint">
-        <a href="/?hero3d=1">Ver vista previa del hero 3D (logo + luz dorada)</a>
-      </p>
-    </main>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <SiteLayout navVariant="home">
+            <HomePage />
+          </SiteLayout>
+        }
+      />
+      <Route
+        path="/events"
+        element={
+          <SiteLayout navVariant="events">
+            <EventsPage />
+          </SiteLayout>
+        }
+      />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }

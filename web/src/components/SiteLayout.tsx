@@ -3,13 +3,15 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useHomeSectionNav, type HomeNavId } from "../hooks/useHomeSectionNav";
 import FabCalendar from "./FabCalendar";
 
-/** Menú digital (misma URL que la sección cuisine en home). */
+/** Menú digital Mandala (misma URL que la sección cuisine en home). */
 const SIDEBAR_MENU_URL = "https://mandalagroup.menu/tulum/vagalume/";
-/** Perfil público; actualizar si el handle oficial cambia. */
-const SIDEBAR_INSTAGRAM_URL = "https://www.instagram.com/vagalumetulum/";
-/** Lista usada en el embed del home; sustituir por perfil de artista/venue si aplica. */
+/** Perfil oficial en Instagram (@vagalume_tulum). */
+const SIDEBAR_INSTAGRAM_URL = "https://www.instagram.com/vagalume_tulum/";
+/** Playlist pública “Tulum Vibes” (mismo ID que el embed en home). */
 const SIDEBAR_SPOTIFY_URL = "https://open.spotify.com/playlist/37i9dQZF1DX9pP7cC2liKw";
 
+/** Reservas oficiales (mismo CTA que la top nav). */
+const MT_BOOK_VAGALUME_URL = "https://mandalatickets.com/en/tulum/disco/Vagalume";
 /** Enlaces legales / contacto en MandalaTickets (inglés). */
 const MT_TERMS_URL = "https://mandalatickets.com/info/terminos/en";
 const MT_PRIVACY_URL = "https://mandalatickets.com/info/privacidad/en";
@@ -37,6 +39,9 @@ export default function SiteLayout({ children, navVariant }: SiteLayoutProps) {
 
   const drawerLinkClass = (id: HomeNavId) =>
     "vl-mobile-drawer__link" + (activeSection === id ? " vl-mobile-drawer__link--active" : "");
+
+  const footerQuickClass = (id: HomeNavId) =>
+    "vl-footer__qlink" + (activeSection === id ? " vl-footer__qlink--active" : "");
 
   /** Misma lógica que el HTML legacy: en inicio → scroll suave al hero; si no, ir a / arriba. */
   const handleBrandClick = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -67,7 +72,7 @@ export default function SiteLayout({ children, navVariant }: SiteLayoutProps) {
 
   useEffect(() => {
     const onResize = () => {
-      if (window.matchMedia("(min-width: 768px)").matches) setMobileOpen(false);
+      if (window.matchMedia("(min-width: 1010px)").matches) setMobileOpen(false);
     };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
@@ -120,10 +125,10 @@ export default function SiteLayout({ children, navVariant }: SiteLayoutProps) {
           <Link to="/" className="vl-topnav__brand" aria-label="Vagalume — inicio" onClick={handleBrandClick}>
             <img
               className="vl-topnav__logo"
-              src="/media/logo.png"
+              src="/media/logo-blanco-vagalume.png"
               alt=""
-              width={40}
-              height={40}
+              width={160}
+              height={42}
             />
             <span className="vl-topnav__wordmark">VAGALUME</span>
           </Link>
@@ -169,7 +174,7 @@ export default function SiteLayout({ children, navVariant }: SiteLayoutProps) {
         </div>
         <a
           className="vl-topnav__cta"
-          href="https://mandalatickets.com/en/tulum/disco/Vagalume"
+          href={MT_BOOK_VAGALUME_URL}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -401,14 +406,130 @@ export default function SiteLayout({ children, navVariant }: SiteLayoutProps) {
       <FabCalendar />
 
       <footer className="vl-footer">
-        <div className="vl-footer__copy">
-          © 2024 VAGALUME TULUM. ARCHITECTURE OF THE SOUL.
+        <div className="vl-footer__grid">
+          <div className="vl-footer__brand">
+            <Link
+              to="/"
+              className="vl-footer__logo-link"
+              aria-label="Vagalume — inicio"
+              onClick={handleBrandClick}
+            >
+              <img
+                className="vl-footer__logo"
+                src="/media/logo-blanco-vagalume.png"
+                alt=""
+                width={180}
+                height={48}
+                decoding="async"
+              />
+            </Link>
+            <p className="vl-footer__desc">
+              A contemporary jungle beach sanctuary in Tulum—where curated sound, the Caribbean, and ritual
+              energy meet. One venue, one frequency.
+            </p>
+          </div>
+          <div className="vl-footer__col">
+            <h2 className="vl-footer__heading">Quick links</h2>
+            <nav className="vl-footer__nav" aria-label="Secciones principales">
+              <ul className="vl-footer__list">
+                {navVariant === "home" ? (
+                  <li>
+                    <a
+                      className={footerQuickClass("events")}
+                      href="#events"
+                      aria-current={activeSection === "events" ? "true" : undefined}
+                    >
+                      Events
+                    </a>
+                  </li>
+                ) : null}
+                <li>
+                  <a
+                    className={footerQuickClass("experience")}
+                    href={hash("experience")}
+                    aria-current={activeSection === "experience" ? "true" : undefined}
+                  >
+                    Experience
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className={footerQuickClass("playlist")}
+                    href={hash("playlist")}
+                    aria-current={activeSection === "playlist" ? "true" : undefined}
+                  >
+                    Playlist
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className={footerQuickClass("cuisine")}
+                    href={hash("cuisine")}
+                    aria-current={activeSection === "cuisine" ? "true" : undefined}
+                  >
+                    Cuisine
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className={footerQuickClass("location")}
+                    href={hash("location")}
+                    aria-current={activeSection === "location" ? "true" : undefined}
+                  >
+                    Location
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div className="vl-footer__col">
+            <h2 className="vl-footer__heading">MandalaTickets</h2>
+            <nav className="vl-footer__nav" aria-label="Información y contacto MandalaTickets">
+              <ul className="vl-footer__list vl-footer__list--compact">
+                <li>
+                  <a
+                    className="vl-footer__mtlink"
+                    href={MT_TERMS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Terms &amp; Conditions
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="vl-footer__mtlink"
+                    href={MT_PRIVACY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a className="vl-footer__mtlink" href={MT_FAQS_URL} target="_blank" rel="noopener noreferrer">
+                    FAQs
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="vl-footer__mtlink"
+                    href={MT_CONTACT_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Contact Us
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
-        <div className="vl-footer__links">
-          <a href="#">PRIVACY</a>
-          <a href="#">MEMBERSHIP</a>
-          <a href="#">PRESS</a>
-          <a href="#">CAREERS</a>
+        <div className="vl-footer__rule" aria-hidden />
+        <div className="vl-footer__bottom">
+          <p className="vl-footer__copy">
+            © {new Date().getFullYear()} Vagalume Tulum. All rights reserved.
+          </p>
         </div>
       </footer>
     </>

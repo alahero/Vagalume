@@ -7,7 +7,7 @@ import * as THREE from "three";
  * Plano con textura del wordmark; responde a luces (metal + rugosidad suaves).
  */
 function LogoMesh() {
-  const map = useTexture("/brand-logo.png");
+  const map = useTexture("/media/logo.png");
   map.colorSpace = THREE.SRGBColorSpace;
 
   const { width, height } = useMemo(() => {

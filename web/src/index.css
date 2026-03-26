@@ -23,6 +23,9 @@
   --vl-font-body: "Work Sans", system-ui, sans-serif;
   --vl-space-section-y: clamp(4rem, 10vw, 8rem);
   --vl-nav-h: 5.5rem;
+  /* Logo claro (PNG) → mismo tono que --vl-primary: footer y marca móvil en top nav */
+  --vl-brand-logo-filter: brightness(0) saturate(100%) invert(84%) sepia(31%) saturate(520%) hue-rotate(332deg)
+    brightness(103%) contrast(92%);
 }
 
 *,
@@ -130,7 +133,7 @@ body {
   cursor: pointer;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1010px) {
   .vl-topnav__burger {
     display: none;
   }
@@ -152,9 +155,12 @@ body {
 .vl-topnav__logo {
   height: 2.25rem;
   width: auto;
+  max-width: 10rem;
   object-fit: contain;
+  filter: var(--vl-brand-logo-filter);
 }
 
+/* Logo compacto solo en móvil; desde tablet hasta <1010px se mantiene el wordmark como en desktop. */
 @media (min-width: 768px) {
   .vl-topnav__logo {
     display: none;
@@ -185,7 +191,7 @@ body {
   gap: 2.5rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1010px) {
   .vl-topnav__links {
     display: flex;
   }
@@ -258,10 +264,12 @@ body {
   .vl-sidebar {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     position: fixed;
     left: 0;
     top: 0;
     height: 100%;
+    /* Deslizamiento original; el ancho real del contenido vive en __inner (16rem) para evitar reflujo interno. */
     width: 5rem;
     z-index: 40;
     border-right: 1px solid rgba(156, 142, 131, 0.1);
@@ -277,13 +285,23 @@ body {
   }
 }
 
+@media (min-width: 768px) and (prefers-reduced-motion: reduce) {
+  .vl-sidebar {
+    transition-duration: 0.01ms;
+  }
+}
+
 .vl-sidebar__inner {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  box-sizing: border-box;
   height: 100%;
-  width: 100%;
+  width: 16rem;
+  min-width: 16rem;
+  flex-shrink: 0;
+  transform: translateZ(0);
 }
 
 .vl-sidebar__top {
@@ -310,7 +328,7 @@ body {
   text-transform: uppercase;
   white-space: nowrap;
   padding-top: 0.5rem;
-  transition: opacity 0.5s;
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .vl-sidebar:hover .vl-sidebar__tag {
@@ -331,7 +349,13 @@ body {
   padding: 1rem 1.5rem;
   color: rgba(237, 190, 144, 0.4);
   cursor: default;
-  transition: color 0.5s, background 0.5s;
+  transition:
+    color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.vl-sidebar__item .material-symbols-outlined {
+  flex-shrink: 0;
 }
 
 a.vl-sidebar__item {
@@ -357,7 +381,7 @@ a.vl-sidebar__item {
   letter-spacing: 0.32em;
   text-transform: uppercase;
   white-space: nowrap;
-  transition: opacity 0.5s;
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .vl-sidebar:hover .vl-sidebar__label {
@@ -370,7 +394,7 @@ a.vl-sidebar__item {
   gap: 1rem;
   margin-bottom: 2rem;
   opacity: 0;
-  transition: opacity 0.7s;
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .vl-sidebar:hover .vl-sidebar__social {
@@ -401,7 +425,7 @@ a.vl-sidebar__item {
   width: 100%;
   padding: 0 1.25rem 0 1.5rem;
   opacity: 0;
-  transition: opacity 0.7s;
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .vl-sidebar:hover .vl-sidebar__legal {
@@ -484,7 +508,8 @@ a.vl-sidebar__item {
   opacity: 1;
 }
 
-@media (min-width: 768px) {
+/* Drawer hasta <1010px: coincide con hamburguesa visible en top nav */
+@media (min-width: 1010px) {
   .vl-mobile-overlay {
     display: none;
   }
@@ -585,58 +610,146 @@ a.vl-sidebar__item {
   padding-left: 1rem;
 }
 
-/* Footer */
+/* Footer (estilo columnas tipo Mandala, tokens Vagalume) */
 .vl-footer {
+  /* Logo + títulos comparten tono; descripción + enlaces comparten otro. */
+  --vl-footer-title: var(--vl-primary);
+  --vl-footer-body: rgba(250, 249, 214, 0.82);
+  --vl-footer-body-muted: rgba(250, 249, 214, 0.48);
   margin-left: 0;
-  padding: 5rem 3rem;
-  border-top: 1px solid rgba(156, 142, 131, 0.1);
+  padding: clamp(3rem, 7vw, 5.5rem) clamp(1.5rem, 5vw, 3.5rem);
+  border-top: 1px solid rgba(156, 142, 131, 0.12);
   background: var(--vl-night);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
+  color: var(--vl-on-surface);
 }
 
 @media (min-width: 768px) {
   .vl-footer {
     margin-left: 5rem;
-    flex-direction: row;
-    justify-content: space-between;
   }
+}
+
+.vl-footer__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.75rem;
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 900px) {
+  .vl-footer__grid {
+    grid-template-columns: minmax(14rem, 1.35fr) 1fr 1fr;
+    gap: 3rem 2.5rem;
+    align-items: start;
+  }
+}
+
+.vl-footer__brand {
+  max-width: 26rem;
+}
+
+.vl-footer__logo-link {
+  display: block;
+  width: fit-content;
+  max-width: min(14rem, 100%);
+  line-height: 0;
+}
+
+.vl-footer__logo {
+  display: block;
+  height: clamp(2.5rem, 4vw, 3.25rem);
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  filter: var(--vl-brand-logo-filter);
+}
+
+.vl-footer__desc {
+  margin: 1.25rem 0 0;
+  font-family: var(--vl-font-body);
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  color: var(--vl-footer-body);
+}
+
+.vl-footer__col {
+  min-width: 0;
+}
+
+.vl-footer__heading {
+  margin: 0 0 1.1rem;
+  font-family: var(--vl-font-headline);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--vl-footer-title);
+}
+
+.vl-footer__nav {
+  margin: 0;
+}
+
+.vl-footer__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.vl-footer__list--compact {
+  gap: 0.55rem;
+}
+
+.vl-footer__qlink,
+.vl-footer__mtlink {
+  font-family: var(--vl-font-body);
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--vl-footer-body);
+  transition: color 0.2s ease;
+}
+
+.vl-footer__mtlink {
+  letter-spacing: 0.18em;
+  font-size: 0.625rem;
+}
+
+.vl-footer__qlink:hover,
+.vl-footer__mtlink:hover {
+  color: var(--vl-sand);
+}
+
+.vl-footer__qlink--active {
+  color: var(--vl-footer-body);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.vl-footer__rule {
+  max-width: 72rem;
+  margin: clamp(2.5rem, 5vw, 3.25rem) auto 0;
+  height: 1px;
+  background: rgba(156, 142, 131, 0.18);
+}
+
+.vl-footer__bottom {
+  max-width: 72rem;
+  margin: 1.35rem auto 0;
+  padding: 0;
 }
 
 .vl-footer__copy {
+  margin: 0;
   font-size: 0.625rem;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(237, 190, 144, 0.5);
-  text-align: center;
-}
-
-@media (min-width: 768px) {
-  .vl-footer__copy {
-    text-align: left;
-  }
-}
-
-.vl-footer__links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3rem;
-  justify-content: center;
-}
-
-.vl-footer__links a {
-  font-size: 0.625rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: rgba(237, 190, 144, 0.5);
-  text-decoration: underline;
-  text-underline-offset: 8px;
-}
-
-.vl-footer__links a:hover {
-  color: var(--vl-sand);
+  color: var(--vl-footer-body-muted);
 }
 
 /* FAB + calendario */

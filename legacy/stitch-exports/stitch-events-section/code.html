@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Work+Sans:wght@100..900&amp;family=Cormorant+Garamond:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-fixed": "#1c1d08",
+              "on-tertiary-container": "#eeb9b7",
+              "background": "#131313",
+              "secondary": "#c9c8a8",
+              "on-tertiary": "#492726",
+              "inverse-surface": "#e5e2e1",
+              "surface": "#131313",
+              "primary-fixed": "#ffdcbd",
+              "error": "#ffb4ab",
+              "surface-container-high": "#2a2a2a",
+              "on-surface": "#e5e2e1",
+              "surface-container-low": "#1c1b1b",
+              "on-secondary": "#31321b",
+              "secondary-fixed-dim": "#c9c8a8",
+              "surface-container-highest": "#353534",
+              "tertiary-container": "#6f4847",
+              "surface-container": "#201f1f",
+              "surface-bright": "#3a3939",
+              "on-error-container": "#ffdad6",
+              "secondary-fixed": "#e5e4c2",
+              "inverse-on-surface": "#313030",
+              "inverse-primary": "#7b5732",
+              "on-primary-container": "#ecbd90",
+              "on-background": "#e5e2e1",
+              "on-primary-fixed": "#2c1600",
+              "error-container": "#93000a",
+              "on-error": "#690005",
+              "outline-variant": "#4f453b",
+              "on-surface-variant": "#d3c4b7",
+              "on-primary": "#462a08",
+              "surface-dim": "#131313",
+              "surface-variant": "#353534",
+              "surface-container-lowest": "#0e0e0e",
+              "on-primary-fixed-variant": "#60401d",
+              "outline": "#9c8e83",
+              "on-tertiary-fixed": "#301313",
+              "tertiary": "#efbab8",
+              "primary-container": "#6d4b27",
+              "on-secondary-fixed-variant": "#47482f",
+              "primary-fixed-dim": "#edbe90",
+              "primary": "#edbe90",
+              "on-secondary-container": "#b7b797",
+              "tertiary-fixed-dim": "#efbab8",
+              "secondary-container": "#47482f",
+              "tertiary-fixed": "#ffdad8",
+              "surface-tint": "#edbe90",
+              "on-tertiary-fixed-variant": "#623d3c"
+            },
+            fontFamily: {
+              "headline": ["Cormorant Garamond", "serif"],
+              "newsreader": ["Newsreader", "serif"],
+              "body": ["Work Sans", "sans-serif"],
+              "label": ["Work Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .font-newsreader { font-family: 'Newsreader', serif; }
+      .font-workSans { font-family: 'Work Sans', sans-serif; }
+      .jungle-mask {
+        mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+      }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-md dark:bg-stone-950/60 border-b border-[#9c8e83]/20">
+<div class="flex justify-between items-center w-full px-8 py-6 max-w-none">
+<div class="font-newsreader font-light tracking-[0.3em] text-2xl text-[#edbe90]">
+                VAGALUME
+            </div>
+<div class="hidden md:flex gap-12">
+<a class="text-[#edbe90] border-b border-[#edbe90] pb-1 font-newsreader uppercase tracking-[0.2em] text-sm transition-all duration-300" href="#">EXPERIENCE</a>
+<a class="text-[#c9c8a8] hover:text-[#edbe90] transition-colors font-newsreader uppercase tracking-[0.2em] text-sm" href="#">CUISINE</a>
+<a class="text-[#c9c8a8] hover:text-[#edbe90] transition-colors font-newsreader uppercase tracking-[0.2em] text-sm" href="#">EVENTS</a>
+<a class="text-[#c9c8a8] hover:text-[#edbe90] transition-colors font-newsreader uppercase tracking-[0.2em] text-sm" href="#">GALLERY</a>
+</div>
+<button class="bg-primary-container text-on-primary-container font-label uppercase tracking-[0.22em] text-[10px] px-8 py-3 rounded-xl hover:opacity-80 transition-all duration-300 active:scale-95">
+                BOOK NOW
+            </button>
+</div>
+</nav>
+<main class="pt-32">
+<!-- Upcoming Experiences Header -->
+<header class="px-8 md:px-20 mb-16 max-w-4xl">
+<span class="font-label text-primary uppercase tracking-[0.32em] text-xs mb-4 block">Seasonal Series</span>
+<h1 class="font-headline text-5xl md:text-8xl text-on-surface font-light leading-none uppercase tracking-[0.05em]">
+                Upcoming <br/> <span class="italic text-secondary">Experiences</span>
+</h1>
+</header>
+<!-- Full-Bleed Revolving Featured Banner -->
+<section class="relative w-full h-[819px] overflow-hidden mb-20 group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" data-alt="luxury outdoor dinner event at dusk with warm ambient lighting and jungle silhouettes in tulum" style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0uiYewmFt-AXYm61cOpyADF0KYVFtkNKjJUWyhd4wfIB7TG4A8jCH79PUr-mayaS-HQVhcVgFOttOiLyEMlSogBS17c-nlR0OqzRb7tXWwKj5Z4sNIBDQCQcwnbneSt77sY9PY2yk5kbN5V0bH_A-ioYG2wNN0IU6Wb8V5EMB5xYGTr8xPKf374RDcIX6WttDiQme377bPceeOGsuNc6CS7pgjz_Vv-NI9fIUnZ9Llg-H-zUgHBJKsAD4OdD0niSQUvRW3XJ5ij6')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 md:p-20 w-full flex flex-col md:flex-row justify-between items-end gap-8">
+<div class="max-w-2xl">
+<div class="flex items-center gap-4 mb-6">
+<span class="w-12 h-[1px] bg-primary"></span>
+<span class="font-label text-primary uppercase tracking-[0.32em] text-xs">Featured Event</span>
+</div>
+<h2 class="font-headline text-4xl md:text-6xl text-white font-light uppercase tracking-widest mb-4">Solstice Ritual</h2>
+<p class="font-body text-[#c9c8a8] text-sm md:text-lg leading-relaxed tracking-wider max-w-xl">
+                        An immersive sensory journey under the Tulum stars, featuring world-renowned melodic techno and ancestral organic rhythms.
+                    </p>
+</div>
+<div class="flex gap-4">
+<button class="p-4 rounded-full border border-outline/30 hover:bg-outline/10 transition-colors">
+<span class="material-symbols-outlined text-primary">chevron_left</span>
+</button>
+<button class="p-4 rounded-full border border-outline/30 hover:bg-outline/10 transition-colors">
+<span class="material-symbols-outlined text-primary">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Dynamic Staggered Grid of Event Cards -->
+<section class="px-8 md:px-20 py-10">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+<!-- Card 1 (Taller vertical offset) -->
+<div class="md:col-span-4 md:mt-24 space-y-6">
+<div class="aspect-square relative overflow-hidden rounded-xl group border border-secondary/20">
+<img alt="Crowd dancing at a sophisticated jungle lounge with moody lighting" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="high-end nightclub scene in a tropical jungle setting with warm moody lighting and silhouettes of palm leaves" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDh7OnoO72QtKU4oMIQ-JJeVgzbZMHWJqIzHypD8DcK-Ytmcok6Z5PoMuwzSByFD5I7n23q2WGC8wYebqvjLYeQFumPSzdpTaG2nqF9MOkVnWDgyj9-H_kztWyOHDqmD9wjHTzACq_8ONAIZSAlzzjD_mtPDzx_67QxgfQfip3NBdJBan6lb6S1qx2Gl4-7Nja5Oz2Nd5FCm0qZ_mVLBc8VJyjBAjCUPs1zs0E4_SnNlaZPxae0mlCkWEI3AEQzs9KKeGfVR6zaqw"/>
+<div class="absolute inset-0 bg-[#331515]/20 group-hover:bg-transparent transition-colors"></div>
+</div>
+<div class="px-2">
+<p class="font-label text-primary text-[10px] tracking-[0.32em] uppercase mb-2">Dec 15 / 22:00</p>
+<h3 class="font-headline text-2xl text-on-surface uppercase tracking-wider mb-3">Moonlight Echoes</h3>
+<p class="font-body text-outline text-xs leading-relaxed tracking-widest uppercase">Deep melodic techno and organic house fusion.</p>
+</div>
+</div>
+<!-- Card 2 (Standard Position) -->
+<div class="md:col-span-4 space-y-6">
+<div class="aspect-square relative overflow-hidden rounded-xl group border border-secondary/20">
+<img alt="Gourmet dish served in a dimly lit high-end restaurant" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="artisanal gourmet seafood dish served on dark stone plate with edible flowers and mystical atmospheric lighting" src="https://lh3.googleusercontent.com/aida/ADBb0uh4behj60nimISp2Oy0KdDLsn61x-TOxaPbz8pOMABB7YXuEn17x5xcmLCIAlN1s7oxbtU0hx-eIQ4DFdBCDLYsPZVMcNP_bgO3AeyqRdEaDSpBozdw15KFn8JDIk7BFL7F28NbrIBmi2j2oGyWPdrFeqGTLckpt_7tVGzs5DirhnCxcQjKiIzNsE5sT0li1V9pe4P8a_Y6SNKlxXl4n4GIuTGwMkp9bEwshOXxdaUiO2-EjEsy73dlVwsjw0jBLMOqP23g758D"/>
+<div class="absolute inset-0 bg-[#331515]/20 group-hover:bg-transparent transition-colors"></div>
+</div>
+<div class="px-2">
+<p class="font-label text-primary text-[10px] tracking-[0.32em] uppercase mb-2">Dec 18 / 19:30</p>
+<h3 class="font-headline text-2xl text-on-surface uppercase tracking-wider mb-3">Ancestral Flavors</h3>
+<p class="font-body text-outline text-xs leading-relaxed tracking-widest uppercase">A curated 7-course tasting menu inspired by Mayan heritage.</p>
+</div>
+</div>
+<!-- Card 3 (Lower vertical offset) -->
+<div class="md:col-span-4 md:mt-48 space-y-6">
+<div class="aspect-square relative overflow-hidden rounded-xl group border border-secondary/20">
+<img alt="Performers in exotic costumes at a luxury event" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="ethereal performance artists in organic costume textures dancing in a golden-lit jungle sanctuary environment" src="https://lh3.googleusercontent.com/aida/ADBb0ug88_qNEulI3O4hIZe2a6hBu9ISBJ6_b1woIKv8TBb0WusYnBy5c50v7s8QtjrLdWegUz7zbXU6bPIJni-1gV-fWY6ntLKrHXLYW97O2qs8NstkQmMooxbQcyIP0xQUOootu9EX-ADoWNF_AxXA-J4_L-NsdWeIzcTgNynzIlvLLf8KgFTwOhcPjnPOSqrifut65jsCggPMrpxRYxCEwy5krI_7eIjnz2seY7yrOW_LsjxWjgkQF3rn1eGDiTMYBbB8sc0n0asU"/>
+<div class="absolute inset-0 bg-[#331515]/20 group-hover:bg-transparent transition-colors"></div>
+</div>
+<div class="px-2">
+<p class="font-label text-primary text-[10px] tracking-[0.32em] uppercase mb-2">Dec 21 / 21:00</p>
+<h3 class="font-headline text-2xl text-on-surface uppercase tracking-wider mb-3">Fire &amp; Spirit</h3>
+<p class="font-body text-outline text-xs leading-relaxed tracking-widest uppercase">Theatrical fire dance and immersive performance art.</p>
+</div>
+</div>
+<!-- Card 4 (Large offset for organic feel) -->
+<div class="md:col-span-4 md:-mt-12 space-y-6">
+<div class="aspect-square relative overflow-hidden rounded-xl group border border-secondary/20">
+<img alt="Elegant cocktail on a marble surface" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="luxury handcrafted cocktail with botanical garnish sitting on a dark marble surface with soft amber candlelight reflections" src="https://lh3.googleusercontent.com/aida/ADBb0uiuvsKCVplH2L0VajRJ3DjIfQ_RUkDYiXbOWekEO1OQsunTcA5VjxdDdQLWKVXBNwJ-J6fPOjhQCjueo09AWULJGkvm0pGykbV1OROPLrcn6ceiipkowEtUm-SpPyDQYHTLy1DlES7inwDdpZkeN2ZxNFRUoR2n0DS0VDbYs0QoO9yfuvMX-hpjIJmONGJ0efT9K4MRoIAAU6aKJ1B5_duk1zokKai8a7q90cHf8hVePAGDGMElUwxtvobDSSvStsAReTq2eZYe"/>
+<div class="absolute inset-0 bg-[#331515]/20 group-hover:bg-transparent transition-colors"></div>
+</div>
+<div class="px-2">
+<p class="font-label text-primary text-[10px] tracking-[0.32em] uppercase mb-2">Dec 24 / 18:00</p>
+<h3 class="font-headline text-2xl text-on-surface uppercase tracking-wider mb-3">Botanical Alchemy</h3>
+<p class="font-body text-outline text-xs leading-relaxed tracking-widest uppercase">Masterclass in sustainable mixology with jungle ingredients.</p>
+</div>
+</div>
+<!-- Card 5 (Standard position) -->
+<div class="md:col-span-4 md:mt-12 space-y-6">
+<div class="aspect-square relative overflow-hidden rounded-xl group border border-secondary/20">
+<img alt="Atmospheric sunset beach party" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="panoramic beach sunset with silhouettes of luxury cabanas and soft smoke from ceremonial incense in tulum" src="https://lh3.googleusercontent.com/aida/ADBb0uiQTENu4RlmYeKob3LqPQyDM6DTpq5PnREkQ6Fg0ZYMwzrdPwibDmuQ5pCTm0Q3iHsHApQ575kG6kF903aSPsAsXezEpnglsMKCBbQ-Mk6LyR_fs8w7pA8whoHtPbTz3fHvrjWBm1SC9MSRCXCbSZw555qAPtTmem43gyAgdJMAj_uAshiNh8gkD-U7QwGDqIlwS3V8BIS1wSy1kWG3r_ei7yrf0t0xfVjJuL2yvsDLsPLqinWiG1y5pCHrI4vTVECBgK0OnZFL"/>
+<div class="absolute inset-0 bg-[#331515]/20 group-hover:bg-transparent transition-colors"></div>
+</div>
+<div class="px-2">
+<p class="font-label text-primary text-[10px] tracking-[0.32em] uppercase mb-2">Dec 31 / 20:00</p>
+<h3 class="font-headline text-2xl text-on-surface uppercase tracking-wider mb-3">New Dawn Gala</h3>
+<p class="font-body text-outline text-xs leading-relaxed tracking-widest uppercase">An unparalleled celebration of life, light, and the future.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter / Contact Section (Asymmetric) -->
+<section class="mt-40 px-8 md:px-20 grid md:grid-cols-2 items-center gap-20">
+<div class="order-2 md:order-1">
+<div class="bg-surface-container-low p-12 md:p-20 rounded-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl rounded-full"></div>
+<h2 class="font-headline text-4xl text-on-surface uppercase tracking-widest mb-8">Join the Inner <br/>Circle</h2>
+<p class="font-body text-outline text-sm tracking-widest uppercase mb-12 max-w-xs">Be the first to know about secret pop-ups and exclusive residencies.</p>
+<form class="space-y-8">
+<div class="relative">
+<label class="font-label text-[10px] text-primary tracking-[0.32em] uppercase block mb-2">Email Address</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 text-sm tracking-widest text-on-surface placeholder:text-outline-variant/50 transition-colors py-4" placeholder="YOUR@EMAIL.COM" type="email"/>
+</div>
+<button class="font-label text-primary text-[10px] tracking-[0.32em] uppercase border-b-2 border-primary pb-2 hover:opacity-70 transition-opacity">
+                            SUBSCRIBE
+                        </button>
+</form>
+</div>
+</div>
+<div class="order-1 md:order-2">
+<div class="aspect-[4/5] rounded-xl overflow-hidden grayscale contrast-125 hover:grayscale-0 transition-all duration-1000 border border-secondary/20">
+<img alt="Person receiving a spa treatment in a luxury outdoor setting" class="w-full h-full object-cover" data-alt="high-contrast editorial photograph of a luxury spa treatment in a candlelit jungle cabana at night" src="https://lh3.googleusercontent.com/aida/ADBb0uilTQfIdo1Rsqh2NKSctCLFCny-IUz137doFoEbObsWSsnUwSJSl4RDwOeoJhx5I0mhoWVnkOConN-3BdX_YOpgY-dXEVqvB1zmDFU6iK4hJLHfdupcn8PE9YzeZgqzhn4XfRzTqo-oaRc4jVgnXwUbYSeTmbPKOzXPGY4H_dcpqXxiFuKepSwOjbkssOz1WtSDKitbl8Z5tUGZTlaY10ilhF_iXfjMQ2mmjqYOtaHCsbfWguCNc7WTEanaEoYHDVVviKoVxy0"/>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full rounded-t-[3rem] mt-20 bg-[#131313] dark:bg-black flex flex-col items-center gap-8 py-16 px-8 border-t border-[#9c8e83]/10">
+<div class="font-newsreader text-xl tracking-[0.2em] text-[#edbe90]">VAGALUME</div>
+<div class="flex flex-wrap justify-center gap-10 md:gap-20">
+<a class="font-workSans font-light tracking-[0.22em] text-[10px] uppercase text-[#9c8e83] hover:text-[#FAF9D6] transition-colors" href="#">PRIVACY POLICY</a>
+<a class="font-workSans font-light tracking-[0.22em] text-[10px] uppercase text-[#9c8e83] hover:text-[#FAF9D6] transition-colors" href="#">TERMS OF SERVICE</a>
+<a class="font-workSans font-light tracking-[0.22em] text-[10px] uppercase text-[#9c8e83] hover:text-[#FAF9D6] transition-colors" href="#">CONTACT US</a>
+<a class="font-workSans font-light tracking-[0.22em] text-[10px] uppercase text-[#9c8e83] hover:text-[#FAF9D6] transition-colors" href="#">CAREERS</a>
+</div>
+<div class="font-workSans font-light tracking-[0.22em] text-[10px] uppercase text-[#edbe90] mt-8">
+            © 2024 VAGALUME TULUM. ALL RIGHTS RESERVED.
+        </div>
+</footer>
+</body></html>

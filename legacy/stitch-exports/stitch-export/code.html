@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Work+Sans:wght@100;200;300;400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#353534",
+              "secondary": "#c9c8a8",
+              "background": "#131313",
+              "surface-bright": "#3a3939",
+              "on-surface": "#e5e2e1",
+              "inverse-surface": "#e5e2e1",
+              "tertiary": "#efbab8",
+              "surface-container-low": "#1c1b1b",
+              "on-error-container": "#ffdad6",
+              "on-tertiary": "#492726",
+              "inverse-primary": "#7b5732",
+              "surface-container-high": "#2a2a2a",
+              "primary-container": "#6d4b27",
+              "secondary-fixed": "#e5e4c2",
+              "tertiary-fixed": "#ffdad8",
+              "surface-tint": "#edbe90",
+              "surface-variant": "#353534",
+              "error-container": "#93000a",
+              "error": "#ffb4ab",
+              "on-secondary-container": "#b7b797",
+              "on-background": "#e5e2e1",
+              "on-primary-fixed-variant": "#60401d",
+              "on-secondary-fixed": "#1c1d08",
+              "surface-container-lowest": "#0e0e0e",
+              "surface": "#131313",
+              "outline-variant": "#4f453b",
+              "on-tertiary-fixed-variant": "#623d3c",
+              "primary-fixed": "#ffdcbd",
+              "secondary-fixed-dim": "#c9c8a8",
+              "on-primary-container": "#ecbd90",
+              "on-error": "#690005",
+              "outline": "#9c8e83",
+              "on-surface-variant": "#d3c4b7",
+              "on-secondary-fixed-variant": "#47482f",
+              "on-primary": "#462a08",
+              "on-tertiary-fixed": "#301313",
+              "primary": "#edbe90",
+              "inverse-on-surface": "#313030",
+              "primary-fixed-dim": "#edbe90",
+              "on-secondary": "#31321b",
+              "tertiary-container": "#6f4847",
+              "secondary-container": "#47482f",
+              "on-tertiary-container": "#eeb9b7",
+              "surface-dim": "#131313",
+              "surface-container": "#201f1f",
+              "on-primary-fixed": "#2c1600",
+              "tertiary-fixed-dim": "#efbab8",
+              "earth": "#6D4B27",
+              "sand": "#FAF9D6",
+              "burgundy": "#331515"
+            },
+            fontFamily: {
+              "headline": ["Newsreader", "serif"],
+              "body": ["Work Sans", "sans-serif"],
+              "label": ["Work Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        html {
+          scroll-behavior: smooth;
+          scroll-padding-top: 6.5rem;
+        }
+        @media (min-width: 768px) {
+          html {
+            scroll-padding-top: 6rem;
+          }
+        }
+        body { background-color: #131313; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24; }
+        .newsreader-caps { font-family: 'Newsreader'; font-variant: small-caps; text-transform: uppercase; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        /* Hero: imagen → canvas 3D → texto (z-index) */
+        .hero-3d__bg { z-index: 0; }
+        .hero-3d__canvas { z-index: 5; }
+        .hero-3d__content { z-index: 20; pointer-events: none; }
+        .hero-3d__content * { pointer-events: none; }
+        /* translateY baja el copy sin pelear con justify-center (el margen superior se re-centraba) */
+        .hero-3d__content--shift {
+          transform: translateY(clamp(5.5rem, 24vh, 13.25rem));
+        }
+        @media (min-width: 768px) {
+          .hero-3d__content--shift {
+            transform: translateY(clamp(7rem, 28vh, 16rem));
+          }
+        }
+        /* Drawer móvil: animación de entrada */
+        #mobile-menu-overlay.mobile-menu-open .mobile-menu-drawer {
+          transform: translateX(0);
+        }
+        #mobile-menu-overlay.mobile-menu-open .mobile-menu-backdrop {
+          opacity: 1;
+        }
+        .mobile-menu-drawer {
+          transform: translateX(-100%);
+          transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .mobile-menu-backdrop {
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+        /* Marzo 26–28: eventos especiales (dorado + número oscuro) */
+        .calendar-popover__day--special-event {
+          background-color: #edbe90;
+          color: #0a0a0a !important;
+          font-weight: 600;
+          box-shadow: 0 0 0 2px rgba(237, 190, 144, 0.45);
+        }
+        .calendar-popover__day--special-event:hover:not(:disabled) {
+          background-color: #e5b880;
+          color: #0a0a0a !important;
+        }
+        .calendar-popover__day--today:not(:disabled) {
+          box-shadow: inset 0 0 0 1px rgba(237, 190, 144, 0.65);
+        }
+        .calendar-popover__day:disabled {
+          opacity: 0.32;
+          cursor: not-allowed;
+        }
+        /* Eventos 26–28 mar: se sigue viendo el dorado aunque el día ya pasó */
+        .calendar-popover__day--special-event:disabled {
+          opacity: 0.48 !important;
+          filter: saturate(0.85);
+        }
+        /* Embed Spotify: animación al abrir/cerrar (grid 0fr → 1fr + opacidad) */
+        .spotify-embed-panel {
+          display: grid;
+          grid-template-rows: 0fr;
+          opacity: 0;
+          transition: grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+          pointer-events: none;
+        }
+        .spotify-embed-panel.spotify-embed-panel--open {
+          grid-template-rows: 1fr;
+          opacity: 1;
+          pointer-events: auto;
+        }
+        .spotify-embed-panel__clip {
+          min-height: 0;
+          overflow: hidden;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .spotify-embed-panel {
+            transition-duration: 0.01ms;
+          }
+        }
+    </style>
+</head>
+<body class="font-body text-on-surface selection:bg-primary/30">
+<!-- Barra superior: icono en móvil, wordmark en desktop; hamburguesa solo móvil -->
+<nav class="fixed top-0 w-full z-[70] bg-[#0A0A0A]/60 backdrop-blur-md border-b border-[#9c8e83]/20 flex justify-between items-center gap-3 px-4 sm:px-8 md:px-12 py-4 md:py-6" aria-label="Principal">
+<div class="flex items-center gap-2 min-w-0">
+<button type="button" id="mobile-menu-btn" class="md:hidden flex items-center justify-center size-10 rounded-lg text-[#edbe90] hover:bg-white/5 border border-[#9c8e83]/20 transition-colors shrink-0" aria-expanded="false" aria-controls="mobile-menu-overlay" aria-label="Abrir menú">
+<span class="material-symbols-outlined text-2xl mobile-menu-icon-menu" aria-hidden="true">menu</span>
+<span class="material-symbols-outlined text-2xl mobile-menu-icon-close hidden" aria-hidden="true">close</span>
+</button>
+<a href="#page-top" class="flex items-center gap-3 min-w-0 shrink-0" aria-label="Vagalume — inicio">
+<img src="media/logo.png" alt="" width="40" height="40" class="h-9 w-auto object-contain md:hidden"/>
+<span class="hidden md:block text-2xl font-light tracking-[0.4em] text-[#edbe90] uppercase font-headline truncate">VAGALUME</span>
+</a>
+</div>
+<div class="hidden md:flex gap-10 lg:gap-12">
+<a class="text-[#FAF9D6] border-b border-[#edbe90] pb-1 font-label text-[10px] tracking-[0.32em] font-light" href="#events">EVENTS</a>
+<a class="text-[#edbe90]/70 hover:text-[#edbe90] transition-colors font-label text-[10px] tracking-[0.32em] font-light" href="#experience">EXPERIENCE</a>
+<a class="text-[#edbe90]/70 hover:text-[#edbe90] transition-colors font-label text-[10px] tracking-[0.32em] font-light" href="#playlist">PLAYLIST</a>
+<a class="text-[#edbe90]/70 hover:text-[#edbe90] transition-colors font-label text-[10px] tracking-[0.32em] font-light" href="#cuisine">CUISINE</a>
+<a class="text-[#edbe90]/70 hover:text-[#edbe90] transition-colors font-label text-[10px] tracking-[0.32em] font-light" href="#location">LOCATION</a>
+</div>
+<a href="https://mandalatickets.com/en/tulum/disco/Vagalume" target="_blank" rel="noopener noreferrer" class="bg-primary-container text-on-primary-container px-4 py-2.5 sm:px-8 sm:py-3 rounded-xl font-label text-[9px] sm:text-[10px] tracking-[0.28em] sm:tracking-[0.32em] hover:bg-primary-container/80 transition-all active:scale-95 duration-300 ease-out shrink-0 inline-flex items-center justify-center">
+        BOOK NOW
+    </a>
+</nav>
+<!-- Barra lateral: solo tablet/desktop (oculta en móvil para ganar ancho) -->
+<aside class="hidden md:flex md:flex-col fixed left-0 top-0 h-full w-20 hover:w-64 transition-all duration-700 z-40 border-r border-[#9c8e83]/10 bg-[#0A0A0A] justify-between items-center py-8 group overflow-hidden shadow-[48px_0_48px_rgba(0,0,0,0.5)]" aria-label="Secciones">
+<div class="flex flex-col items-center gap-12 w-full">
+<div class="flex flex-col items-center">
+<span class="text-xl font-light tracking-widest text-[#FAF9D6] font-headline">V</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-label text-[8px] tracking-[0.4em] text-primary pt-2 whitespace-nowrap">TULUM SANCTUARY</span>
+</div>
+<div class="flex flex-col gap-8 w-full">
+<div class="flex items-center px-6 gap-6 text-[#FAF9D6] bg-[#6D4B27]/20 border-l-2 border-[#edbe90] py-4 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="waves">waves</span>
+<span class="opacity-0 group-hover:opacity-100 transition-all duration-500 font-label text-[10px] tracking-[0.32em] whitespace-nowrap">THE CLUB</span>
+</div>
+<div class="flex items-center px-6 gap-6 text-[#edbe90]/40 hover:text-[#edbe90] transition-all duration-500 py-4 cursor-pointer hover:bg-[#331515]/30">
+<span class="material-symbols-outlined" data-icon="spa">spa</span>
+<span class="opacity-0 group-hover:opacity-100 transition-all duration-500 font-label text-[10px] tracking-[0.32em] whitespace-nowrap">WELLNESS</span>
+</div>
+<div class="flex items-center px-6 gap-6 text-[#edbe90]/40 hover:text-[#edbe90] transition-all duration-500 py-4 cursor-pointer hover:bg-[#331515]/30">
+<span class="material-symbols-outlined" data-icon="theater_comedy">theater_comedy</span>
+<span class="opacity-0 group-hover:opacity-100 transition-all duration-500 font-label text-[10px] tracking-[0.32em] whitespace-nowrap">CULTURE</span>
+</div>
+<div class="flex items-center px-6 gap-6 text-[#edbe90]/40 hover:text-[#edbe90] transition-all duration-500 py-4 cursor-pointer hover:bg-[#331515]/30">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="opacity-0 group-hover:opacity-100 transition-all duration-500 font-label text-[10px] tracking-[0.32em] whitespace-nowrap">CONTACT</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-6 w-full items-center">
+<div class="opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col gap-4 mb-8">
+<a class="text-[#edbe90]/50 hover:text-[#FAF9D6] font-label text-[9px] tracking-[0.3em] flex items-center gap-3" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="photo_camera">photo_camera</span> INSTAGRAM
+            </a>
+<a class="text-[#edbe90]/50 hover:text-[#FAF9D6] font-label text-[9px] tracking-[0.3em] flex items-center gap-3" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="audiotrack">audiotrack</span> SPOTIFY
+            </a>
+</div>
+</div>
+</aside>
+<!-- Panel móvil: enlaces del top nav + barra lateral + redes -->
+<div id="mobile-menu-overlay" class="fixed inset-0 z-[60] md:hidden hidden" aria-hidden="true">
+<button type="button" class="mobile-menu-backdrop absolute inset-0 bg-black/75 backdrop-blur-sm border-0 cursor-default" data-mobile-nav-close aria-label="Cerrar menú"></button>
+<nav id="mobile-menu-panel" class="mobile-menu-drawer absolute left-0 top-0 h-full w-[min(100%,20rem)] bg-[#0A0A0A] border-r border-[#9c8e83]/20 shadow-2xl flex flex-col pt-[6.75rem] pb-8 px-5 overflow-y-auto hide-scrollbar" aria-label="Menú móvil">
+<p class="font-label text-[8px] tracking-[0.4em] text-primary mb-6 uppercase">Tulum sanctuary</p>
+<div class="flex flex-col gap-1 mb-8">
+<a class="text-[#FAF9D6] border-l-2 border-[#edbe90] pl-4 py-3 font-label text-[10px] tracking-[0.32em] font-light" href="#events">EVENTS</a>
+<a class="text-[#edbe90]/80 hover:text-[#edbe90] pl-4 py-3 font-label text-[10px] tracking-[0.32em] font-light transition-colors" href="#experience">EXPERIENCE</a>
+<a class="text-[#edbe90]/80 hover:text-[#edbe90] pl-4 py-3 font-label text-[10px] tracking-[0.32em] font-light transition-colors" href="#playlist">PLAYLIST</a>
+<a class="text-[#edbe90]/80 hover:text-[#edbe90] pl-4 py-3 font-label text-[10px] tracking-[0.32em] font-light transition-colors" href="#cuisine">CUISINE</a>
+<a class="text-[#edbe90]/80 hover:text-[#edbe90] pl-4 py-3 font-label text-[10px] tracking-[0.32em] font-light transition-colors" href="#location">LOCATION</a>
+</div>
+<p class="font-label text-[8px] tracking-[0.35em] text-on-surface/40 mb-3 uppercase">Explore</p>
+<div class="flex flex-col gap-0.5 mb-8">
+<a class="flex items-center gap-4 text-[#FAF9D6] bg-[#6D4B27]/20 border-l-2 border-[#edbe90] py-3 pl-4 pr-2 font-label text-[10px] tracking-[0.32em]" href="#"><span class="material-symbols-outlined text-xl shrink-0" data-icon="waves">waves</span> THE CLUB</a>
+<a class="flex items-center gap-4 text-[#edbe90]/70 hover:text-[#edbe90] py-3 pl-4 font-label text-[10px] tracking-[0.32em] transition-colors" href="#"><span class="material-symbols-outlined text-xl shrink-0" data-icon="spa">spa</span> WELLNESS</a>
+<a class="flex items-center gap-4 text-[#edbe90]/70 hover:text-[#edbe90] py-3 pl-4 font-label text-[10px] tracking-[0.32em] transition-colors" href="#"><span class="material-symbols-outlined text-xl shrink-0" data-icon="theater_comedy">theater_comedy</span> CULTURE</a>
+<a class="flex items-center gap-4 text-[#edbe90]/70 hover:text-[#edbe90] py-3 pl-4 font-label text-[10px] tracking-[0.32em] transition-colors" href="#"><span class="material-symbols-outlined text-xl shrink-0" data-icon="mail">mail</span> CONTACT</a>
+</div>
+<div class="flex flex-col gap-4 mt-auto border-t border-[#9c8e83]/15 pt-6">
+<a class="text-[#edbe90]/50 hover:text-[#FAF9D6] font-label text-[9px] tracking-[0.3em] flex items-center gap-3" href="#"><span class="material-symbols-outlined text-sm" data-icon="photo_camera">photo_camera</span> INSTAGRAM</a>
+<a class="text-[#edbe90]/50 hover:text-[#FAF9D6] font-label text-[9px] tracking-[0.3em] flex items-center gap-3" href="#"><span class="material-symbols-outlined text-sm" data-icon="audiotrack">audiotrack</span> SPOTIFY</a>
+</div>
+</nav>
+</div>
+<main class="ml-0 md:ml-20 min-h-screen">
+<!-- Hero Section: fondo → logo 3D (luz dorada) → copy -->
+<section id="page-top" class="hero-3d-root relative h-screen min-h-[32rem] flex flex-col items-center justify-center text-center px-4 pt-20 overflow-hidden scroll-mt-0" data-hero-3d>
+<div class="hero-3d__bg absolute inset-0">
+<img alt="" class="absolute inset-0 w-full h-full object-cover" src="media/hero-bg.jpg"/>
+<!-- Velo oscuro + degradado: contraste para logo 3D y titulares -->
+<div class="absolute inset-0 bg-black/50" aria-hidden="true"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-black/45 via-black/55 to-[#131313]" aria-hidden="true"></div>
+</div>
+<canvas id="canvas3d" class="hero-3d__canvas absolute inset-0 block h-full w-full pointer-events-none" width="1491" height="945"></canvas>
+<div class="hero-3d__content hero-3d__content--shift relative flex flex-col items-center max-w-5xl pointer-events-none">
+<span class="font-label text-xs tracking-[0.5em] text-white mb-8 uppercase font-light drop-shadow-[0_2px_12px_rgba(0,0,0,0.75)]">A Sanctuary of Sound</span>
+<h1 class="font-headline text-4xl sm:text-5xl md:text-6xl tracking-[0.18em] md:tracking-[0.2em] font-extralight text-on-surface mb-10 uppercase leading-[1.08] drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
+            ARCHITECTS<br/><span class="italic font-light">of the</span> SOUL
+        </h1>
+<div class="w-px h-32 bg-gradient-to-b from-primary/60 to-transparent drop-shadow-[0_0_8px_rgba(237,190,144,0.35)]"></div>
+</div>
+</section>
+<!-- Upcoming Events Section -->
+<section id="events" class="py-16 md:py-32 px-6 md:px-12 overflow-x-hidden">
+<div class="max-w-7xl mx-auto flex flex-col items-center text-center gap-5 sm:flex-row sm:items-end sm:justify-between sm:text-left sm:gap-6 mb-10">
+<div class="flex flex-col gap-2 items-center sm:items-start">
+<span class="font-label text-[10px] tracking-[0.4em] text-primary/60 uppercase font-light">Curation</span>
+<h2 class="font-headline text-3xl sm:text-4xl md:text-5xl tracking-widest text-on-surface uppercase">UPCOMING RITUALS</h2>
+</div>
+<a class="shrink-0 border border-outline/30 text-[#FAF9D6] px-8 py-3 rounded-xl font-label text-[10px] tracking-[0.32em] uppercase hover:bg-earth/10 transition-all text-center sm:mb-2" href="#">SEE ALL EVENTS</a>
+</div>
+<!-- Banner rotativo: móvil bleed viewport; md+ ancho de columna main (rompe solo md:px-12 de #events) -->
+<div class="relative max-md:w-screen max-md:max-w-[100vw] max-md:-ml-6 md:w-[calc(100%+6rem)] md:max-w-none md:-mx-12 aspect-[4000/1200] rounded-none overflow-hidden isolate bg-black" data-events-banner="">
+<!-- Slide 1: Nido (4000×1200) -->
+<article class="events-banner__slide absolute inset-0 z-10 opacity-100 transition-opacity duration-700 ease-in-out group" aria-hidden="false">
+<img alt="Nido closing at Vagalume Tulum — March 27" class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-[1.02]" src="../Events/260327_NIDO-VAGALUME-POST%20%284000x1200%29.png" width="4000" height="1200"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
+</article>
+<!-- Slide 2: MIUL (4000×1200) -->
+<article class="events-banner__slide absolute inset-0 z-0 opacity-0 pointer-events-none transition-opacity duration-700 ease-in-out group" aria-hidden="true">
+<img alt="MIUL with Disorder at Vagalume — April 3" class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-[1.02]" src="../Events/Vagalume_4000%20X%201200_MIUL_ABR03.png" width="4000" height="1200"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
+</article>
+<!-- Slide 3: Sinner (4000×1200) -->
+<article class="events-banner__slide absolute inset-0 z-0 opacity-0 pointer-events-none transition-opacity duration-700 ease-in-out group" aria-hidden="true">
+<img alt="Sinner at Vagalume Tulum" class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-[1.02]" src="../Events/VAGALUME-SINNER-MAR-ABR%20%284000x1200%29.png" width="4000" height="1200"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
+</article>
+<div class="absolute bottom-3 right-4 md:bottom-8 md:right-16 z-20 flex gap-2 md:gap-3" aria-label="Eventos destacados">
+<button type="button" class="events-banner__dot h-1 w-8 cursor-pointer rounded-full bg-sand transition-colors" aria-label="Slide 1" aria-current="true"></button>
+<button type="button" class="events-banner__dot h-1 w-8 cursor-pointer rounded-full bg-white/20 transition-colors" aria-label="Slide 2"></button>
+<button type="button" class="events-banner__dot h-1 w-8 cursor-pointer rounded-full bg-white/20 transition-colors" aria-label="Slide 3"></button>
+</div>
+</div>
+<!-- Tarjetas: una sola fila; 3 visibles (max-xl), 4 desde breakpoint xl; 5–6 ocultas hasta página de eventos -->
+<div class="max-w-7xl mx-auto mt-8 md:mt-12">
+<div class="-mx-6 w-[calc(100%+3rem)] md:mx-0 md:w-full grid grid-flow-col auto-cols-[calc((100%-3rem)/3)] md:auto-cols-[calc((100%-4rem)/3)] xl:auto-cols-[calc((100%-6rem)/4)] gap-6 md:gap-8 px-6 md:px-0 pb-1 overflow-x-auto hide-scrollbar" role="list" aria-label="Próximos eventos">
+<!-- Card 1: Sinner (serie) -->
+<div class="flex flex-col gap-3 md:gap-6 group min-w-0" role="listitem">
+<div class="aspect-square w-full rounded-2xl md:rounded-[48px] overflow-hidden relative border border-outline/10">
+<img alt="Sinner at Vagalume — spring series" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" src="../Events/VAGALUME-SINNER-MAR-ABR%20%2826%29.jpeg" width="1080" height="1080"/>
+<div class="absolute inset-0 bg-burgundy/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="px-0.5 sm:px-1 md:px-4">
+<span class="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-earth uppercase mb-1.5 md:mb-2 block font-medium">MAR – APR • 2026</span>
+<h4 class="font-headline text-lg md:text-2xl text-on-surface mb-2 md:mb-3 tracking-wide uppercase">SINNER</h4>
+<p class="font-body text-[11px] md:text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase line-clamp-3 md:line-clamp-none">Bold rhythm and ritual energy for nights that refuse to whisper.</p>
+</div>
+</div>
+<!-- Card 2: MIUL -->
+<div class="flex flex-col gap-3 md:gap-6 group min-w-0" role="listitem">
+<div class="aspect-square w-full rounded-2xl md:rounded-[48px] overflow-hidden relative border border-outline/10">
+<img alt="MIUL with Disorder at Vagalume" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" src="../Events/Vagalume_1080%20X%201080_MIUL_ABR03%20%283%29.jpg" width="1080" height="1080"/>
+<div class="absolute inset-0 bg-earth/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="px-0.5 sm:px-1 md:px-4">
+<span class="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-earth uppercase mb-1.5 md:mb-2 block font-medium">APR 03 • 2026</span>
+<h4 class="font-headline text-lg md:text-2xl text-on-surface mb-2 md:mb-3 tracking-wide uppercase">MIUL × DISORDER</h4>
+<p class="font-body text-[11px] md:text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase line-clamp-3 md:line-clamp-none">An out-of-body frequency journey with Jotadmaya and Negrinm under the Vagalume sky.</p>
+</div>
+</div>
+<!-- Card 3: Sinner — 28 March -->
+<div class="flex flex-col gap-3 md:gap-6 group min-w-0" role="listitem">
+<div class="aspect-square w-full rounded-2xl md:rounded-[48px] overflow-hidden relative border border-outline/10">
+<img alt="Sinner — Marwan, Vite, Rene at Vagalume Tulum" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" src="../Events/SINNER_28MARCH_4a5%20%283%29.jpg" width="1080" height="1080"/>
+<div class="absolute inset-0 bg-burgundy/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="px-0.5 sm:px-1 md:px-4">
+<span class="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-earth uppercase mb-1.5 md:mb-2 block font-medium">MAR 28 • 2026</span>
+<h4 class="font-headline text-lg md:text-2xl text-on-surface mb-2 md:mb-3 tracking-wide uppercase">SINNER</h4>
+<p class="font-body text-[11px] md:text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase line-clamp-3 md:line-clamp-none">Marwan, Vite, and Rene guide a crimson-hazed night of deep, hypnotic groove.</p>
+</div>
+</div>
+<!-- Card 4: Pendulum (solo xl+; resto del listado irá a la futura página de eventos) -->
+<div class="max-xl:hidden flex flex-col gap-3 md:gap-6 group min-w-0" role="listitem">
+<div class="aspect-square w-full rounded-2xl md:rounded-[48px] overflow-hidden relative border border-outline/10">
+<img alt="Pendulum at Vagalume Tulum" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" src="../Events/pendelum-portada%20%284%29.jpeg" width="1080" height="1080"/>
+<div class="absolute inset-0 bg-earth/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="px-0.5 sm:px-1 md:px-4">
+<span class="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-earth uppercase mb-1.5 md:mb-2 block font-medium">TULUM • 2026</span>
+<h4 class="font-headline text-lg md:text-2xl text-on-surface mb-2 md:mb-3 tracking-wide uppercase">PENDULUM</h4>
+<p class="font-body text-[11px] md:text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase line-clamp-3 md:line-clamp-none">Arena-scale drum and bass energy, distilled into the jungle’s open air.</p>
+</div>
+</div>
+<!-- Card 5: Maxi Degrassi (atributo hidden: quitar cuando exista página de eventos) -->
+<div class="flex flex-col gap-3 md:gap-6 group min-w-0" role="listitem" aria-hidden="true" hidden>
+<div class="aspect-square w-full rounded-2xl md:rounded-[48px] overflow-hidden relative border border-outline/10">
+<img alt="Maxi Degrassi — State of Flow crew at Vagalume" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" src="../Events/Maxi%20Degrassi%20-%20March%2029th%20%282%29.jpg" width="1080" height="1080"/>
+<div class="absolute inset-0 bg-burgundy/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="px-0.5 sm:px-1 md:px-4">
+<span class="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-earth uppercase mb-1.5 md:mb-2 block font-medium">MAR 29 • 2026</span>
+<h4 class="font-headline text-lg md:text-2xl text-on-surface mb-2 md:mb-3 tracking-wide uppercase">MAXI DEGRASSI</h4>
+<p class="font-body text-[11px] md:text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase line-clamp-3 md:line-clamp-none">Melodic momentum with Javier Alei, Nacho Kahn, and Bovet — a State of Flow session.</p>
+</div>
+</div>
+<!-- Card 6: Nido closing (atributo hidden: quitar cuando exista página de eventos) -->
+<div class="flex flex-col gap-3 md:gap-6 group min-w-0" role="listitem" aria-hidden="true" hidden>
+<div class="aspect-square w-full rounded-2xl md:rounded-[48px] overflow-hidden relative border border-outline/10">
+<img alt="Nido closing — Igor Marijuan, Bodaishin, Sorä at Vagalume" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" src="../Events/260327_NIDO-VAGALUME-POST%20%282%29.jpg" width="1080" height="1080"/>
+<div class="absolute inset-0 bg-earth/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="px-0.5 sm:px-1 md:px-4">
+<span class="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-earth uppercase mb-1.5 md:mb-2 block font-medium">MAR 27 • 2026</span>
+<h4 class="font-headline text-lg md:text-2xl text-on-surface mb-2 md:mb-3 tracking-wide uppercase">NIDO CLOSING</h4>
+<p class="font-body text-[11px] md:text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase line-clamp-3 md:line-clamp-none">A coastal farewell with Igor Marijuan, Bodaishin, and Sorä — sky, sea, and hummingbird light.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pilares: 2×2 en móvil (cuadrados compactos), fila de 4 en md+ -->
+<section id="experience" class="max-w-7xl mx-auto py-16 md:py-32 px-6 md:px-12" aria-labelledby="experience-heading">
+<div class="mb-10 md:mb-14 text-center">
+<h2 id="experience-heading" class="font-headline text-3xl sm:text-4xl md:text-5xl text-on-surface tracking-[0.12em] md:tracking-[0.2em] uppercase">WHERE THE NIGHT OPENS</h2>
+<div class="w-16 sm:w-20 md:w-24 h-px bg-primary/50 mx-auto mt-4 md:mt-6"></div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-8 mx-auto w-full max-w-[20rem] sm:max-w-sm md:max-w-none">
+<div class="flex flex-col items-center justify-center aspect-square p-4 sm:p-5 md:aspect-auto md:p-12 bg-surface-container-low rounded-xl border border-outline-variant/10 group hover:border-primary/30 transition-all duration-700">
+<span class="material-symbols-outlined text-3xl md:text-4xl text-primary/40 group-hover:text-primary transition-colors mb-2 md:mb-6" data-icon="water_drop">water_drop</span>
+<span class="font-label text-[9px] md:text-[10px] tracking-[0.35em] md:tracking-[0.4em] text-on-surface/50 font-light uppercase text-center leading-tight">ELEMENTAL</span>
+</div>
+<div class="flex flex-col items-center justify-center aspect-square p-4 sm:p-5 md:aspect-auto md:p-12 bg-surface-container-low rounded-xl border border-outline-variant/10 group hover:border-primary/30 transition-all duration-700">
+<span class="material-symbols-outlined text-3xl md:text-4xl text-primary/40 group-hover:text-primary transition-colors mb-2 md:mb-6" data-icon="nights_stay">nights_stay</span>
+<span class="font-label text-[9px] md:text-[10px] tracking-[0.35em] md:tracking-[0.4em] text-on-surface/50 font-light uppercase text-center leading-tight">NOCTURNAL</span>
+</div>
+<div class="flex flex-col items-center justify-center aspect-square p-4 sm:p-5 md:aspect-auto md:p-12 bg-surface-container-low rounded-xl border border-outline-variant/10 group hover:border-primary/30 transition-all duration-700">
+<span class="material-symbols-outlined text-3xl md:text-4xl text-primary/40 group-hover:text-primary transition-colors mb-2 md:mb-6" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-label text-[9px] md:text-[10px] tracking-[0.35em] md:tracking-[0.4em] text-on-surface/50 font-light uppercase text-center leading-tight">MYSTICAL</span>
+</div>
+<div class="flex flex-col items-center justify-center aspect-square p-4 sm:p-5 md:aspect-auto md:p-12 bg-surface-container-low rounded-xl border border-outline-variant/10 group hover:border-primary/30 transition-all duration-700">
+<span class="material-symbols-outlined text-3xl md:text-4xl text-primary/40 group-hover:text-primary transition-colors mb-2 md:mb-6" data-icon="temple_buddhist">temple_buddhist</span>
+<span class="font-label text-[9px] md:text-[10px] tracking-[0.35em] md:tracking-[0.4em] text-on-surface/50 font-light uppercase text-center leading-tight">SACRED</span>
+</div>
+</div>
+<p class="mt-10 md:mt-16 max-w-3xl mx-auto text-center font-body text-[10px] sm:text-xs md:text-sm font-light text-on-surface/65 tracking-[0.16em] sm:tracking-[0.2em] md:tracking-[0.22em] leading-relaxed uppercase px-2">
+A CONTEMPORARY JUNGLE SANCTUARY THAT BLENDS SOPHISTICATION, THE ORGANIC PULSE OF NATURE, AND THE SPIRIT OF RHYTHM. A PLACE WHERE LOCAL AND INTERNATIONAL TALENTS MEET WITH A COMMUNITY CENTERED IN A JOURNEY OF PRESENCE, AUTHENTICITY, AND ENJOYMENT.
+</p>
+</section>
+<!-- Editorial Feature 1: The Ritual — full bleed en móvil como el banner de eventos -->
+<section class="max-w-5xl mx-auto py-16 md:py-32 px-6 md:px-12 overflow-x-hidden">
+<div class="relative -mx-6 w-[calc(100%+3rem)] max-w-none md:mx-0 md:w-full rounded-none md:rounded-[48px] overflow-hidden border-0 md:border md:border-outline/20 p-0 md:p-2">
+<div class="aspect-[3/4] w-full rounded-none md:aspect-[16/9] md:rounded-[40px] overflow-hidden relative group">
+<img alt="Luxury beach club ritual" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" data-alt="cinematic close-up of a ceremonial fire pit at night on a Tulum beach, warm orange glow reflecting on dark sand and tropical palm leaves" src="media/ritual-feature.jpg"/>
+<!-- Móvil: más alto + velo fuerte abajo que no sube tanto (arriba se ve más foto); misma opacidad -->
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/90 via-[30%] to-transparent md:from-background md:from-[45%] md:via-transparent md:to-transparent opacity-95 md:opacity-80" aria-hidden="true"></div>
+<div class="absolute bottom-6 left-4 right-4 sm:bottom-10 sm:left-6 sm:right-6 md:bottom-16 md:left-16 md:right-16">
+<h2 class="font-headline text-2xl sm:text-3xl md:text-4xl text-secondary mb-3 md:mb-6 tracking-widest uppercase">The Sunset Ritual</h2>
+<p class="font-body text-xs sm:text-sm font-light text-on-surface/70 leading-relaxed max-w-xl tracking-wide">
+                        As the sun descends below the jungle canopy, Vagalume transforms. Experience a sensory transition led by world-class curation and the ancient pulse of Mayan heritage.
+                    </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Accent Panel: The Sound -->
+<section id="playlist" class="w-full py-40 bg-tertiary-container/10 flex flex-col items-center text-center">
+<div class="max-w-3xl w-full px-6 sm:px-12 mx-auto flex flex-col items-center">
+<span class="material-symbols-outlined text-primary mb-12 text-5xl" data-icon="graphic_eq">graphic_eq</span>
+<h3 class="font-headline text-5xl text-on-surface mb-8 tracking-[0.15em] uppercase">AUDITORY ALCHEMY</h3>
+<p class="font-body text-lg font-extralight text-on-surface/60 leading-loose tracking-widest uppercase italic">
+                Where deep house meets organic vibrations. A curated frequency for the modern wanderer.
+            </p>
+<div class="mt-16 flex flex-wrap gap-8 sm:gap-12 justify-center items-end">
+<a href="#events" class="font-label text-[10px] tracking-[0.4em] text-primary border-b border-outline pb-2 hover:text-secondary transition-all uppercase inline-block">Explore Events</a>
+<button type="button" id="spotify-embed-toggle" class="font-label text-[10px] tracking-[0.4em] text-primary border-b border-outline pb-2 hover:text-secondary transition-all uppercase inline-flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-sm" aria-expanded="false" aria-controls="spotify-embed-panel">
+<span>LISTEN TO PLAYLIST</span>
+<span class="material-symbols-outlined text-[1.35rem] leading-none shrink-0 playlist-embed-chevron" aria-hidden="true">expand_more</span>
+</button>
+</div>
+<div id="spotify-embed-panel" class="spotify-embed-panel w-full max-w-2xl mx-auto" role="region" aria-label="Spotify playlist embed" aria-hidden="true">
+<div class="spotify-embed-panel__clip">
+<div class="mt-10 overflow-hidden rounded-xl border border-outline/20 bg-black/20 shadow-lg">
+<iframe data-testid="embed-iframe" class="w-full rounded-xl" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX9pP7cC2liKw?utm_source=generator" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify playlist"></iframe>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Editorial Feature 2: Cuisine -->
+<section id="cuisine" class="max-w-5xl mx-auto py-32 px-12">
+<div class="relative rounded-[48px] overflow-hidden border border-outline/20 p-1 md:p-2">
+<div class="aspect-[4/5] md:aspect-video w-full rounded-[40px] overflow-hidden relative group">
+<img alt="Exotic gastronomy" class="w-full h-full object-cover grayscale-[40%] transition-transform duration-1000 group-hover:scale-105" data-alt="Artistic overhead shot of a gourmet seafood dish with vibrant edible flowers on a textured dark ceramic plate, moody high-contrast lighting" src="media/cuisine-feature.jpg"/>
+<div class="absolute inset-0 bg-[#331515]/20 mix-blend-multiply"></div>
+<!-- Velo oscuro para legibilidad del título y el cuerpo -->
+<div class="absolute inset-0 bg-black/50 md:bg-black/40" aria-hidden="true"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-8 md:px-12 max-w-full">
+<h2 class="font-headline text-3xl sm:text-4xl md:text-6xl text-on-surface mb-4 md:mb-8 tracking-[0.08em] sm:tracking-[0.15em] md:tracking-[0.25em] uppercase leading-[1.05] max-w-[95%] drop-shadow-[0_2px_24px_rgba(0,0,0,0.65)]">CUISINE</h2>
+<div class="w-16 sm:w-20 md:w-24 h-px bg-primary/50 mb-4 md:mb-8"></div>
+<p class="font-body text-[10px] sm:text-xs font-light text-[#FAF9D6] tracking-[0.22em] sm:tracking-[0.28em] md:tracking-[0.3em] uppercase max-w-lg leading-relaxed drop-shadow-[0_1px_12px_rgba(0,0,0,0.55)]">
+                        Honoring the raw essence of coastal ingredients through refined technique.
+                    </p>
+<a href="https://mandalagroup.menu/tulum/vagalume/" target="_blank" rel="noopener noreferrer" class="relative z-10 mt-6 md:mt-8 inline-flex items-center justify-center bg-primary-container text-on-primary-container px-4 py-2.5 sm:px-8 sm:py-3 rounded-xl font-label text-[9px] sm:text-[10px] tracking-[0.28em] sm:tracking-[0.32em] uppercase hover:bg-primary-container/80 transition-all active:scale-95 duration-300 ease-out drop-shadow-[0_2px_16px_rgba(0,0,0,0.35)]">See our menu</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Ubicación: mapa a ancho de la columna de contenido (main) -->
+<section id="location" class="py-16 md:py-24 overflow-x-hidden" aria-labelledby="location-heading">
+<div class="max-w-5xl mx-auto px-6 md:px-12 mb-8 md:mb-10 text-center">
+<h2 id="location-heading" class="font-headline text-3xl sm:text-4xl md:text-5xl text-on-surface tracking-[0.12em] md:tracking-[0.2em] uppercase">LOCATION</h2>
+<div class="w-16 sm:w-20 md:w-24 h-px bg-primary/50 mx-auto mt-4 md:mt-6"></div>
+</div>
+<div class="relative w-full border-y border-[#9c8e83]/20 shadow-[inset_0_1px_0_rgba(237,190,144,0.06)]">
+<iframe class="block w-full h-[min(70vh,32rem)] min-h-[280px] sm:min-h-[360px] border-0" src="https://www.google.com/maps?cid=68158030288869776&amp;g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAEYASAB&amp;hl=es-419&amp;gl=MX&amp;output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación de Vagalume en Google Maps"></iframe>
+</div>
+</section>
+<!-- FAB reserva + calendario (mes/año navegable, elegir fecha) -->
+<div class="fixed bottom-6 right-4 sm:bottom-12 sm:right-12 z-50 w-auto" id="fab-reserve-root">
+<div id="calendar-popover" class="hidden absolute bottom-[calc(100%+0.75rem)] right-0 w-[min(100vw-2rem,20rem)] rounded-2xl border border-[#9c8e83]/25 bg-[#0A0A0A] p-4 shadow-2xl ring-1 ring-black/40" role="dialog" aria-modal="true" aria-labelledby="calendar-popover-title" aria-hidden="true">
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex flex-col gap-2 min-w-0 flex-1">
+<div class="flex items-center justify-between gap-1">
+<button type="button" id="calendar-prev-month" class="flex items-center justify-center size-9 shrink-0 rounded-full text-primary hover:bg-white/10 transition-colors" aria-label="Previous month">
+<span class="material-symbols-outlined text-2xl" aria-hidden="true">chevron_left</span>
+</button>
+<h2 id="calendar-popover-title" class="font-headline text-primary text-sm sm:text-base tracking-[0.12em] uppercase text-center truncate px-1">—</h2>
+<button type="button" id="calendar-next-month" class="flex items-center justify-center size-9 shrink-0 rounded-full text-primary hover:bg-white/10 transition-colors" aria-label="Next month">
+<span class="material-symbols-outlined text-2xl" aria-hidden="true">chevron_right</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<label for="calendar-year-select" class="font-label text-[8px] tracking-[0.25em] text-on-surface/45 uppercase shrink-0">Year</label>
+<select id="calendar-year-select" class="flex-1 min-w-0 rounded-lg border border-outline/30 bg-[#1c1b1b] text-on-surface font-label text-xs py-2 px-2 focus:outline-none focus:ring-2 focus:ring-primary/40"></select>
+</div>
+</div>
+<button type="button" id="calendar-popover-close" class="flex items-center justify-center size-8 shrink-0 rounded-full text-on-surface/60 hover:text-primary hover:bg-white/5 transition-colors font-light text-xl leading-none" aria-label="Cerrar calendario">×</button>
+</div>
+<div class="grid grid-cols-7 gap-0.5 text-center font-label text-[8px] tracking-[0.2em] text-on-surface/45 uppercase pb-2 border-b border-outline/15">
+<span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+</div>
+<div id="calendar-popover-days" class="grid grid-cols-7 gap-1 pt-3"></div>
+<button type="button" id="calendar-go-today" class="mt-3 w-full font-label text-[9px] tracking-[0.25em] text-primary/80 hover:text-primary uppercase py-2 rounded-lg border border-outline/20 hover:bg-white/5 transition-colors">Go to today</button>
+</div>
+<button type="button" id="fab-reserve-btn" class="relative w-16 h-16 rounded-full bg-primary shadow-2xl flex items-center justify-center text-on-primary hover:scale-110 transition-transform active:scale-95 group" aria-expanded="false" aria-haspopup="dialog" aria-controls="calendar-popover" title="Reserve a table">
+<span class="material-symbols-outlined text-3xl" data-icon="calendar_month">calendar_month</span>
+<span class="absolute right-[calc(100%+0.5rem)] top-1/2 -translate-y-1/2 bg-surface-container-highest px-4 py-2 rounded-full font-label text-[10px] tracking-widest text-on-surface opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none uppercase border border-outline/20 max-sm:hidden">RESERVE A TABLE</span>
+</button>
+</div>
+<!-- Footer -->
+<footer class="w-full py-20 px-12 border-t border-[#9c8e83]/10 bg-[#0A0A0A] flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex flex-col gap-4 text-center md:text-left">
+<span class="font-label text-[10px] tracking-[0.3em] text-[#edbe90]/50 uppercase">© 2024 VAGALUME TULUM. ARCHITECTURE OF THE SOUL.</span>
+</div>
+<div class="flex gap-12">
+<a class="text-[#edbe90]/50 hover:text-[#FAF9D6] underline underline-offset-8 transition-all font-label text-[10px] tracking-[0.3em] uppercase" href="#">PRIVACY</a>
+<a class="text-[#edbe90]/50 hover:text-[#FAF9D6] underline underline-offset-8 transition-all font-label text-[10px] tracking-[0.3em] uppercase" href="#">MEMBERSHIP</a>
+<a class="text-[#edbe90]/50 hover:text-[#FAF9D6] underline underline-offset-8 transition-all font-label text-[10px] tracking-[0.3em] uppercase" href="#">PRESS</a>
+<a class="text-[#edbe90]/50 hover:text-[#FAF9D6] underline underline-offset-8 transition-all font-label text-[10px] tracking-[0.3em] uppercase" href="#">CAREERS</a>
+</div>
+</footer>
+</main>
+<script>
+/* Menú móvil: drawer con enlaces del nav y barra lateral; cierra con Escape o backdrop. */
+(function () {
+  var overlay = document.getElementById('mobile-menu-overlay');
+  var btn = document.getElementById('mobile-menu-btn');
+  var panel = document.getElementById('mobile-menu-panel');
+  if (!overlay || !btn || !panel) return;
+
+  var iconMenu = btn.querySelector('.mobile-menu-icon-menu');
+  var iconClose = btn.querySelector('.mobile-menu-icon-close');
+
+  function isOpen() {
+    return overlay.classList.contains('mobile-menu-open');
+  }
+
+  function openMenu() {
+    overlay.classList.remove('hidden');
+    overlay.setAttribute('aria-hidden', 'false');
+    btn.setAttribute('aria-expanded', 'true');
+    if (iconMenu) iconMenu.classList.add('hidden');
+    if (iconClose) iconClose.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(function () {
+      overlay.classList.add('mobile-menu-open');
+    });
+  }
+
+  function closeMenu() {
+    overlay.classList.remove('mobile-menu-open');
+    btn.setAttribute('aria-expanded', 'false');
+    if (iconMenu) iconMenu.classList.remove('hidden');
+    if (iconClose) iconClose.classList.add('hidden');
+    document.body.style.overflow = '';
+
+    var drawer = panel;
+    var done = false;
+    function finish() {
+      if (done) return;
+      done = true;
+      overlay.classList.add('hidden');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+    var t = window.setTimeout(finish, 380);
+    drawer.addEventListener(
+      'transitionend',
+      function onTE(ev) {
+        if (ev.target !== drawer || ev.propertyName !== 'transform') return;
+        window.clearTimeout(t);
+        drawer.removeEventListener('transitionend', onTE);
+        finish();
+      }
+    );
+  }
+
+  btn.addEventListener('click', function () {
+    if (isOpen()) closeMenu();
+    else openMenu();
+  });
+
+  overlay.addEventListener('click', function (ev) {
+    var t = ev.target;
+    if (t && t.getAttribute && t.getAttribute('data-mobile-nav-close') !== null) closeMenu();
+  });
+
+  panel.addEventListener('click', function (ev) {
+    var a = ev.target.closest('a');
+    if (a && panel.contains(a)) closeMenu();
+  });
+
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape' && isOpen()) closeMenu();
+  });
+
+  window.addEventListener('resize', function () {
+    if (window.matchMedia('(min-width: 768px)').matches && isOpen()) closeMenu();
+  });
+})();
+</script>
+<script>
+/* Calendario FAB: mes/año; 26–28 marzo resaltados (eventos); clic abre Mandala Tickets (sin “selección”). */
+(function () {
+  var root = document.getElementById('fab-reserve-root');
+  var fab = document.getElementById('fab-reserve-btn');
+  var pop = document.getElementById('calendar-popover');
+  var daysHost = document.getElementById('calendar-popover-days');
+  var titleEl = document.getElementById('calendar-popover-title');
+  var closeBtn = document.getElementById('calendar-popover-close');
+  var prevBtn = document.getElementById('calendar-prev-month');
+  var nextBtn = document.getElementById('calendar-next-month');
+  var yearSel = document.getElementById('calendar-year-select');
+  var goTodayBtn = document.getElementById('calendar-go-today');
+  if (!root || !fab || !pop || !daysHost || !titleEl || !closeBtn || !prevBtn || !nextBtn || !yearSel || !goTodayBtn) return;
+
+  var BOOKING_URL = 'https://mandalatickets.com/en/tulum/disco/Vagalume';
+
+  var monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  var now = new Date();
+  var viewYear = now.getFullYear();
+  var viewMonth = now.getMonth();
+
+  function startOfLocalDay(y, m, d) {
+    var t = new Date(y, m, d);
+    t.setHours(0, 0, 0, 0);
+    return t;
+  }
+
+  function todayStart() {
+    var t = new Date();
+    t.setHours(0, 0, 0, 0);
+    return t;
+  }
+
+  function isPastDay(y, m, d) {
+    return startOfLocalDay(y, m, d) < todayStart();
+  }
+
+  function isToday(y, m, d) {
+    var t = todayStart();
+    return t.getFullYear() === y && t.getMonth() === m && t.getDate() === d;
+  }
+
+  /** Marzo (índice 2): días con eventos especiales cada año */
+  function isSpecialEventDay(y, m, d) {
+    return m === 2 && d >= 26 && d <= 28;
+  }
+
+  function openBookingPage() {
+    var a = document.createElement('a');
+    a.href = BOOKING_URL;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  function updateTitle() {
+    titleEl.textContent = monthNames[viewMonth] + ' ' + viewYear;
+  }
+
+  function populateYearSelect() {
+    var nowY = new Date().getFullYear();
+    var minY = Math.min(viewYear, nowY - 5);
+    var maxY = Math.max(viewYear, nowY + 8);
+    yearSel.innerHTML = '';
+    var y;
+    for (y = minY; y <= maxY; y++) {
+      var opt = document.createElement('option');
+      opt.value = String(y);
+      opt.textContent = String(y);
+      yearSel.appendChild(opt);
+    }
+    yearSel.value = String(viewYear);
+  }
+
+  function shiftMonth(delta) {
+    viewMonth += delta;
+    if (viewMonth > 11) {
+      viewMonth = 0;
+      viewYear++;
+    }
+    if (viewMonth < 0) {
+      viewMonth = 11;
+      viewYear--;
+    }
+    refresh();
+  }
+
+  function goToday() {
+    var t = new Date();
+    viewYear = t.getFullYear();
+    viewMonth = t.getMonth();
+    refresh();
+  }
+
+  function refresh() {
+    updateTitle();
+    populateYearSelect();
+    renderDays();
+  }
+
+  function renderDays() {
+    daysHost.innerHTML = '';
+    var first = new Date(viewYear, viewMonth, 1);
+    var pad = first.getDay();
+    var lastDay = new Date(viewYear, viewMonth + 1, 0).getDate();
+    var i;
+    for (i = 0; i < pad; i++) {
+      daysHost.appendChild(document.createElement('div'));
+    }
+    var d;
+    for (d = 1; d <= lastDay; d++) {
+      var past = isPastDay(viewYear, viewMonth, d);
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = String(d);
+      var special = isSpecialEventDay(viewYear, viewMonth, d);
+      var label =
+        monthNames[viewMonth] +
+        ' ' +
+        d +
+        ', ' +
+        viewYear +
+        (past ? ' (not available)' : '') +
+        (special ? ' · special event' : '') +
+        (!past ? ' · book on Mandala Tickets' : '');
+      b.setAttribute('aria-label', label);
+      var baseCls =
+        'min-h-[2.35rem] w-full rounded-full text-sm flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60';
+      if (past) {
+        b.disabled = true;
+        if (special) {
+          b.className = baseCls + ' calendar-popover__day--special-event';
+        } else {
+          b.className = baseCls + ' text-on-surface/40';
+        }
+      } else if (special) {
+        b.className = baseCls + ' calendar-popover__day--special-event';
+      } else {
+        b.className = baseCls + ' text-on-surface/90 hover:bg-white/10';
+      }
+      if (!past && isToday(viewYear, viewMonth, d)) {
+        b.classList.add('calendar-popover__day--today');
+      }
+      (function (dayNum) {
+        b.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          if (isPastDay(viewYear, viewMonth, dayNum)) return;
+          closePop();
+          openBookingPage();
+        });
+      })(d);
+      daysHost.appendChild(b);
+    }
+  }
+
+  function openPop() {
+    pop.classList.remove('hidden');
+    pop.setAttribute('aria-hidden', 'false');
+    fab.setAttribute('aria-expanded', 'true');
+    refresh();
+  }
+
+  function closePop() {
+    pop.classList.add('hidden');
+    pop.setAttribute('aria-hidden', 'true');
+    fab.setAttribute('aria-expanded', 'false');
+  }
+
+  function togglePop() {
+    if (pop.classList.contains('hidden')) openPop();
+    else closePop();
+  }
+
+  fab.addEventListener('click', function (ev) {
+    ev.stopPropagation();
+    togglePop();
+  });
+
+  closeBtn.addEventListener('click', function (ev) {
+    ev.stopPropagation();
+    closePop();
+  });
+
+  prevBtn.addEventListener('click', function (ev) {
+    ev.stopPropagation();
+    shiftMonth(-1);
+  });
+
+  nextBtn.addEventListener('click', function (ev) {
+    ev.stopPropagation();
+    shiftMonth(1);
+  });
+
+  yearSel.addEventListener('change', function () {
+    var y = parseInt(yearSel.value, 10);
+    if (!isNaN(y)) {
+      viewYear = y;
+      updateTitle();
+      renderDays();
+    }
+  });
+
+  yearSel.addEventListener('click', function (ev) {
+    ev.stopPropagation();
+  });
+
+  goTodayBtn.addEventListener('click', function (ev) {
+    ev.stopPropagation();
+    goToday();
+  });
+
+  document.addEventListener('click', function (ev) {
+    if (pop.classList.contains('hidden')) return;
+    if (!root.contains(ev.target)) closePop();
+  });
+
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape' && !pop.classList.contains('hidden')) closePop();
+  });
+
+  updateTitle();
+  populateYearSelect();
+  renderDays();
+})();
+</script>
+<script>
+/* Logo: scroll suave al hero; evita que el clic no haga nada si el hash ya era #page-top. */
+(function () {
+  var logo = document.querySelector('a[href="#page-top"]');
+  if (!logo) return;
+  logo.addEventListener('click', function (e) {
+    e.preventDefault();
+    var hero = document.getElementById('page-top');
+    if (hero) {
+      hero.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    try {
+      history.replaceState(null, '', '#page-top');
+    } catch (_unused) {}
+  });
+})();
+</script>
+<script>
+/* Botón playlist: abre/cierra el embed con transición CSS y alterna la flecha. */
+(function () {
+  var btn = document.getElementById('spotify-embed-toggle');
+  var panel = document.getElementById('spotify-embed-panel');
+  if (!btn || !panel) return;
+  var icon = btn.querySelector('.playlist-embed-chevron');
+  btn.addEventListener('click', function () {
+    var openNow = panel.classList.toggle('spotify-embed-panel--open');
+    btn.setAttribute('aria-expanded', String(openNow));
+    panel.setAttribute('aria-hidden', String(!openNow));
+    if (icon) icon.textContent = openNow ? 'expand_less' : 'expand_more';
+  });
+})();
+</script>
+<script src="hero-3d.mjs" type="module"></script>
+<script src="events-banner.mjs" type="module"></script>
+</body></html>
