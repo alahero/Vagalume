@@ -1,5 +1,6 @@
 import EventCardsRow from "../components/EventCardsRow";
 import EventsBanner from "../components/EventsBanner";
+import SeoHead from "../components/SeoHead";
 import { BANNER_SLIDES, EVENT_CARDS } from "../data/eventsContent";
 
 /**
@@ -8,6 +9,11 @@ import { BANNER_SLIDES, EVENT_CARDS } from "../data/eventsContent";
 export default function EventsPage() {
   return (
     <>
+      <SeoHead
+        title="Upcoming Events | Vagalume Tulum"
+        description="Full Vagalume Tulum lineup: DJ sets, live rituals, and seasonal series. Plan your night and book via MandalaTickets."
+        path="/events"
+      />
       <section id="page-top" className="vl-section vl-section--events-intro">
         <div className="vl-events-intro">
           <span className="vl-eyebrow">Seasonal Series</span>

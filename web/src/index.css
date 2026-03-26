@@ -59,6 +59,27 @@ body {
   font-weight: 300;
 }
 
+/* Foco visible para teclado (WCAG); sin anillo en clics con puntero */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+.vl-topnav__cta:focus-visible,
+.vl-topnav__burger:focus-visible,
+.vl-topnav__brand:focus-visible,
+.vl-footer__logo-link:focus-visible,
+.vl-footer__qlink:focus-visible,
+.vl-footer__mtlink:focus-visible,
+.vl-sidebar__item:focus-visible,
+.vl-mobile-drawer__link:focus-visible,
+.vl-events-banner__dot:focus-visible,
+.vl-notfound__btn:focus-visible {
+  outline: 2px solid var(--vl-primary);
+  outline-offset: 3px;
+}
+
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 24;
 }
@@ -750,6 +771,84 @@ a.vl-sidebar__item {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--vl-footer-body-muted);
+}
+
+/* ——— 404 ——— */
+.vl-notfound {
+  padding: calc(var(--vl-nav-h) + 3rem) 1.5rem 4rem;
+  max-width: 28rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.vl-notfound__eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.625rem;
+  letter-spacing: 0.45em;
+  color: var(--vl-primary);
+  text-transform: uppercase;
+}
+
+.vl-notfound__title {
+  margin: 0 0 1rem;
+  font-family: var(--vl-font-headline);
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 400;
+  color: var(--vl-sand);
+  line-height: 1.2;
+}
+
+.vl-notfound__text {
+  margin: 0 0 2rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--vl-on-surface-muted);
+}
+
+.vl-notfound__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+@media (min-width: 480px) {
+  .vl-notfound__actions {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+.vl-notfound__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  background: var(--vl-primary-container);
+  color: var(--vl-on-primary-container);
+  font-size: 0.625rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.vl-notfound__btn:hover {
+  background: rgba(109, 75, 39, 0.85);
+  color: var(--vl-on-primary-container);
+}
+
+.vl-notfound__btn--ghost {
+  background: transparent;
+  color: var(--vl-primary);
+  border: 1px solid rgba(237, 190, 144, 0.35);
+}
+
+.vl-notfound__btn--ghost:hover {
+  background: rgba(237, 190, 144, 0.08);
+  color: var(--vl-sand);
 }
 
 /* FAB + calendario */

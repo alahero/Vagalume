@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import EventCardsRow from "../components/EventCardsRow";
 import EventsBanner from "../components/EventsBanner";
 import HeroLogoCanvas from "../components/HeroLogoCanvas";
+import SeoHead from "../components/SeoHead";
 import { BANNER_SLIDES, EVENT_CARDS } from "../data/eventsContent";
 
 /**
@@ -15,9 +16,19 @@ export default function HomePage() {
 
   return (
     <>
+      <SeoHead
+        title="Vagalume Tulum | Beach Club & Night Sanctuary"
+        description="Beach club and night sanctuary in Tulum: curated DJ nights, cuisine, playlists, and MandalaTickets reservations on the Caribbean coast."
+        path="/"
+      />
       <section id="page-top" className="vl-hero" data-hero-3d>
         <div className="vl-hero__bg">
-          <img className="vl-hero__bg-img" src="/media/hero-bg.jpg" alt="" />
+          <img
+            className="vl-hero__bg-img"
+            src="/media/hero-bg.jpg"
+            alt="Vagalume beach club in Tulum at dusk, jungle and Caribbean shoreline"
+            fetchPriority="high"
+          />
           <div className="vl-hero__veil" aria-hidden />
           <div className="vl-hero__grad" aria-hidden />
         </div>
@@ -84,7 +95,8 @@ export default function HomePage() {
             <img
               className="vl-ritual-img"
               src="/media/ritual-feature.jpg"
-              alt="Luxury beach club ritual"
+              alt="Sunset ritual at Vagalume beach club, guests by the shore"
+              loading="lazy"
             />
             <div className="vl-ritual-grad" aria-hidden />
             <div className="vl-ritual-copy">
@@ -151,7 +163,8 @@ export default function HomePage() {
             <img
               className="vl-cuisine-img"
               src="/media/cuisine-feature.jpg"
-              alt="Exotic gastronomy"
+              alt="Coastal cuisine presentation at Vagalume Tulum"
+              loading="lazy"
             />
             <div className="vl-cuisine-multiply" aria-hidden />
             <div className="vl-cuisine-veil" aria-hidden />

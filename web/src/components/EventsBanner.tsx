@@ -39,6 +39,9 @@ export default function EventsBanner({ slides }: EventsBannerProps) {
             alt={slide.alt}
             width={4000}
             height={1200}
+            loading={i === 0 ? "eager" : "lazy"}
+            decoding="async"
+            fetchPriority={i === 0 ? "high" : undefined}
           />
           <div className="vl-events-banner__grad" aria-hidden />
         </article>

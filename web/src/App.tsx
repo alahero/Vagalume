@@ -1,8 +1,9 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import SiteLayout from "./components/SiteLayout";
 import Hero3DPage from "./Hero3DPage";
 import EventsPage from "./pages/EventsPage";
 import HomePage from "./pages/HomePage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 /**
  * Rutas del sitio marketing; `?hero3d=1` conserva la vista previa del hero 3D a pantalla completa.
@@ -35,7 +36,14 @@ export default function App() {
           </SiteLayout>
         }
       />
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route
+        path="*"
+        element={
+          <SiteLayout navVariant="home">
+            <NotFoundPage />
+          </SiteLayout>
+        }
+      />
     </Routes>
   );
 }

@@ -42,6 +42,8 @@ export default function EventCardsRow({
                 alt={card.imageAlt}
                 width={1080}
                 height={1080}
+                loading="lazy"
+                decoding="async"
               />
               <div
                 className={
