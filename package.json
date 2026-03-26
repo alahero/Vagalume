@@ -1,0 +1,5 @@
+{
+  "name": "vagalume",
+  "private": true,
+  "description": "Raíz del monorepo; la app de producción está en web/. Vercel: Root Directory vacío usa vercel.json de esta raíz; o bien Root Directory = web y web/vercel.json."
+}
