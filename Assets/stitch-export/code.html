@@ -277,49 +277,22 @@
 </div>
 <a class="shrink-0 border border-outline/30 text-[#FAF9D6] px-8 py-3 rounded-xl font-label text-[10px] tracking-[0.32em] uppercase hover:bg-earth/10 transition-all text-center sm:mb-2" href="#">SEE ALL EVENTS</a>
 </div>
-<!-- Banner rotativo: a pantalla completa en móvil (sin radio); desktop como antes -->
-<div class="relative w-[calc(100%+3rem)] max-w-none -mx-6 md:mx-auto md:w-full md:max-w-[100rem] aspect-[21/9] rounded-none md:rounded-[48px] overflow-hidden border-0 md:border md:border-outline/10 isolate" data-events-banner="">
-<!-- Slide 1 -->
+<!-- Banner rotativo: móvil bleed viewport; md+ ancho de columna main (rompe solo md:px-12 de #events) -->
+<div class="relative max-md:w-screen max-md:max-w-[100vw] max-md:-ml-6 md:w-[calc(100%+6rem)] md:max-w-none md:-mx-12 aspect-[4000/1200] rounded-none overflow-hidden isolate bg-black" data-events-banner="">
+<!-- Slide 1: Nido (4000×1200) -->
 <article class="events-banner__slide absolute inset-0 z-10 opacity-100 transition-opacity duration-700 ease-in-out group" aria-hidden="false">
-<img alt="New Year Eternal event" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkyDIJLqu9awG67YO6qIv9lieWsWDJRnGBYcCZyCkcNcndlxUbvCw0JxKhqRaaCY-9Ng4w-XvdOVfU6oH9P5O6Qt859VBBSz937gbh2IH--xP4u7vSSBp8aBvCjkQNXZLVR_8fETOdPSdfdOqpIJEqR3ATe-w4_vRPxmC7xCjbKsI3MmAZbIlgGMDLQ5sMC1ZhFbg68hb-mAvl5oxM7rpUo_PfG-KZzQe6INGZsU0MzXCHFDFsfpyhN21ox-cj6jRayWJ5yt19LQ"/>
-<div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
-<div class="absolute inset-0 p-4 sm:p-8 md:p-16 flex flex-col justify-center max-w-2xl">
-<span class="bg-burgundy text-sand px-4 py-1 self-start rounded-full font-label text-[8px] tracking-[0.3em] mb-3 md:mb-6 uppercase">Featured Event</span>
-<h3 class="font-headline text-3xl sm:text-5xl md:text-6xl text-sand mb-2 md:mb-4 tracking-[0.1em] uppercase leading-tight">NEW YEAR<br/><span class="italic font-light">Eternal</span></h3>
-<div class="flex flex-wrap items-center gap-3 md:gap-6 mb-4 md:mb-8 text-on-surface/70 font-label text-[10px] tracking-[0.2em]">
-<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="calendar_today">calendar_today</span> DEC 31, 2024</span>
-<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span> 10:00 PM</span>
-</div>
-<button type="button" class="bg-sand text-burgundy px-5 py-2.5 md:px-8 md:py-3 rounded-lg md:rounded-xl font-label text-[9px] md:text-[10px] tracking-[0.32em] self-start hover:bg-white transition-all">GET TICKETS</button>
-</div>
+<img alt="Nido closing at Vagalume Tulum — March 27" class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-[1.02]" src="../Events/260327_NIDO-VAGALUME-POST%20%284000x1200%29.png" width="4000" height="1200"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
 </article>
-<!-- Slide 2 -->
+<!-- Slide 2: MIUL (4000×1200) -->
 <article class="events-banner__slide absolute inset-0 z-0 opacity-0 pointer-events-none transition-opacity duration-700 ease-in-out group" aria-hidden="true">
-<img alt="Solaris Gathering" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida/ADBb0uilTQfIdo1Rsqh2NKSctCLFCny-IUz137doFoEbObsWSsnUwSJSl4RDwOeoJhx5I0mhoWVnkOConN-3BdX_YOpgY-dXEVqvB1zmDFU6iK4hJLHfdupcn8PE9YzeZgqzhn4XfRzTqo-oaRc4jVgnXwUbYSeTmbPKOzXPGY4H_dcpqXxiFuKepSwOjbkssOz1WtSDKitbl8Z5tUGZTlaY10ilhF_iXfjMQ2mmjqYOtaHCsbfWguCNc7WTEanaEoYHDVVviKoVxy0"/>
-<div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
-<div class="absolute inset-0 p-4 sm:p-8 md:p-16 flex flex-col justify-center max-w-2xl">
-<span class="bg-earth text-sand px-4 py-1 self-start rounded-full font-label text-[8px] tracking-[0.3em] mb-3 md:mb-6 uppercase">Gathering</span>
-<h3 class="font-headline text-3xl sm:text-5xl md:text-6xl text-sand mb-2 md:mb-4 tracking-[0.1em] uppercase leading-tight">SOLARIS<br/><span class="italic font-light">Gathering</span></h3>
-<div class="flex flex-wrap items-center gap-3 md:gap-6 mb-4 md:mb-8 text-on-surface/70 font-label text-[10px] tracking-[0.2em]">
-<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="calendar_today">calendar_today</span> NOV 14, 2024</span>
-<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span> SUNSET</span>
-</div>
-<button type="button" class="bg-sand text-burgundy px-5 py-2.5 md:px-8 md:py-3 rounded-lg md:rounded-xl font-label text-[9px] md:text-[10px] tracking-[0.32em] self-start hover:bg-white transition-all">GET TICKETS</button>
-</div>
+<img alt="MIUL with Disorder at Vagalume — April 3" class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-[1.02]" src="../Events/Vagalume_4000%20X%201200_MIUL_ABR03.png" width="4000" height="1200"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
 </article>
-<!-- Slide 3 -->
+<!-- Slide 3: Sinner (4000×1200) -->
 <article class="events-banner__slide absolute inset-0 z-0 opacity-0 pointer-events-none transition-opacity duration-700 ease-in-out group" aria-hidden="true">
-<img alt="Cenote Deep" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida/ADBb0uiYewmFt-AXYm61cOpyADF0KYVFtkNKjJUWyhd4wfIB7TG4A8jCH79PUr-mayaS-HQVhcVgFOttOiLyEMlSogBS17c-nlR0OqzRb7tXWwKj5Z4sNIBDQCQcwnbneSt77sY9PY2yk5kbN5V0bH_A-ioYG2wNN0IU6Wb8V5EMB5xYGTr8xPKf374RDcIX6WttDiQme377bPceeOGsuNc6CS7pgjz_Vv-NI9fIUnZ9Llg-H-zUgHBJKsAD4OdD0niSQUvRW3XJ5ij6"/>
-<div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
-<div class="absolute inset-0 p-4 sm:p-8 md:p-16 flex flex-col justify-center max-w-2xl">
-<span class="bg-burgundy text-sand px-4 py-1 self-start rounded-full font-label text-[8px] tracking-[0.3em] mb-3 md:mb-6 uppercase">Deep listening</span>
-<h3 class="font-headline text-3xl sm:text-5xl md:text-6xl text-sand mb-2 md:mb-4 tracking-[0.1em] uppercase leading-tight">CENOTE<br/><span class="italic font-light">Deep</span></h3>
-<div class="flex flex-wrap items-center gap-3 md:gap-6 mb-4 md:mb-8 text-on-surface/70 font-label text-[10px] tracking-[0.2em]">
-<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="calendar_today">calendar_today</span> NOV 22, 2024</span>
-<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span> LATE NIGHT</span>
-</div>
-<button type="button" class="bg-sand text-burgundy px-5 py-2.5 md:px-8 md:py-3 rounded-lg md:rounded-xl font-label text-[9px] md:text-[10px] tracking-[0.32em] self-start hover:bg-white transition-all">GET TICKETS</button>
-</div>
+<img alt="Sinner at Vagalume Tulum" class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-[1.02]" src="../Events/VAGALUME-SINNER-MAR-ABR%20%284000x1200%29.png" width="4000" height="1200"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
 </article>
 <div class="absolute bottom-3 right-4 md:bottom-8 md:right-16 z-20 flex gap-2 md:gap-3" aria-label="Eventos destacados">
 <button type="button" class="events-banner__dot h-1 w-8 cursor-pointer rounded-full bg-sand transition-colors" aria-label="Slide 1" aria-current="true"></button>
@@ -327,50 +300,90 @@
 <button type="button" class="events-banner__dot h-1 w-8 cursor-pointer rounded-full bg-white/20 transition-colors" aria-label="Slide 3"></button>
 </div>
 </div>
-<!-- Tarjetas: una fila con scroll en móvil (lo que no cabe queda fuera); grid en md+; thumb cuadrado -->
+<!-- Tarjetas: una sola fila; 3 visibles (max-xl), 4 desde breakpoint xl; 5–6 ocultas hasta página de eventos -->
 <div class="max-w-7xl mx-auto mt-8 md:mt-12">
-<div class="-mx-6 w-[calc(100%+3rem)] md:mx-0 md:w-full flex md:grid md:grid-cols-3 flex-row gap-6 sm:gap-7 md:gap-8 overflow-x-auto md:overflow-x-visible overscroll-x-contain snap-x snap-mandatory hide-scrollbar px-6 md:px-0 pb-1" role="list" aria-label="Próximos eventos">
-<!-- Card 1 -->
-<div class="flex flex-col gap-3 md:gap-6 group shrink-0 w-[11.75rem] sm:w-[13rem] md:w-auto md:shrink snap-center" role="listitem">
+<div class="-mx-6 w-[calc(100%+3rem)] md:mx-0 md:w-full grid grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 px-6 md:px-0 pb-1" role="list" aria-label="Próximos eventos">
+<!-- Card 1: Sinner (serie) -->
+<div class="flex flex-col gap-3 md:gap-6 group min-w-0" role="listitem">
 <div class="aspect-square w-full rounded-2xl md:rounded-[48px] overflow-hidden relative border border-outline/10">
-<img alt="Solaris Gathering" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/ADBb0uilTQfIdo1Rsqh2NKSctCLFCny-IUz137doFoEbObsWSsnUwSJSl4RDwOeoJhx5I0mhoWVnkOConN-3BdX_YOpgY-dXEVqvB1zmDFU6iK4hJLHfdupcn8PE9YzeZgqzhn4XfRzTqo-oaRc4jVgnXwUbYSeTmbPKOzXPGY4H_dcpqXxiFuKepSwOjbkssOz1WtSDKitbl8Z5tUGZTlaY10ilhF_iXfjMQ2mmjqYOtaHCsbfWguCNc7WTEanaEoYHDVVviKoVxy0"/>
+<img alt="Sinner at Vagalume — spring series" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" src="../Events/VAGALUME-SINNER-MAR-ABR%20%2826%29.jpeg" width="1080" height="1080"/>
 <div class="absolute inset-0 bg-burgundy/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
 </div>
 <div class="px-0.5 sm:px-1 md:px-4">
-<span class="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-earth uppercase mb-1.5 md:mb-2 block font-medium">NOV 14 • 2024</span>
-<h4 class="font-headline text-lg md:text-2xl text-on-surface mb-2 md:mb-3 tracking-wide uppercase">SOLARIS GATHERING</h4>
-<p class="font-body text-[11px] md:text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase line-clamp-3 md:line-clamp-none">An organic house journey guided by desert vibrations and golden hour spirits.</p>
+<span class="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-earth uppercase mb-1.5 md:mb-2 block font-medium">MAR – APR • 2026</span>
+<h4 class="font-headline text-lg md:text-2xl text-on-surface mb-2 md:mb-3 tracking-wide uppercase">SINNER</h4>
+<p class="font-body text-[11px] md:text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase line-clamp-3 md:line-clamp-none">Bold rhythm and ritual energy for nights that refuse to whisper.</p>
 </div>
 </div>
-<!-- Card 2 -->
-<div class="flex flex-col gap-3 md:gap-6 group shrink-0 w-[11.75rem] sm:w-[13rem] md:w-auto md:shrink snap-center" role="listitem">
+<!-- Card 2: MIUL -->
+<div class="flex flex-col gap-3 md:gap-6 group min-w-0" role="listitem">
 <div class="aspect-square w-full rounded-2xl md:rounded-[48px] overflow-hidden relative border border-outline/10">
-<img alt="Cenote Deep" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/ADBb0uiYewmFt-AXYm61cOpyADF0KYVFtkNKjJUWyhd4wfIB7TG4A8jCH79PUr-mayaS-HQVhcVgFOttOiLyEMlSogBS17c-nlR0OqzRb7tXWwKj5Z4sNIBDQCQcwnbneSt77sY9PY2yk5kbN5V0bH_A-ioYG2wNN0IU6Wb8V5EMB5xYGTr8xPKf374RDcIX6WttDiQme377bPceeOGsuNc6CS7pgjz_Vv-NI9fIUnZ9Llg-H-zUgHBJKsAD4OdD0niSQUvRW3XJ5ij6"/>
+<img alt="MIUL with Disorder at Vagalume" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" src="../Events/Vagalume_1080%20X%201080_MIUL_ABR03%20%283%29.jpg" width="1080" height="1080"/>
 <div class="absolute inset-0 bg-earth/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
 </div>
 <div class="px-0.5 sm:px-1 md:px-4">
-<span class="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-earth uppercase mb-1.5 md:mb-2 block font-medium">NOV 22 • 2024</span>
-<h4 class="font-headline text-lg md:text-2xl text-on-surface mb-2 md:mb-3 tracking-wide uppercase">CENOTE DEEP</h4>
-<p class="font-body text-[11px] md:text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase line-clamp-3 md:line-clamp-none">Submerge into the subterranean frequencies of melodic techno within our jungle atrium.</p>
+<span class="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-earth uppercase mb-1.5 md:mb-2 block font-medium">APR 03 • 2026</span>
+<h4 class="font-headline text-lg md:text-2xl text-on-surface mb-2 md:mb-3 tracking-wide uppercase">MIUL × DISORDER</h4>
+<p class="font-body text-[11px] md:text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase line-clamp-3 md:line-clamp-none">An out-of-body frequency journey with Jotadmaya and Negrinm under the Vagalume sky.</p>
 </div>
 </div>
-<!-- Card 3 -->
-<div class="flex flex-col gap-3 md:gap-6 group shrink-0 w-[11.75rem] sm:w-[13rem] md:w-auto md:shrink snap-center" role="listitem">
+<!-- Card 3: Sinner — 28 March -->
+<div class="flex flex-col gap-3 md:gap-6 group min-w-0" role="listitem">
 <div class="aspect-square w-full rounded-2xl md:rounded-[48px] overflow-hidden relative border border-outline/10">
-<img alt="Ancestral Moon" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/ADBb0ug88_qNEulI3O4hIZe2a6hBu9ISBJ6_b1woIKv8TBb0WusYnBy5c50v7s8QtjrLdWegUz7zbXU6bPIJni-1gV-fWY6ntLKrHXLYW97O2qs8NstkQmMooxbQcyIP0xQUOootu9EX-ADoWNF_AxXA-J4_L-NsdWeIzcTgNynzIlvLLf8KgFTwOhcPjnPOSqrifut65jsCggPMrpxRYxCEwy5krI_7eIjnz2seY7yrOW_LsjxWjgkQF3rn1eGDiTMYBbB8sc0n0asU"/>
+<img alt="Sinner — Marwan, Vite, Rene at Vagalume Tulum" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" src="../Events/SINNER_28MARCH_4a5%20%283%29.jpg" width="1080" height="1080"/>
 <div class="absolute inset-0 bg-burgundy/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
 </div>
 <div class="px-0.5 sm:px-1 md:px-4">
-<span class="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-earth uppercase mb-1.5 md:mb-2 block font-medium">DEC 05 • 2024</span>
-<h4 class="font-headline text-lg md:text-2xl text-on-surface mb-2 md:mb-3 tracking-wide uppercase">ANCESTRAL MOON</h4>
-<p class="font-body text-[11px] md:text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase line-clamp-3 md:line-clamp-none">A multi-sensory performance honoring the lunar cycle through fire and movement.</p>
+<span class="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-earth uppercase mb-1.5 md:mb-2 block font-medium">MAR 28 • 2026</span>
+<h4 class="font-headline text-lg md:text-2xl text-on-surface mb-2 md:mb-3 tracking-wide uppercase">SINNER</h4>
+<p class="font-body text-[11px] md:text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase line-clamp-3 md:line-clamp-none">Marwan, Vite, and Rene guide a crimson-hazed night of deep, hypnotic groove.</p>
+</div>
+</div>
+<!-- Card 4: Pendulum (solo xl+; resto del listado irá a la futura página de eventos) -->
+<div class="max-xl:hidden flex flex-col gap-3 md:gap-6 group min-w-0" role="listitem">
+<div class="aspect-square w-full rounded-2xl md:rounded-[48px] overflow-hidden relative border border-outline/10">
+<img alt="Pendulum at Vagalume Tulum" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" src="../Events/pendelum-portada%20%284%29.jpeg" width="1080" height="1080"/>
+<div class="absolute inset-0 bg-earth/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="px-0.5 sm:px-1 md:px-4">
+<span class="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-earth uppercase mb-1.5 md:mb-2 block font-medium">TULUM • 2026</span>
+<h4 class="font-headline text-lg md:text-2xl text-on-surface mb-2 md:mb-3 tracking-wide uppercase">PENDULUM</h4>
+<p class="font-body text-[11px] md:text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase line-clamp-3 md:line-clamp-none">Arena-scale drum and bass energy, distilled into the jungle’s open air.</p>
+</div>
+</div>
+<!-- Card 5: Maxi Degrassi (atributo hidden: quitar cuando exista página de eventos) -->
+<div class="flex flex-col gap-3 md:gap-6 group min-w-0" role="listitem" aria-hidden="true" hidden>
+<div class="aspect-square w-full rounded-2xl md:rounded-[48px] overflow-hidden relative border border-outline/10">
+<img alt="Maxi Degrassi — State of Flow crew at Vagalume" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" src="../Events/Maxi%20Degrassi%20-%20March%2029th%20%282%29.jpg" width="1080" height="1080"/>
+<div class="absolute inset-0 bg-burgundy/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="px-0.5 sm:px-1 md:px-4">
+<span class="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-earth uppercase mb-1.5 md:mb-2 block font-medium">MAR 29 • 2026</span>
+<h4 class="font-headline text-lg md:text-2xl text-on-surface mb-2 md:mb-3 tracking-wide uppercase">MAXI DEGRASSI</h4>
+<p class="font-body text-[11px] md:text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase line-clamp-3 md:line-clamp-none">Melodic momentum with Javier Alei, Nacho Kahn, and Bovet — a State of Flow session.</p>
+</div>
+</div>
+<!-- Card 6: Nido closing (atributo hidden: quitar cuando exista página de eventos) -->
+<div class="flex flex-col gap-3 md:gap-6 group min-w-0" role="listitem" aria-hidden="true" hidden>
+<div class="aspect-square w-full rounded-2xl md:rounded-[48px] overflow-hidden relative border border-outline/10">
+<img alt="Nido closing — Igor Marijuan, Bodaishin, Sorä at Vagalume" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" src="../Events/260327_NIDO-VAGALUME-POST%20%282%29.jpg" width="1080" height="1080"/>
+<div class="absolute inset-0 bg-earth/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="px-0.5 sm:px-1 md:px-4">
+<span class="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-earth uppercase mb-1.5 md:mb-2 block font-medium">MAR 27 • 2026</span>
+<h4 class="font-headline text-lg md:text-2xl text-on-surface mb-2 md:mb-3 tracking-wide uppercase">NIDO CLOSING</h4>
+<p class="font-body text-[11px] md:text-xs font-light text-on-surface/60 leading-relaxed tracking-wide uppercase line-clamp-3 md:line-clamp-none">A coastal farewell with Igor Marijuan, Bodaishin, and Sorä — sky, sea, and hummingbird light.</p>
 </div>
 </div>
 </div>
 </div>
 </section>
 <!-- Pilares: 2×2 en móvil (cuadrados compactos), fila de 4 en md+ -->
-<section id="experience" class="max-w-7xl mx-auto py-16 md:py-32 px-6 md:px-12">
+<section id="experience" class="max-w-7xl mx-auto py-16 md:py-32 px-6 md:px-12" aria-labelledby="experience-heading">
+<div class="mb-10 md:mb-14 text-center">
+<h2 id="experience-heading" class="font-headline text-3xl sm:text-4xl md:text-5xl text-on-surface tracking-[0.12em] md:tracking-[0.2em] uppercase">WHERE THE NIGHT OPENS</h2>
+<div class="w-16 sm:w-20 md:w-24 h-px bg-primary/50 mx-auto mt-4 md:mt-6"></div>
+</div>
 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-8 mx-auto w-full max-w-[20rem] sm:max-w-sm md:max-w-none">
 <div class="flex flex-col items-center justify-center aspect-square p-4 sm:p-5 md:aspect-auto md:p-12 bg-surface-container-low rounded-xl border border-outline-variant/10 group hover:border-primary/30 transition-all duration-700">
 <span class="material-symbols-outlined text-3xl md:text-4xl text-primary/40 group-hover:text-primary transition-colors mb-2 md:mb-6" data-icon="water_drop">water_drop</span>
@@ -452,13 +465,13 @@ A CONTEMPORARY JUNGLE SANCTUARY THAT BLENDS SOPHISTICATION, THE ORGANIC PULSE OF
 </div>
 </div>
 </section>
-<!-- Ubicación: mapa a ancho de viewport (compensa ml-20 del main en desktop) -->
+<!-- Ubicación: mapa a ancho de la columna de contenido (main) -->
 <section id="location" class="py-16 md:py-24 overflow-x-hidden" aria-labelledby="location-heading">
 <div class="max-w-5xl mx-auto px-6 md:px-12 mb-8 md:mb-10 text-center">
 <h2 id="location-heading" class="font-headline text-3xl sm:text-4xl md:text-5xl text-on-surface tracking-[0.12em] md:tracking-[0.2em] uppercase">LOCATION</h2>
 <div class="w-16 sm:w-20 md:w-24 h-px bg-primary/50 mx-auto mt-4 md:mt-6"></div>
 </div>
-<div class="relative w-screen max-w-[100vw] -ml-0 md:-ml-20 border-y border-[#9c8e83]/20 shadow-[inset_0_1px_0_rgba(237,190,144,0.06)]">
+<div class="relative w-full border-y border-[#9c8e83]/20 shadow-[inset_0_1px_0_rgba(237,190,144,0.06)]">
 <iframe class="block w-full h-[min(70vh,32rem)] min-h-[280px] sm:min-h-[360px] border-0" src="https://www.google.com/maps?cid=68158030288869776&amp;g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAEYASAB&amp;hl=es-419&amp;gl=MX&amp;output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación de Vagalume en Google Maps"></iframe>
 </div>
 </section>
