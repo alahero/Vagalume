@@ -18,11 +18,18 @@ export const BANNER_SLIDES: BannerSlide[] = [
 ];
 
 export type EventCard = {
+  /** Clave estable para React cuando el origen es la API (slug). */
+  cardKey?: string;
   dateLabel: string;
   title: string;
   body: string;
-  imageFile: string;
+  /** Archivo bajo `public/events/` (contenido estático). */
+  imageFile?: string;
+  /** URL absoluta de imagen (API Mandala). */
+  imageUrl?: string | null;
   imageAlt: string;
+  /** Página del evento en MandalaTickets (inglés). */
+  href?: string;
   /** Capa hover (burgundy | earth) */
   tint?: "burgundy" | "earth";
 };

@@ -1062,6 +1062,27 @@ a.vl-sidebar__item {
   box-shadow: inset 0 0 0 1px rgba(237, 190, 144, 0.65);
 }
 
+/* Día con evento publicado (API MT); mismo acento que “special” legacy */
+.vl-cal-pop__day--event:not(:disabled) {
+  background-color: var(--vl-primary);
+  color: var(--vl-night) !important;
+  font-weight: 600;
+  box-shadow: 0 0 0 2px rgba(237, 190, 144, 0.45);
+}
+
+.vl-cal-pop__day--event:hover:not(:disabled) {
+  background-color: #e5b880;
+}
+
+.vl-cal-pop__day--past-event {
+  opacity: 0.48;
+  cursor: not-allowed;
+  background-color: var(--vl-primary);
+  color: var(--vl-night) !important;
+  font-weight: 600;
+  filter: saturate(0.85);
+}
+
 .vl-cal-pop__today {
   margin-top: 0.75rem;
   width: 100%;
@@ -1492,6 +1513,31 @@ a.vl-sidebar__item {
   .vl-event-cards--grid {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+.vl-event-card__link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+@media (min-width: 768px) {
+  .vl-event-card__link {
+    gap: 1.5rem;
+  }
+}
+
+.vl-event-card__link:hover .vl-event-card__img,
+.vl-event-card__link:focus-visible .vl-event-card__img {
+  transform: scale(1.1);
+}
+
+.vl-event-card__link:hover .vl-event-card__tint,
+.vl-event-card__link:focus-visible .vl-event-card__tint {
+  opacity: 1;
 }
 
 .vl-event-card {

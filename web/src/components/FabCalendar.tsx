@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useVagalumeMtEvents } from "../context/VagalumeMtEventsContext";
 
 const BOOKING_URL = "https://mandalatickets.com/en/tulum/disco/Vagalume";
 
@@ -38,9 +39,10 @@ function isToday(y: number, m: number, d: number) {
   return t.getFullYear() === y && t.getMonth() === m && t.getDate() === d;
 }
 
-/** Marzo (índice 2): días con eventos especiales cada año */
-function isSpecialEventDay(m: number, d: number) {
-  return m === 2 && d >= 26 && d <= 28;
+function localDateKey(y: number, monthIndex: number, d: number) {
+  const mo = String(monthIndex + 1).padStart(2, "0");
+  const day = String(d).padStart(2, "0");
+  return `${y}-${mo}-${day}`;
 }
 
 function openBookingPage() {
@@ -55,20 +57,35 @@ function openBookingPage() {
 
 type DayCell =
   | { kind: "empty" }
-  | { kind: "day"; day: number; past: boolean; special: boolean; today: boolean };
+  | {
+      kind: "day";
+      day: number;
+      past: boolean;
+      hasEvent: boolean;
+      eventUrl: string | null;
+      today: boolean;
+    };
 
-function buildDayCells(year: number, month: number): DayCell[] {
+function buildDayCells(
+  year: number,
+  month: number,
+  dayToEventUrl: Map<string, string>,
+): DayCell[] {
   const first = new Date(year, month, 1);
   const pad = first.getDay();
   const lastDay = new Date(year, month + 1, 0).getDate();
   const cells: DayCell[] = [];
   for (let i = 0; i < pad; i++) cells.push({ kind: "empty" });
   for (let d = 1; d <= lastDay; d++) {
+    const key = localDateKey(year, month, d);
+    const eventUrl = dayToEventUrl.get(key) ?? null;
+    const past = isPastDay(year, month, d);
     cells.push({
       kind: "day",
       day: d,
-      past: isPastDay(year, month, d),
-      special: isSpecialEventDay(month, d),
+      past,
+      hasEvent: Boolean(eventUrl),
+      eventUrl,
       today: isToday(year, month, d),
     });
   }
@@ -76,9 +93,11 @@ function buildDayCells(year: number, month: number): DayCell[] {
 }
 
 /**
- * FAB de reserva con popover de calendario (misma lógica que el HTML legacy).
+ * FAB de reserva con popover: resalta días con evento (API MT) y envía a la ficha en MandalaTickets.
+ * Sin evento en un día futuro: abre reserva genérica (comportamiento previo).
  */
 export default function FabCalendar() {
+  const { dayToEventUrl } = useVagalumeMtEvents();
   const rootRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const now = new Date();
@@ -89,8 +108,8 @@ export default function FabCalendar() {
   const { year: viewYear, month: viewMonth } = view;
 
   const cells = useMemo(
-    () => buildDayCells(viewYear, viewMonth),
-    [viewYear, viewMonth],
+    () => buildDayCells(viewYear, viewMonth, dayToEventUrl),
+    [viewYear, viewMonth, dayToEventUrl],
   );
 
   const yearOptions = useMemo(() => {
@@ -140,9 +159,13 @@ export default function FabCalendar() {
     };
   }, [open]);
 
-  const onDayClick = (past: boolean) => {
+  const onDayClick = (past: boolean, eventUrl: string | null) => {
     if (past) return;
     setOpen(false);
+    if (eventUrl) {
+      window.location.assign(eventUrl);
+      return;
+    }
     openBookingPage();
   };
 
@@ -235,12 +258,13 @@ export default function FabCalendar() {
             if (cell.kind === "empty") {
               return <div key={`e-${i}`} className="vl-cal-pop__cell" />;
             }
-            const { day, past, special, today: isTo } = cell;
+            const { day, past, hasEvent, eventUrl, today: isTo } = cell;
             let cls = "vl-cal-pop__day";
             if (past) {
-              cls += special ? " vl-cal-pop__day--past-special" : " vl-cal-pop__day--past";
-            } else if (special) {
-              cls += " vl-cal-pop__day--special";
+              if (hasEvent) cls += " vl-cal-pop__day--past-event";
+              else cls += " vl-cal-pop__day--past";
+            } else if (hasEvent) {
+              cls += " vl-cal-pop__day--event";
             } else {
               cls += " vl-cal-pop__day--ok";
             }
@@ -249,8 +273,8 @@ export default function FabCalendar() {
             const label =
               `${MONTH_NAMES[viewMonth]} ${day}, ${viewYear}` +
               (past ? " (not available)" : "") +
-              (special ? " · special event" : "") +
-              (!past ? " · book on Mandala Tickets" : "");
+              (hasEvent ? " · event at Vagalume" : "") +
+              (!past && !hasEvent ? " · book on Mandala Tickets" : "");
 
             return (
               <button
@@ -261,7 +285,7 @@ export default function FabCalendar() {
                 aria-label={label}
                 onClick={(e) => {
                   e.stopPropagation();
-                  onDayClick(past);
+                  onDayClick(past, eventUrl);
                 }}
               >
                 {day}

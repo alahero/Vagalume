@@ -1,5 +1,6 @@
 import { useEffect, useState, type MouseEvent, type ReactNode } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { VagalumeMtEventsProvider } from "../context/VagalumeMtEventsContext";
 import { useHomeSectionNav, type HomeNavId } from "../hooks/useHomeSectionNav";
 import FabCalendar from "./FabCalendar";
 
@@ -92,7 +93,8 @@ export default function SiteLayout({ children, navVariant }: SiteLayoutProps) {
     location.pathname === "/events" || (location.pathname === "/" && activeSection === "events");
 
   return (
-    <>
+    <VagalumeMtEventsProvider>
+      <>
       <nav className="vl-topnav" aria-label="Principal">
         <div className="vl-topnav__left">
           <button
@@ -532,6 +534,7 @@ export default function SiteLayout({ children, navVariant }: SiteLayoutProps) {
           </p>
         </div>
       </footer>
-    </>
+      </>
+    </VagalumeMtEventsProvider>
   );
 }

@@ -1,12 +1,23 @@
+import { useMemo } from "react";
 import EventCardsRow from "../components/EventCardsRow";
 import EventsBanner from "../components/EventsBanner";
 import SeoHead from "../components/SeoHead";
 import { BANNER_SLIDES, EVENT_CARDS } from "../data/eventsContent";
+import { useVagalumeMtEvents } from "../hooks/useVagalumeEvents";
+import { mtEventToEventCard } from "../lib/mapMtEventToCard";
 
 /**
  * Página dedicada a eventos (lista completa + banner).
  */
 export default function EventsPage() {
+  const { upcomingSorted, loading, fetchFailed } = useVagalumeMtEvents();
+
+  const gridCards = useMemo(() => {
+    if (loading) return EVENT_CARDS;
+    if (fetchFailed || upcomingSorted.length === 0) return EVENT_CARDS;
+    return upcomingSorted.map((e, i) => mtEventToEventCard(e, i));
+  }, [loading, fetchFailed, upcomingSorted]);
+
   return (
     <>
       <SeoHead
@@ -31,7 +42,7 @@ export default function EventsPage() {
           <EventsBanner slides={BANNER_SLIDES} />
         </div>
         <div className="vl-event-cards-wrap vl-event-cards-wrap--page">
-          <EventCardsRow cards={EVENT_CARDS} layout="grid" />
+          <EventCardsRow cards={gridCards} layout="grid" />
         </div>
       </section>
     </>

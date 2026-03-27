@@ -1,18 +1,25 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import EventCardsRow from "../components/EventCardsRow";
 import EventsBanner from "../components/EventsBanner";
 import HeroLogoCanvas from "../components/HeroLogoCanvas";
 import SeoHead from "../components/SeoHead";
 import { BANNER_SLIDES, EVENT_CARDS } from "../data/eventsContent";
+import { useNearestMtEvents } from "../hooks/useVagalumeEvents";
+import { mtEventToEventCard } from "../lib/mapMtEventToCard";
 
 /**
  * Landing principal (paridad con el HTML legacy en stitch-export).
  */
 export default function HomePage() {
   const [spotifyOpen, setSpotifyOpen] = useState(false);
-  /* Tres visibles + cuarta en xl (la quinta y sexta quedaron ocultas en el HTML legacy). */
-  const homeCards = EVENT_CARDS.slice(0, 4);
+  const { nearest, loading, fetchFailed } = useNearestMtEvents(4);
+
+  const homeCards = useMemo(() => {
+    if (loading) return EVENT_CARDS.slice(0, 4);
+    if (fetchFailed || nearest.length === 0) return EVENT_CARDS.slice(0, 4);
+    return nearest.map((e, i) => mtEventToEventCard(e, i));
+  }, [loading, fetchFailed, nearest]);
 
   return (
     <>
