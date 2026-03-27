@@ -1,12 +1,27 @@
-import { Suspense, useMemo, useRef } from "react";
+import { Suspense, useMemo, useRef, useSyncExternalStore } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 
+/** Viewport estrecho (hero): isotipo 3D un poco más chico que en escritorio. */
+function useHeroNarrowViewport() {
+  return useSyncExternalStore(
+    (onChange) => {
+      const mq = window.matchMedia("(max-width: 767px)");
+      mq.addEventListener("change", onChange);
+      return () => mq.removeEventListener("change", onChange);
+    },
+    () => window.matchMedia("(max-width: 767px)").matches,
+    () => false
+  );
+}
+
+type LogoMeshProps = { maxW: number };
+
 /**
  * Plano con logo; misma lógica que la vista previa pero embebido en el hero principal.
  */
-function LogoMesh() {
+function LogoMesh({ maxW }: LogoMeshProps) {
   const map = useTexture("/media/logo.png");
   map.colorSpace = THREE.SRGBColorSpace;
 
@@ -14,9 +29,8 @@ function LogoMesh() {
     const img = map.image as HTMLImageElement;
     const w = img.naturalWidth || img.width || 1;
     const h = img.naturalHeight || img.height || 1;
-    const maxW = 3.45;
     return { width: maxW, height: maxW * (h / w) };
-  }, [map]);
+  }, [map, maxW]);
 
   return (
     <mesh position={[0, 0.62, 0]}>
@@ -73,6 +87,10 @@ type HeroLogoCanvasProps = {
  * Sin plano de fondo opaco: la foto del hero se ve a través del WebGL (alpha).
  */
 export default function HeroLogoCanvas({ className }: HeroLogoCanvasProps) {
+  const narrow = useHeroNarrowViewport();
+  // Antes ~3.45; stack del hero más contenido en escritorio y aún más en móvil
+  const planeMaxW = narrow ? 2.35 : 2.78;
+
   return (
     <div className={className}>
       <Canvas
@@ -88,7 +106,7 @@ export default function HeroLogoCanvas({ className }: HeroLogoCanvasProps) {
       >
         <GoldenFollowLight />
         <Suspense fallback={null}>
-          <LogoMesh />
+          <LogoMesh maxW={planeMaxW} />
         </Suspense>
       </Canvas>
     </div>

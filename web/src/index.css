@@ -1227,18 +1227,25 @@ a.vl-sidebar__item {
 }
 
 .vl-hero__eyebrow {
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.5em;
   text-transform: uppercase;
   color: #fff;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.75);
 }
 
+@media (min-width: 768px) {
+  .vl-hero__eyebrow {
+    font-size: 0.75rem;
+    margin-bottom: 1.75rem;
+  }
+}
+
 .vl-hero__title {
-  margin: 0 0 2.5rem;
+  margin: 0 0 2rem;
   font-family: var(--vl-font-headline);
-  font-size: clamp(2.25rem, 6vw, 3.75rem);
+  font-size: clamp(1.875rem, 5.2vw, 3rem);
   font-weight: 200;
   letter-spacing: 0.18em;
   line-height: 1.08;
@@ -1250,7 +1257,8 @@ a.vl-sidebar__item {
 @media (min-width: 768px) {
   .vl-hero__title {
     letter-spacing: 0.2em;
-    font-size: clamp(3rem, 5vw, 3.75rem);
+    margin-bottom: 2.25rem;
+    font-size: clamp(2.5rem, 4.2vw, 3.125rem);
   }
 }
 
@@ -1261,9 +1269,15 @@ a.vl-sidebar__item {
 
 .vl-hero__rule {
   width: 1px;
-  height: 8rem;
+  height: 6.5rem;
   background: linear-gradient(to bottom, rgba(237, 190, 144, 0.6), transparent);
   box-shadow: 0 0 8px rgba(237, 190, 144, 0.35);
+}
+
+@media (min-width: 768px) {
+  .vl-hero__rule {
+    height: 7rem;
+  }
 }
 
 /* Secciones genéricas */

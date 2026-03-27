@@ -9,10 +9,14 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     server: {
-      // En Windows, `localhost` a veces no coincide con la interfaz que usa Vite; `true` escucha en todas.
+      // En Windows, el navegador a veces abre `localhost` por IPv6 (`::1`) y otro dev server
+      // puede estar solo en IPv4: ves otro sitio en "el mismo" puerto. Usa la URL que imprime Vite
+      // o http://127.0.0.1:<puerto>/ para forzar IPv4.
       host: true,
       port: 5173,
       strictPort: false,
+      // Abre el navegador en la URL de *este* proyecto al hacer `npm run dev`.
+      open: true,
       // Redirige /api/* a `vercel dev` (p. ej. puerto 3000) para probar mt-venues en local.
       proxy: {
         "/api": {
