@@ -88,8 +88,8 @@ type HeroLogoCanvasProps = {
  */
 export default function HeroLogoCanvas({ className }: HeroLogoCanvasProps) {
   const narrow = useHeroNarrowViewport();
-  // Antes ~3.45; stack del hero más contenido en escritorio y aún más en móvil
-  const planeMaxW = narrow ? 2.35 : 2.78;
+  // Escala del plano del logo (unidades Three); móvil ligeramente menor que escritorio
+  const planeMaxW = narrow ? 2.1 : 2.5;
 
   return (
     <div className={className}>
