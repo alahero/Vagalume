@@ -89,7 +89,7 @@ type HeroLogoCanvasProps = {
 export default function HeroLogoCanvas({ className }: HeroLogoCanvasProps) {
   const narrow = useHeroNarrowViewport();
   // Escala del plano del logo (unidades Three); móvil ligeramente menor que escritorio
-  const planeMaxW = narrow ? 2.1 : 2.5;
+  const planeMaxW = narrow ? 1.72 : 2.5;
 
   return (
     <div className={className}>
