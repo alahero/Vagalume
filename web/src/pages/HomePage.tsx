@@ -1,10 +1,9 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import EventCardsRow from "../components/EventCardsRow";
-import EventsBanner from "../components/EventsBanner";
 import HeroLogoCanvas from "../components/HeroLogoCanvas";
 import SeoHead from "../components/SeoHead";
-import { BANNER_SLIDES, EVENT_CARDS } from "../data/eventsContent";
+import { EVENT_CARDS } from "../data/eventsContent";
 import {
   VAGALUME_DIRECTIONS_URL,
   VAGALUME_MAP_EXTERNAL_URL,
@@ -64,9 +63,6 @@ export default function HomePage() {
           <Link className="vl-btn-outline" to="/events">
             SEE ALL EVENTS
           </Link>
-        </div>
-        <div className="vl-events-banner-wrap">
-          <EventsBanner slides={BANNER_SLIDES} />
         </div>
         <div className="vl-event-cards-wrap">
           <EventCardsRow

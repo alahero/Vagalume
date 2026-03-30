@@ -1,22 +1,5 @@
 /** Nombres de archivo bajo `public/events/` (copiados desde Assets). */
 
-export type BannerSlide = { alt: string; file: string };
-
-export const BANNER_SLIDES: BannerSlide[] = [
-  {
-    alt: "Nido closing at Vagalume Tulum — March 27",
-    file: "260327_NIDO-VAGALUME-POST (4000x1200).png",
-  },
-  {
-    alt: "MIUL with Disorder at Vagalume — April 3",
-    file: "Vagalume_4000 X 1200_MIUL_ABR03.png",
-  },
-  {
-    alt: "Sinner at Vagalume Tulum",
-    file: "VAGALUME-SINNER-MAR-ABR (4000x1200).png",
-  },
-];
-
 export type EventCard = {
   /** Clave estable para React cuando el origen es la API (slug). */
   cardKey?: string;

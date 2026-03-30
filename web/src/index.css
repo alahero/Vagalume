@@ -74,7 +74,6 @@ button:focus-visible,
 .vl-footer__mtlink:focus-visible,
 .vl-sidebar__item:focus-visible,
 .vl-mobile-drawer__link:focus-visible,
-.vl-events-banner__dot:focus-visible,
 .vl-notfound__btn:focus-visible {
   outline: 2px solid var(--vl-primary);
   outline-offset: 3px;
@@ -1381,103 +1380,6 @@ a.vl-sidebar__item {
 
 .vl-btn-outline:hover {
   background: rgba(109, 75, 39, 0.1);
-}
-
-/* Events banner */
-.vl-events-banner-wrap {
-  max-width: 80rem;
-  margin: 0 auto;
-}
-
-.vl-section--events .vl-events-banner-wrap {
-  margin-left: -1.5rem;
-  margin-right: -1.5rem;
-  width: calc(100% + 3rem);
-}
-
-@media (min-width: 768px) {
-  .vl-section--events .vl-events-banner-wrap {
-    margin-left: -3rem;
-    margin-right: -3rem;
-    width: calc(100% + 6rem);
-    max-width: none;
-  }
-}
-
-.vl-events-banner {
-  position: relative;
-  aspect-ratio: 4000 / 1200;
-  background: #000;
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.vl-events-banner__slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.7s ease-in-out;
-  z-index: 0;
-}
-
-.vl-events-banner__slide--active {
-  opacity: 1;
-  z-index: 10;
-  pointer-events: auto;
-}
-
-.vl-events-banner__img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transition: transform 1s;
-}
-
-.vl-events-banner__slide--active:hover .vl-events-banner__img {
-  transform: scale(1.02);
-}
-
-.vl-events-banner__grad {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
-  pointer-events: none;
-}
-
-.vl-events-banner__dots {
-  position: absolute;
-  bottom: 0.75rem;
-  right: 1rem;
-  z-index: 20;
-  display: flex;
-  gap: 0.5rem;
-}
-
-@media (min-width: 768px) {
-  .vl-events-banner__dots {
-    bottom: 2rem;
-    right: 4rem;
-    gap: 0.75rem;
-  }
-}
-
-.vl-events-banner__dot {
-  height: 0.25rem;
-  width: 2rem;
-  border-radius: 9999px;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  background: rgba(255, 255, 255, 0.2);
-  transition: background 0.2s;
-}
-
-.vl-events-banner__dot--active {
-  background: var(--vl-sand);
 }
 
 /* Event cards */
