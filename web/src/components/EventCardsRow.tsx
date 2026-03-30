@@ -3,8 +3,10 @@ import { publicUrl } from "../lib/publicUrl";
 
 type EventCardsRowProps = {
   cards: EventCard[];
-  /** Si true, la cuarta tarjeta solo aparece en viewport ancho (xl). */
+  /** Si true, la cuarta tarjeta solo aparece desde breakpoint desktop (lg). */
   hideFourthOnNarrow?: boolean;
+  /** En fila: en viewport estrecho solo se muestran 2 tarjetas (menos altura por texto). */
+  limitMobileToTwoCards?: boolean;
   /** Modo cuadrícula (página /events) vs fila con scroll horizontal (home). */
   layout?: "row" | "grid";
 };
@@ -23,12 +25,14 @@ function cardImageSrc(card: EventCard): string {
 export default function EventCardsRow({
   cards,
   hideFourthOnNarrow = false,
+  limitMobileToTwoCards = false,
   layout = "row",
 }: EventCardsRowProps) {
   const listClass =
     layout === "grid"
       ? "vl-event-cards vl-event-cards--grid"
-      : "vl-event-cards vl-event-cards--row hide-scrollbar";
+      : "vl-event-cards vl-event-cards--row hide-scrollbar" +
+        (limitMobileToTwoCards ? " vl-event-cards--mobile-two" : "");
 
   return (
     <div className={listClass} role="list" aria-label="Próximos eventos">

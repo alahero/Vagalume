@@ -1495,6 +1495,17 @@ a.vl-sidebar__item {
   padding: 0 1.5rem 0.25rem;
 }
 
+/* Home: en teléfono solo 2 tarjetas visibles (columnas más anchas, menos renglones de copy). */
+@media (max-width: 767.98px) {
+  .vl-event-cards--row.vl-event-cards--mobile-two {
+    grid-auto-columns: calc((100% - 1.5rem) / 2);
+  }
+
+  .vl-event-cards--row.vl-event-cards--mobile-two > .vl-event-card:nth-child(n + 3) {
+    display: none;
+  }
+}
+
 @media (min-width: 768px) {
   .vl-event-cards--row {
     grid-auto-columns: calc((100% - 4rem) / 3);
@@ -1504,7 +1515,7 @@ a.vl-sidebar__item {
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1024px) {
   .vl-event-cards--row {
     grid-auto-columns: calc((100% - 6rem) / 4);
   }
@@ -1571,7 +1582,7 @@ a.vl-sidebar__item {
   display: none;
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1024px) {
   .vl-event-card--xl-only {
     display: flex;
   }
@@ -2213,10 +2224,113 @@ a.vl-sidebar__item {
 }
 
 .vl-map-wrap {
+  position: relative;
   width: 100%;
   border-top: 1px solid rgba(156, 142, 131, 0.2);
   border-bottom: 1px solid rgba(156, 142, 131, 0.2);
   box-shadow: inset 0 1px 0 rgba(237, 190, 144, 0.06);
+}
+
+/* Tarjeta de venue sobre el mapa (tokens: arena, borgoña, tierra, primary). */
+.vl-map-venue-card {
+  position: absolute;
+  top: clamp(0.75rem, 2vw, 1.25rem);
+  right: clamp(0.75rem, 2vw, 1.25rem);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  max-width: min(24rem, calc(100% - 1.5rem));
+  padding: 0.75rem 0.875rem 0.75rem 1rem;
+  border-radius: clamp(1rem, 2.5vw, 1.5rem);
+  border: 1px solid rgba(109, 75, 39, 0.2);
+  background: rgba(250, 249, 214, 0.96);
+  box-shadow: 0 0.5rem 1.5rem rgba(51, 21, 21, 0.18);
+}
+
+.vl-map-venue-card__text {
+  min-width: 0;
+  flex: 1;
+}
+
+.vl-map-venue-card__title {
+  margin: 0 0 0.2rem;
+  font-family: var(--vl-font-headline);
+  font-size: clamp(0.8125rem, 2vw, 0.9375rem);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--vl-burgundy);
+}
+
+.vl-map-venue-card__address {
+  margin: 0;
+  font-family: var(--vl-font-body);
+  font-size: 0.75rem;
+  font-weight: 300;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+  color: rgba(51, 21, 21, 0.78);
+}
+
+.vl-map-venue-card__actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.375rem;
+  flex-shrink: 0;
+}
+
+.vl-map-venue-card__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(250, 249, 214, 0.25);
+  background: var(--vl-primary-container);
+  color: var(--vl-on-primary-container);
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.vl-map-venue-card__btn .material-symbols-outlined {
+  font-size: 1.25rem;
+  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+}
+
+.vl-map-venue-card__btn:hover,
+.vl-map-venue-card__btn:focus-visible {
+  background: var(--vl-burgundy);
+  color: var(--vl-sand);
+  outline: none;
+}
+
+.vl-map-venue-card__btn:focus-visible {
+  box-shadow: 0 0 0 2px var(--vl-night-soft), 0 0 0 4px var(--vl-primary);
+}
+
+.vl-map-venue-card__btn:active {
+  transform: scale(0.96);
+}
+
+@media (max-width: 380px) {
+  .vl-map-venue-card {
+    max-width: calc(100% - 1rem);
+    padding: 0.625rem 0.75rem;
+    gap: 0.625rem;
+  }
+
+  .vl-map-venue-card__btn {
+    width: 2.35rem;
+    height: 2.35rem;
+  }
+
+  .vl-map-venue-card__btn .material-symbols-outlined {
+    font-size: 1.125rem;
+  }
 }
 
 .vl-map {
@@ -2227,8 +2341,14 @@ a.vl-sidebar__item {
   border: 0;
 }
 
+/* Embed Snazzy Maps: altura fija del iframe (evita que min(70vh) lo aplaste). */
+.vl-map.vl-map--snazzy {
+  height: 600px;
+  min-height: 280px;
+}
+
 @media (min-width: 640px) {
-  .vl-map {
+  .vl-map:not(.vl-map--snazzy) {
     min-height: 360px;
   }
 }

@@ -5,6 +5,10 @@ import EventsBanner from "../components/EventsBanner";
 import HeroLogoCanvas from "../components/HeroLogoCanvas";
 import SeoHead from "../components/SeoHead";
 import { BANNER_SLIDES, EVENT_CARDS } from "../data/eventsContent";
+import {
+  VAGALUME_DIRECTIONS_URL,
+  VAGALUME_MAP_EXTERNAL_URL,
+} from "../data/venueLocation";
 import { useNearestMtEvents } from "../hooks/useVagalumeEvents";
 import { mtEventToEventCard } from "../lib/mapMtEventToCard";
 
@@ -65,7 +69,12 @@ export default function HomePage() {
           <EventsBanner slides={BANNER_SLIDES} />
         </div>
         <div className="vl-event-cards-wrap">
-          <EventCardsRow cards={homeCards} hideFourthOnNarrow layout="row" />
+          <EventCardsRow
+            cards={homeCards}
+            hideFourthOnNarrow
+            limitMobileToTwoCards
+            layout="row"
+          />
         </div>
       </section>
 
@@ -203,13 +212,50 @@ export default function HomePage() {
         </div>
         <div className="vl-map-wrap">
           <iframe
-            className="vl-map"
-            src="https://www.google.com/maps?cid=68158030288869776&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAEYASAB&hl=es-419&gl=MX&output=embed"
-            title="Ubicación de Vagalume en Google Maps"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            allowFullScreen
+            src="https://snazzymaps.com/embed/782762"
+            width="100%"
+            height="600px"
+            style={{ border: "none" }}
+            className="vl-map vl-map--snazzy"
+            title="Ubicación de Vagalume (mapa estilizado)"
           />
+          <aside
+            className="vl-map-venue-card"
+            aria-label="Vagalume — ubicación y enlaces al mapa"
+          >
+            <div className="vl-map-venue-card__text">
+              <h3 className="vl-map-venue-card__title">VAGALUME</h3>
+              <p className="vl-map-venue-card__address">
+                Tulum, Quintana Roo
+                <br />
+                México
+              </p>
+            </div>
+            <div className="vl-map-venue-card__actions">
+              <a
+                className="vl-map-venue-card__btn"
+                href={VAGALUME_MAP_EXTERNAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Abrir Google Maps en una pestaña nueva"
+              >
+                <span className="material-symbols-outlined" aria-hidden>
+                  open_in_new
+                </span>
+              </a>
+              <a
+                className="vl-map-venue-card__btn"
+                href={VAGALUME_DIRECTIONS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Cómo llegar en Google Maps"
+              >
+                <span className="material-symbols-outlined" aria-hidden>
+                  directions
+                </span>
+              </a>
+            </div>
+          </aside>
         </div>
       </section>
     </>
