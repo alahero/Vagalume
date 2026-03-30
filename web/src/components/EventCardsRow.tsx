@@ -19,7 +19,7 @@ function cardImageSrc(card: EventCard): string {
 }
 
 /**
- * Tarjetas de evento con imagen cuadrada y copy.
+ * Tarjetas de evento con imagen cuadrada, fecha y título.
  * Con `href`, toda la tarjeta enlaza a MandalaTickets (nueva pestaña).
  */
 export default function EventCardsRow({
@@ -62,7 +62,6 @@ export default function EventCardsRow({
             <div className="vl-event-card__body">
               <span className="vl-event-card__date">{card.dateLabel}</span>
               <h3 className="vl-event-card__title">{card.title}</h3>
-              <p className="vl-event-card__text">{card.body}</p>
             </div>
           </>
         );

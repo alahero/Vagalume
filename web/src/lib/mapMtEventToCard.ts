@@ -8,7 +8,6 @@ export function mtEventToEventCard(e: MtNormalizedEvent, idx: number): EventCard
     cardKey: e.slug,
     dateLabel: formatEventDateLabel(e.startIso) || "—",
     title: e.title,
-    body: e.snippet,
     imageUrl: e.imageUrl || undefined,
     imageAlt: `${e.title} — Vagalume Tulum`,
     href: e.eventUrlEn,
